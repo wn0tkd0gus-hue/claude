@@ -345,7 +345,7 @@
 
   <figure>
     <div id="stage">
-      <svg viewBox="0 0 1430 740" role="img"
+      <svg viewBox="0 0 1430 824" role="img"
            aria-label="연간 세무 흐름도. 사업연도 중 신고한 부가가치세 매출·매입 자료와 인건비 지급액이 익년 5월 소득금액 계산으로 모이고, 확정된 소득금액이 종합소득세액과 건강보험료를 함께 결정합니다."
            font-family="'IBM Plex Sans KR', system-ui, 'Malgun Gothic', sans-serif">
 
@@ -405,6 +405,7 @@
         <text x="838" y="84" font-size="27" font-weight="700" fill="var(--ink-3)" text-anchor="middle">익년 3월</text>
         <text x="838" y="140" font-size="17" fill="var(--ink-3)" text-anchor="middle">법인세 신고</text>
         <text x="838" y="162" font-size="13" fill="var(--ink-3)" text-anchor="middle">결산 후 3개월</text>
+        <text x="838" y="179" font-size="11" fill="var(--ink-3)" text-anchor="middle">사업연도 1.1~12.31 가정</text>
 
         <circle cx="978" cy="106" r="11" fill="var(--clay)"></circle>
         <text x="978" y="110" font-size="14" font-weight="700" fill="var(--on-clay)" text-anchor="middle">2</text>
@@ -609,6 +610,40 @@
         <line x1="1068" y1="628" x2="1094" y2="628" stroke="var(--seal)" stroke-width="2.5"
               marker-end="url(#ah-seal)"></line>
         <circle cx="1068" cy="628" r="5" fill="var(--seal)"></circle>
+
+        <!-- ═══════════ 종합소득세 세율 구간 ═══════════ -->
+        <line x1="30" y1="734" x2="1400" y2="734" stroke="var(--rule)" stroke-width="1.5"></line>
+        <text x="30" y="757" font-size="14" font-weight="700" fill="var(--clay)">종합소득세 세율 구간 <tspan font-weight="400" fill="var(--ink-3)">— 과세표준 기준, 누진공제 적용 전</tspan></text>
+        <rect x="30.0" y="766" width="168.2" height="30" rx="5" fill="var(--clay)" fill-opacity="0.1" stroke="var(--clay-line)" stroke-width="1"></rect>
+        <text x="114.1" y="787" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">6%</text>
+        <rect x="201.2" y="766" width="168.2" height="30" rx="5" fill="var(--clay)" fill-opacity="0.142" stroke="var(--clay-line)" stroke-width="1"></rect>
+        <text x="285.4" y="787" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">15%</text>
+        <rect x="372.5" y="766" width="168.2" height="30" rx="5" fill="var(--clay)" fill-opacity="0.184" stroke="var(--clay-line)" stroke-width="1"></rect>
+        <text x="456.6" y="787" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">24%</text>
+        <rect x="543.8" y="766" width="168.2" height="30" rx="5" fill="var(--clay)" fill-opacity="0.226" stroke="var(--clay-line)" stroke-width="1"></rect>
+        <text x="627.9" y="787" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">35%</text>
+        <rect x="715.0" y="766" width="168.2" height="30" rx="5" fill="var(--clay)" fill-opacity="0.268" stroke="var(--clay-line)" stroke-width="1"></rect>
+        <text x="799.1" y="787" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">38%</text>
+        <rect x="886.2" y="766" width="168.2" height="30" rx="5" fill="var(--clay)" fill-opacity="0.31" stroke="var(--clay-line)" stroke-width="1"></rect>
+        <text x="970.4" y="787" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">40%</text>
+        <rect x="1057.5" y="766" width="168.2" height="30" rx="5" fill="var(--clay)" fill-opacity="0.352" stroke="var(--clay-line)" stroke-width="1"></rect>
+        <text x="1141.6" y="787" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">42%</text>
+        <rect x="1228.8" y="766" width="168.2" height="30" rx="5" fill="var(--clay)" fill-opacity="0.394" stroke="var(--clay-line)" stroke-width="1"></rect>
+        <text x="1312.9" y="787" font-size="15" font-weight="700" fill="var(--ink)" text-anchor="middle">45%</text>
+        <line x1="199.8" y1="798" x2="199.8" y2="804" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="199.8" y="817" font-size="12" fill="var(--ink-3)" text-anchor="middle">1,400만</text>
+        <line x1="371.0" y1="798" x2="371.0" y2="804" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="371.0" y="817" font-size="12" fill="var(--ink-3)" text-anchor="middle">5,000만</text>
+        <line x1="542.2" y1="798" x2="542.2" y2="804" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="542.2" y="817" font-size="12" fill="var(--ink-3)" text-anchor="middle">8,800만</text>
+        <line x1="713.5" y1="798" x2="713.5" y2="804" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="713.5" y="817" font-size="12" fill="var(--ink-3)" text-anchor="middle">1.5억</text>
+        <line x1="884.8" y1="798" x2="884.8" y2="804" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="884.8" y="817" font-size="12" fill="var(--ink-3)" text-anchor="middle">3억</text>
+        <line x1="1056.0" y1="798" x2="1056.0" y2="804" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="1056.0" y="817" font-size="12" fill="var(--ink-3)" text-anchor="middle">5억</text>
+        <line x1="1227.2" y1="798" x2="1227.2" y2="804" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="1227.2" y="817" font-size="12" fill="var(--ink-3)" text-anchor="middle">10억</text>
 
       </svg>
     </div>
