@@ -25,8 +25,11 @@
     --seal:       #A8382E;
     --gold:       #B8901F;
 
-    --focus-fill: #1C2320;
-    --focus-text: #FAF8F3;
+    --focus-fill: #A32E24;
+    --focus-text: #FDF3EC;
+    --focus-ring: #E6C983;
+    --stamp-fill: #C9A227;
+    --stamp-text: #3A2A06;
 
     --shadow:     0 1px 2px rgba(28,35,32,.05), 0 14px 34px -20px rgba(28,35,32,.3);
   }
@@ -50,11 +53,14 @@
       --clay-line:  #5A4331;
       --on-clay:    #22180F;
 
-      --seal:       #E89A8C;
+      --seal:       #E0796A;
       --gold:       #DCBC66;
 
-      --focus-fill: #31413A;
-      --focus-text: #F3F0E8;
+      --focus-fill: #AB362C;
+      --focus-text: #FDF3EC;
+      --focus-ring: #EBD09A;
+      --stamp-fill: #E2C46E;
+      --stamp-text: #2E2105;
 
       --shadow:     0 1px 2px rgba(0,0,0,.3), 0 14px 34px -20px rgba(0,0,0,.75);
     }
@@ -78,11 +84,14 @@
     --clay-line:  #5A4331;
     --on-clay:    #22180F;
 
-    --seal:       #E89A8C;
+    --seal:       #E0796A;
     --gold:       #DCBC66;
 
-    --focus-fill: #31413A;
-    --focus-text: #F3F0E8;
+    --focus-fill: #AB362C;
+    --focus-text: #FDF3EC;
+    --focus-ring: #EBD09A;
+    --stamp-fill: #E2C46E;
+    --stamp-text: #2E2105;
 
     --shadow:     0 1px 2px rgba(0,0,0,.3), 0 14px 34px -20px rgba(0,0,0,.75);
   }
@@ -284,8 +293,10 @@
       --ink-3: #75837C; --rule: #E3E0D7; --jade: #2A6350; --jade-soft: #E7F0EB;
       --jade-line: #AFCCBF; --on-jade: #FFFFFF; --clay: #A85F2B; --clay-soft: #FAEEE2;
       --clay-line: #E2C09C; --on-clay: #FFFFFF; --seal: #A8382E; --gold: #B8901F;
-      --focus-fill: #1C2320; --focus-text: #FFFFFF; --shadow: none;
+      --focus-fill: #A32E24; --focus-text: #FDF3EC; --focus-ring: #E6C983;
+      --stamp-fill: #C9A227; --stamp-text: #3A2A06; --shadow: none;
     }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .controls, footer { display: none; }
     .page { padding: 0; gap: 10px; max-width: none; }
     figure { border-radius: 0; border: 0; break-inside: avoid; }
@@ -476,15 +487,16 @@
 
         <!-- 핵심 : 소득금액 -->
         <rect x="710" y="562" width="302" height="132" rx="12"
-              fill="var(--focus-fill)" stroke="var(--gold)" stroke-width="2"></rect>
+              fill="var(--focus-fill)" stroke="var(--focus-ring)" stroke-width="2.5"></rect>
         <text x="861" y="634" font-size="50" font-weight="700" fill="var(--focus-text)"
               font-family="'Gowun Batang', serif" text-anchor="middle">소득금액</text>
-        <line x1="781" y1="652" x2="941" y2="652" stroke="var(--gold)" stroke-width="2"></line>
-        <text x="861" y="680" font-size="15" fill="var(--focus-text)" opacity=".8"
+        <line x1="781" y1="652" x2="941" y2="652" stroke="var(--focus-ring)" stroke-width="2"></line>
+        <text x="861" y="680" font-size="15" fill="var(--focus-text)" opacity=".82"
               text-anchor="middle">건강보험료 · 소득증빙의 기준</text>
 
-        <rect x="694" y="546" width="44" height="44" rx="11" fill="var(--seal)"></rect>
-        <text x="716" y="574" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">핵심</text>
+        <rect x="694" y="546" width="44" height="44" rx="11" fill="var(--stamp-fill)"></rect>
+        <text x="716" y="574" font-size="15" font-weight="700" fill="var(--stamp-text)"
+              text-anchor="middle">핵심</text>
 
         <!-- ═══════════ ③ 세액 산출 ═══════════ -->
 
