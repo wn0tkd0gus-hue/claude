@@ -1,0 +1,610 @@
+<title>연간 세무 흐름도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --paper:      #FAF8F3;
+    --surface:    #FFFFFF;
+    --ink:        #1C2320;
+    --ink-2:      #46534D;
+    --ink-3:      #75837C;
+    --rule:       #E3E0D7;
+
+    --jade:       #2A6350;
+    --jade-soft:  #E7F0EB;
+    --jade-line:  #AFCCBF;
+    --on-jade:    #FAF8F3;
+
+    --clay:       #A85F2B;
+    --clay-soft:  #FAEEE2;
+    --clay-line:  #E2C09C;
+    --on-clay:    #FFFFFF;
+
+    --seal:       #A8382E;
+    --gold:       #B8901F;
+
+    --focus-fill: #1C2320;
+    --focus-text: #FAF8F3;
+
+    --shadow:     0 1px 2px rgba(28,35,32,.05), 0 14px 34px -20px rgba(28,35,32,.3);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #131816;
+      --surface:    #1A211E;
+      --ink:        #EDEAE2;
+      --ink-2:      #B2BDB7;
+      --ink-3:      #869189;
+      --rule:       #2D3835;
+
+      --jade:       #86C6AB;
+      --jade-soft:  #1C2D26;
+      --jade-line:  #38584B;
+      --on-jade:    #101614;
+
+      --clay:       #E3A876;
+      --clay-soft:  #2D211A;
+      --clay-line:  #5A4331;
+      --on-clay:    #22180F;
+
+      --seal:       #E89A8C;
+      --gold:       #DCBC66;
+
+      --focus-fill: #31413A;
+      --focus-text: #F3F0E8;
+
+      --shadow:     0 1px 2px rgba(0,0,0,.3), 0 14px 34px -20px rgba(0,0,0,.75);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #131816;
+    --surface:    #1A211E;
+    --ink:        #EDEAE2;
+    --ink-2:      #B2BDB7;
+    --ink-3:      #869189;
+    --rule:       #2D3835;
+
+    --jade:       #86C6AB;
+    --jade-soft:  #1C2D26;
+    --jade-line:  #38584B;
+    --on-jade:    #101614;
+
+    --clay:       #E3A876;
+    --clay-soft:  #2D211A;
+    --clay-line:  #5A4331;
+    --on-clay:    #22180F;
+
+    --seal:       #E89A8C;
+    --gold:       #DCBC66;
+
+    --focus-fill: #31413A;
+    --focus-text: #F3F0E8;
+
+    --shadow:     0 1px 2px rgba(0,0,0,.3), 0 14px 34px -20px rgba(0,0,0,.75);
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans KR', system-ui, -apple-system, 'Malgun Gothic', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1720px;
+    margin: 0 auto;
+    padding: 26px 20px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ---------- header ---------- */
+
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px 32px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .titles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 18px; }
+
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    color: var(--seal);
+  }
+
+  h1 {
+    font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: clamp(28px, 2.6vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+
+  .standfirst {
+    font-size: 17px;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  .standfirst b {
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: inset 0 -.45em 0 color-mix(in srgb, var(--gold) 32%, transparent);
+  }
+
+  /* ---------- controls ---------- */
+
+  .controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  .ctl-label { font-size: 13px; color: var(--ink-3); letter-spacing: .04em; }
+
+  .segmented {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .segmented button,
+  .plain-btn {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: background-color .16s ease, color .16s ease;
+  }
+
+  .segmented button:hover,
+  .plain-btn:hover { color: var(--ink); background: color-mix(in srgb, var(--jade) 10%, transparent); }
+
+  .segmented button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+  }
+
+  .plain-btn { border: 1px solid var(--rule); background: var(--surface); }
+
+  .segmented button:focus-visible,
+  .plain-btn:focus-visible { outline: 2px solid var(--seal); outline-offset: 2px; }
+
+  /* ---------- figure ---------- */
+
+  figure {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  #stage { overflow-x: auto; padding: 16px 18px 8px; }
+
+  #stage svg {
+    display: block;
+    width: calc(100% * var(--zoom, 1));
+    min-width: calc(100% * var(--zoom, 1));
+    height: auto;
+  }
+
+  .figfoot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 28px;
+    border-top: 1px solid var(--rule);
+    margin: 6px 18px 0;
+    padding: 14px 0 16px;
+  }
+
+  figcaption { font-size: 15px; color: var(--ink-2); max-width: 78ch; margin: 0; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .legend li { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+
+  .swatch { width: 24px; height: 13px; border-radius: 4px; flex: none; }
+  .sw-jade { background: var(--jade-soft); border: 1.5px solid var(--jade-line); }
+  .sw-clay { background: var(--clay-soft); border: 1.5px solid var(--clay-line); }
+  .sw-dash { background: var(--surface); border: 1.5px dashed var(--jade-line); }
+  .sw-seal { height: 0; border-top: 2.5px solid var(--seal); border-radius: 0; }
+
+  /* ---------- talking points ---------- */
+
+  .points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .point {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    border-top: 3px solid var(--seal);
+    padding: 15px 18px 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .point h3 { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.35; text-wrap: balance; }
+  .point p { margin: 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+
+  footer { font-size: 13px; color: var(--ink-3); }
+
+  @media (max-width: 760px) {
+    .page { padding: 20px 14px 40px; }
+    #stage { padding: 12px 12px 4px; }
+    .figfoot { margin-inline: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media print {
+    @page { size: A4 landscape; margin: 8mm; }
+    :root {
+      --paper: #FFFFFF; --surface: #FFFFFF; --ink: #1C2320; --ink-2: #46534D;
+      --ink-3: #75837C; --rule: #E3E0D7; --jade: #2A6350; --jade-soft: #E7F0EB;
+      --jade-line: #AFCCBF; --on-jade: #FFFFFF; --clay: #A85F2B; --clay-soft: #FAEEE2;
+      --clay-line: #E2C09C; --on-clay: #FFFFFF; --seal: #A8382E; --gold: #B8901F;
+      --focus-fill: #1C2320; --focus-text: #FFFFFF; --shadow: none;
+    }
+    .controls, footer { display: none; }
+    .page { padding: 0; gap: 10px; max-width: none; }
+    figure { border-radius: 0; border: 0; break-inside: avoid; }
+    #stage { padding: 0; overflow: visible; }
+    #stage svg { width: 100% !important; min-width: 0 !important; }
+    .points { break-inside: avoid; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <div>
+      <div class="titles">
+        <span class="eyebrow">상담용 자료</span>
+        <h1>연간 세무 흐름도</h1>
+      </div>
+      <p class="standfirst">
+        1년 동안의 모든 신고 자료는 결국 <b>소득금액</b> 하나로 모이고, 그 숫자가 세금과 건강보험료를 동시에 결정합니다.
+      </p>
+    </div>
+
+    <div class="controls">
+      <span class="ctl-label">글자 크기</span>
+      <div class="segmented" role="group" aria-label="글자 크기">
+        <button type="button" data-zoom="1" aria-pressed="true">기본</button>
+        <button type="button" data-zoom="1.3" aria-pressed="false">크게</button>
+        <button type="button" data-zoom="1.6" aria-pressed="false">아주 크게</button>
+      </div>
+      <button type="button" class="plain-btn" id="printBtn">인쇄</button>
+    </div>
+  </header>
+
+  <figure>
+    <div id="stage">
+      <svg viewBox="0 0 1430 740" role="img"
+           aria-label="연간 세무 흐름도. 사업연도 중 신고한 부가가치세 매출·매입 자료와 인건비 지급액이 익년 5월 소득금액 계산으로 모이고, 확정된 소득금액이 종합소득세액과 건강보험료를 함께 결정합니다."
+           font-family="'IBM Plex Sans KR', system-ui, 'Malgun Gothic', sans-serif">
+
+        <defs>
+          <marker id="ah-jade" viewBox="0 0 12 12" refX="10" refY="6"
+                  markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+            <path d="M1 1 L11 6 L1 11 z" fill="var(--jade)"></path>
+          </marker>
+          <marker id="ah-seal" viewBox="0 0 12 12" refX="10" refY="6"
+                  markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+            <path d="M1 1 L11 6 L1 11 z" fill="var(--seal)"></path>
+          </marker>
+        </defs>
+
+        <!-- ═══════════ 타임라인 ═══════════ -->
+
+        <rect x="188" y="26" width="124" height="28" rx="14"
+              fill="var(--jade-soft)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+        <text x="250" y="45" font-size="15" font-weight="600" fill="var(--jade)" text-anchor="middle">사업연도</text>
+        <line x1="250" y1="56" x2="250" y2="99" stroke="var(--jade-line)" stroke-width="2" stroke-dasharray="3 5"></line>
+
+        <line x1="100" y1="104" x2="1380" y2="104" stroke="var(--rule)" stroke-width="2"></line>
+        <line x1="150" y1="104" x2="350" y2="104" stroke="var(--jade)" stroke-width="6"
+              stroke-linecap="round" opacity=".85"></line>
+
+        <circle cx="150" cy="104" r="7" fill="var(--surface)" stroke="var(--jade)" stroke-width="3.5"></circle>
+        <text x="150" y="82" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">1월</text>
+        <text x="150" y="138" font-size="17" fill="var(--ink-2)" text-anchor="middle">사업 개시</text>
+        <text x="150" y="160" font-size="15" fill="var(--ink-3)" text-anchor="middle">(사업자등록)</text>
+
+        <circle cx="350" cy="104" r="7" fill="var(--surface)" stroke="var(--jade)" stroke-width="3.5"></circle>
+        <text x="350" y="82" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">12월</text>
+        <text x="350" y="138" font-size="17" fill="var(--ink-2)" text-anchor="middle">사업연도 종료</text>
+        <text x="350" y="160" font-size="15" fill="var(--ink-3)" text-anchor="middle">(12.31 결산)</text>
+
+        <circle cx="500" cy="104" r="7" fill="var(--surface)" stroke="var(--jade)" stroke-width="3.5"></circle>
+        <text x="500" y="82" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">익년 1월</text>
+        <text x="500" y="138" font-size="17" fill="var(--ink-2)" text-anchor="middle">부가세 확정신고</text>
+        <text x="500" y="160" font-size="15" fill="var(--ink-3)" text-anchor="middle">(1.25까지)</text>
+
+        <circle cx="861" cy="104" r="7" fill="var(--surface)" stroke="var(--clay)" stroke-width="3.5"></circle>
+        <text x="861" y="82" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">익년 5월</text>
+        <text x="861" y="138" font-size="17" fill="var(--ink-2)" text-anchor="middle">종합소득세 신고</text>
+        <text x="861" y="160" font-size="15" fill="var(--ink-3)" text-anchor="middle">(5.31까지)</text>
+
+        <circle cx="1160" cy="104" r="7" fill="var(--surface)" stroke="var(--clay)" stroke-width="3.5"></circle>
+        <text x="1160" y="82" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">6월</text>
+        <text x="1160" y="138" font-size="17" fill="var(--ink-2)" text-anchor="middle">건강보험료 정산</text>
+        <text x="1160" y="160" font-size="15" fill="var(--ink-3)" text-anchor="middle">(직장가입자)</text>
+
+        <circle cx="1330" cy="104" r="7" fill="var(--surface)" stroke="var(--clay)" stroke-width="3.5"></circle>
+        <text x="1330" y="82" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">11월</text>
+        <text x="1330" y="138" font-size="17" fill="var(--ink-2)" text-anchor="middle">건강보험료 조정</text>
+        <text x="1330" y="160" font-size="15" fill="var(--ink-3)" text-anchor="middle">(지역가입자)</text>
+
+        <!-- ═══════════ 준비 · 사업자등록 ═══════════ -->
+
+        <rect x="30" y="192" width="240" height="522" rx="14"
+              fill="var(--surface)" stroke="var(--jade-line)" stroke-width="2" stroke-dasharray="8 6"></rect>
+
+        <text x="52" y="236" font-size="25" font-weight="700" fill="var(--ink)">사업자등록</text>
+        <text x="52" y="260" font-size="15" fill="var(--ink-3)">사업 개시 시 최초 1회</text>
+        <line x1="52" y1="282" x2="248" y2="282" stroke="var(--rule)" stroke-width="1.5"></line>
+
+        <rect x="52" y="315" width="9" height="9" fill="var(--jade)"></rect>
+        <text x="71" y="324" font-size="19" font-weight="600" fill="var(--ink)">사업자등록 신청</text>
+
+        <text x="52" y="382" font-size="15" font-weight="700" fill="var(--jade)" letter-spacing="0.06em">기초 세팅</text>
+        <text x="56" y="422" font-size="17" fill="var(--ink-2)">· 사업용 계좌 등록</text>
+        <text x="56" y="466" font-size="17" fill="var(--ink-2)">· 현금영수증 가맹점 가입</text>
+        <text x="56" y="510" font-size="17" fill="var(--ink-2)">· 사업용 신용카드 등록</text>
+
+        <rect x="48" y="558" width="204" height="134" rx="10" fill="var(--jade-soft)"></rect>
+        <text x="66" y="590" font-size="14" font-weight="700" fill="var(--jade)">왜 필요한가요?</text>
+        <text x="66" y="618" font-size="15" fill="var(--ink-2)">계좌 · 카드를 등록해야</text>
+        <text x="66" y="642" font-size="15" fill="var(--ink-2)">매입 · 비용 증빙이</text>
+        <text x="66" y="666" font-size="15" fill="var(--ink-2)">자동으로 쌓입니다</text>
+
+        <!-- ═══════════ ① 부가가치세 ═══════════ -->
+
+        <rect x="304" y="192" width="290" height="346" rx="14"
+              fill="var(--jade-soft)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+
+        <circle cx="340" cy="228" r="17" fill="var(--jade)"></circle>
+        <text x="340" y="235" font-size="18" font-weight="700" fill="var(--on-jade)" text-anchor="middle">1</text>
+        <text x="366" y="236" font-size="24" font-weight="700" fill="var(--ink)">부가가치세</text>
+
+        <rect x="510" y="214" width="62" height="28" rx="14" fill="none" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+        <text x="541" y="233" font-size="15" font-weight="600" fill="var(--jade)" text-anchor="middle">연중</text>
+
+        <line x1="330" y1="266" x2="572" y2="266" stroke="var(--jade-line)" stroke-width="1.5"></line>
+
+        <text x="370" y="306" font-size="23" font-weight="700" fill="var(--ink)">매출액</text>
+        <text x="370" y="330" font-size="15" fill="var(--ink-3)">세금계산서 발급 · 플랫폼 매출</text>
+
+        <text x="360" y="376" font-size="19" fill="var(--ink-3)" text-anchor="end">(−)</text>
+        <text x="370" y="376" font-size="23" font-weight="700" fill="var(--ink)">매입액</text>
+        <text x="370" y="400" font-size="15" fill="var(--ink-3)">세금계산서 · 계산서 ·</text>
+        <text x="370" y="421" font-size="15" fill="var(--ink-3)">현금영수증 · 카드 매입</text>
+
+        <line x1="330" y1="448" x2="572" y2="448" stroke="var(--jade)" stroke-width="2" opacity=".5"></line>
+
+        <text x="449" y="492" font-size="32" font-weight="700" fill="var(--jade)"
+              font-family="'Gowun Batang', serif" text-anchor="middle">부가세</text>
+        <text x="449" y="518" font-size="16" fill="var(--ink-2)" text-anchor="middle">대략 순이익의 10%</text>
+
+        <!-- ═══════════ 인건비 신고 ═══════════ -->
+
+        <rect x="304" y="574" width="290" height="140" rx="14"
+              fill="var(--jade-soft)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+
+        <text x="330" y="612" font-size="22" font-weight="700" fill="var(--ink)">인건비 신고</text>
+        <rect x="510" y="594" width="62" height="28" rx="14" fill="none" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+        <text x="541" y="613" font-size="15" font-weight="600" fill="var(--jade)" text-anchor="middle">연중</text>
+
+        <line x1="330" y1="632" x2="572" y2="632" stroke="var(--jade-line)" stroke-width="1.5"></line>
+        <text x="330" y="660" font-size="17" fill="var(--ink-2)">급여 · 3.3% 사업소득 등</text>
+        <text x="330" y="686" font-size="17" fill="var(--ink-2)">인건비 원천세 신고</text>
+
+        <!-- ═══════════ ② 소득금액 계산 ═══════════ -->
+
+        <rect x="686" y="192" width="350" height="522" rx="14"
+              fill="var(--clay-soft)" stroke="var(--clay-line)" stroke-width="1.5"></rect>
+
+        <circle cx="722" cy="228" r="17" fill="var(--clay)"></circle>
+        <text x="722" y="235" font-size="18" font-weight="700" fill="var(--on-clay)" text-anchor="middle">2</text>
+        <text x="750" y="236" font-size="24" font-weight="700" fill="var(--ink)">소득금액 계산</text>
+
+        <rect x="924" y="214" width="90" height="28" rx="14" fill="none" stroke="var(--clay-line)" stroke-width="1.5"></rect>
+        <text x="969" y="233" font-size="15" font-weight="600" fill="var(--clay)" text-anchor="middle">익년 5월</text>
+
+        <line x1="712" y1="266" x2="1014" y2="266" stroke="var(--clay-line)" stroke-width="1.5"></line>
+
+        <text x="754" y="306" font-size="22" fill="var(--ink)">부가세 매출액</text>
+
+        <text x="744" y="348" font-size="19" fill="var(--ink-3)" text-anchor="end">(−)</text>
+        <text x="754" y="348" font-size="22" fill="var(--ink)">부가세 매입액</text>
+
+        <text x="744" y="390" font-size="19" fill="var(--ink-3)" text-anchor="end">(+)</text>
+        <text x="754" y="390" font-size="22" fill="var(--ink)">추가 비용처리</text>
+
+        <text x="744" y="432" font-size="19" fill="var(--ink-3)" text-anchor="end">(−)</text>
+        <text x="754" y="432" font-size="22" fill="var(--ink)">인건비 지급액</text>
+
+        <text x="744" y="474" font-size="19" fill="var(--ink-3)" text-anchor="end">(−)</text>
+        <text x="754" y="474" font-size="22" fill="var(--ink)">적격증빙 미수취액</text>
+
+        <text x="744" y="516" font-size="19" fill="var(--ink-3)" text-anchor="end">(−)</text>
+        <text x="754" y="516" font-size="22" fill="var(--ink)">경조사비 등 현금지출액</text>
+
+        <line x1="712" y1="536" x2="1014" y2="536" stroke="var(--gold)" stroke-width="2.5"></line>
+
+        <!-- 핵심 : 소득금액 -->
+        <rect x="710" y="562" width="302" height="132" rx="12"
+              fill="var(--focus-fill)" stroke="var(--gold)" stroke-width="2"></rect>
+        <text x="861" y="634" font-size="50" font-weight="700" fill="var(--focus-text)"
+              font-family="'Gowun Batang', serif" text-anchor="middle">소득금액</text>
+        <line x1="781" y1="652" x2="941" y2="652" stroke="var(--gold)" stroke-width="2"></line>
+        <text x="861" y="680" font-size="15" fill="var(--focus-text)" opacity=".8"
+              text-anchor="middle">건강보험료 · 소득증빙의 기준</text>
+
+        <rect x="694" y="546" width="44" height="44" rx="11" fill="var(--seal)"></rect>
+        <text x="716" y="574" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">핵심</text>
+
+        <!-- ═══════════ ③ 세액 산출 ═══════════ -->
+
+        <rect x="1100" y="192" width="300" height="346" rx="14"
+              fill="var(--clay-soft)" stroke="var(--clay-line)" stroke-width="1.5"></rect>
+
+        <circle cx="1136" cy="228" r="17" fill="var(--clay)"></circle>
+        <text x="1136" y="235" font-size="18" font-weight="700" fill="var(--on-clay)" text-anchor="middle">3</text>
+        <text x="1164" y="236" font-size="24" font-weight="700" fill="var(--ink)">세액 산출</text>
+
+        <rect x="1288" y="214" width="90" height="28" rx="14" fill="none" stroke="var(--clay-line)" stroke-width="1.5"></rect>
+        <text x="1333" y="233" font-size="15" font-weight="600" fill="var(--clay)" text-anchor="middle">익년 5월</text>
+
+        <line x1="1126" y1="266" x2="1378" y2="266" stroke="var(--clay-line)" stroke-width="1.5"></line>
+
+        <text x="1250" y="308" font-size="22" fill="var(--ink)" text-anchor="middle">소득금액 × 세율(%)</text>
+        <line x1="1150" y1="336" x2="1350" y2="336" stroke="var(--clay-line)" stroke-width="1.5"></line>
+
+        <text x="1250" y="378" font-size="24" font-weight="700" fill="var(--ink)" text-anchor="middle">소득세액</text>
+        <text x="1250" y="418" font-size="20" fill="var(--ink-2)" text-anchor="middle">(−) 세액감면</text>
+
+        <line x1="1150" y1="446" x2="1350" y2="446" stroke="var(--clay)" stroke-width="2" opacity=".5"></line>
+
+        <text x="1250" y="492" font-size="32" font-weight="700" fill="var(--clay)"
+              font-family="'Gowun Batang', serif" text-anchor="middle">최종세액</text>
+        <text x="1250" y="518" font-size="15" fill="var(--ink-3)" text-anchor="middle">5월 종합소득세 신고 · 납부</text>
+
+        <!-- ═══════════ 건강보험료 ═══════════ -->
+
+        <rect x="1100" y="574" width="300" height="140" rx="14"
+              fill="var(--clay-soft)" stroke="var(--clay-line)" stroke-width="1.5"></rect>
+
+        <text x="1126" y="612" font-size="22" font-weight="700" fill="var(--ink)">건강보험료</text>
+        <rect x="1278" y="594" width="100" height="28" rx="14" fill="none" stroke="var(--clay-line)" stroke-width="1.5"></rect>
+        <text x="1328" y="613" font-size="15" font-weight="600" fill="var(--clay)" text-anchor="middle">6월 · 11월</text>
+
+        <line x1="1126" y1="632" x2="1378" y2="632" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="1126" y="660" font-size="15" fill="var(--ink-2)">직장가입자 · 6월 보수총액 정산</text>
+        <text x="1126" y="686" font-size="15" fill="var(--ink-2)">지역가입자 · 11월 보험료 조정</text>
+
+        <!-- ═══════════ 연결선 ═══════════ -->
+
+        <line x1="594" y1="365" x2="680" y2="365" stroke="var(--jade)" stroke-width="2.5"
+              marker-end="url(#ah-jade)"></line>
+        <text x="637" y="350" font-size="14" font-weight="600" fill="var(--jade)" text-anchor="middle">그대로 반영</text>
+
+        <line x1="594" y1="644" x2="680" y2="644" stroke="var(--jade)" stroke-width="2.5"
+              marker-end="url(#ah-jade)"></line>
+        <text x="637" y="629" font-size="14" font-weight="600" fill="var(--jade)" text-anchor="middle">지급액 차감</text>
+
+        <path d="M1036 628 H1068 V365 H1094" fill="none" stroke="var(--seal)" stroke-width="2.5"
+              stroke-linejoin="round" marker-end="url(#ah-seal)"></path>
+        <line x1="1068" y1="628" x2="1094" y2="628" stroke="var(--seal)" stroke-width="2.5"
+              marker-end="url(#ah-seal)"></line>
+        <circle cx="1068" cy="628" r="5" fill="var(--seal)"></circle>
+
+      </svg>
+    </div>
+
+    <div class="figfoot">
+      <figcaption>
+        사업연도 중 신고한 <strong>부가세 매출·매입 자료</strong>와 <strong>인건비 지급액</strong>이 익년 5월 소득금액 계산으로 그대로 넘어오고,
+        여기서 확정된 소득금액 하나가 종합소득세와 건강보험료로 갈라집니다.
+      </figcaption>
+
+      <ul class="legend">
+        <li><span class="swatch sw-dash"></span>개시 준비</li>
+        <li><span class="swatch sw-jade"></span>연중 실무</li>
+        <li><span class="swatch sw-clay"></span>익년 정산</li>
+        <li><span class="swatch sw-seal"></span>소득금액에서 갈라지는 흐름</li>
+      </ul>
+    </div>
+  </figure>
+
+  <section class="points">
+    <div class="point">
+      <h3>소득금액은 부가세 신고에서 출발합니다</h3>
+      <p>연중에 발급·수취한 세금계산서와 카드·현금영수증 매입이 그대로 소득금액 계산의 출발점이 됩니다.</p>
+    </div>
+
+    <div class="point">
+      <h3>증빙이 없으면 계산에서 빠집니다</h3>
+      <p>적격증빙을 갖추지 못한 지출과 경조사비 등 현금지출은 따로 정리해 두어야 소득금액 계산에서 놓치지 않습니다.</p>
+    </div>
+
+    <div class="point">
+      <h3>소득금액은 세금만의 문제가 아닙니다</h3>
+      <p>같은 숫자가 6월·11월 건강보험료 산정에 쓰이고, 대출 심사의 소득증빙 자료로도 그대로 사용됩니다.</p>
+    </div>
+  </section>
+
+  <footer>
+    상담 설명용 요약 자료입니다. 실제 신고 기한과 세액은 업종 · 과세유형 · 개별 사정에 따라 달라질 수 있습니다.
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var stage = document.getElementById('stage');
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-zoom]'));
+
+    function apply(value, save) {
+      stage.style.setProperty('--zoom', value);
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.zoom === value));
+      });
+      if (save) {
+        try { localStorage.setItem('taxflow-zoom', value); } catch (e) {}
+      }
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { apply(b.dataset.zoom, true); });
+    });
+
+    try {
+      var saved = localStorage.getItem('taxflow-zoom');
+      if (saved && buttons.some(function (b) { return b.dataset.zoom === saved; })) apply(saved, false);
+    } catch (e) {}
+
+    document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
+  })();
+</script>
