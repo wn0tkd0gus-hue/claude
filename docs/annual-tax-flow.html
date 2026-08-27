@@ -246,8 +246,8 @@
   .legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 20px;
-    font-size: 13.5px;
+    gap: 8px 24px;
+    font-size: 15.5px;
     color: var(--ink-2);
     list-style: none;
     margin: 0;
@@ -373,49 +373,58 @@
 
         <!-- 부가세 예정고지 : 신고가 아니라 고지 납부라 작게 표시 -->
         <circle cx="262" cy="106" r="4.5" fill="var(--surface)" stroke="var(--jade-line)" stroke-width="3"></circle>
-        <text x="262" y="140" font-size="13" fill="var(--ink-3)" text-anchor="middle">4월 예정고지</text>
+        <text x="262" y="139" font-size="14" font-weight="600" fill="var(--ink-3)" text-anchor="middle">4/25</text>
+        <text x="262" y="158" font-size="12" fill="var(--ink-3)" text-anchor="middle">예정고지</text>
 
         <circle cx="505" cy="106" r="4.5" fill="var(--surface)" stroke="var(--jade-line)" stroke-width="3"></circle>
-        <text x="505" y="140" font-size="13" fill="var(--ink-3)" text-anchor="middle">10월 예정고지</text>
+        <text x="505" y="139" font-size="14" font-weight="600" fill="var(--ink-3)" text-anchor="middle">10/25</text>
+        <text x="505" y="158" font-size="12" fill="var(--ink-3)" text-anchor="middle">예정고지</text>
 
         <circle cx="150" cy="106" r="7" fill="var(--surface)" stroke="var(--jade)" stroke-width="3.5"></circle>
         <text x="150" y="84" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">1월</text>
         <text x="150" y="140" font-size="17" fill="var(--ink-2)" text-anchor="middle">사업 개시</text>
-        <text x="150" y="162" font-size="15" fill="var(--ink-3)" text-anchor="middle">(사업자등록)</text>
+        <text x="150" y="162" font-size="13" fill="var(--ink-3)" text-anchor="middle">사업자등록</text>
 
-        <circle cx="380" cy="106" r="7" fill="var(--surface)" stroke="var(--jade)" stroke-width="3.5"></circle>
+        <circle cx="380" cy="106" r="12" fill="var(--jade)"></circle>
+        <text x="380" y="111" font-size="15" font-weight="700" fill="var(--on-jade)" text-anchor="middle">1</text>
         <text x="380" y="84" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">7월</text>
         <text x="380" y="140" font-size="17" fill="var(--ink-2)" text-anchor="middle">부가세 확정신고</text>
-        <text x="380" y="162" font-size="15" fill="var(--ink-3)" text-anchor="middle">(1기 · 7.25까지)</text>
+        <text x="380" y="162" font-size="13" fill="var(--ink-3)" text-anchor="middle">1기 1.1~6.30 · 7.25까지</text>
 
-        <circle cx="700" cy="106" r="7" fill="var(--surface)" stroke="var(--jade)" stroke-width="3.5"></circle>
+        <circle cx="700" cy="106" r="12" fill="var(--jade)"></circle>
+        <text x="700" y="111" font-size="15" font-weight="700" fill="var(--on-jade)" text-anchor="middle">1</text>
         <text x="700" y="84" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">익년 1월</text>
         <text x="700" y="140" font-size="17" fill="var(--ink-2)" text-anchor="middle">부가세 확정신고</text>
-        <text x="700" y="162" font-size="15" fill="var(--ink-3)" text-anchor="middle">(2기 · 1.25까지)</text>
+        <text x="700" y="162" font-size="13" fill="var(--ink-3)" text-anchor="middle">2기 7.1~12.31 · 1.25까지</text>
 
         <!-- 법인사업자 참고 : 개인 흐름과 구분되도록 회색 점선 처리 -->
-        <rect x="821" y="22" width="58" height="24" rx="12"
+        <rect x="809" y="22" width="58" height="24" rx="12"
               fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
-        <text x="850" y="39" font-size="13" font-weight="600" fill="var(--ink-3)" text-anchor="middle">법인</text>
-        <circle cx="850" cy="106" r="6" fill="var(--surface)" stroke="var(--ink-3)" stroke-width="2.5"></circle>
-        <text x="850" y="84" font-size="27" font-weight="700" fill="var(--ink-3)" text-anchor="middle">익년 3월</text>
-        <text x="850" y="140" font-size="17" fill="var(--ink-3)" text-anchor="middle">법인세 신고</text>
-        <text x="850" y="162" font-size="15" fill="var(--ink-3)" text-anchor="middle">(결산 후 3개월 이내)</text>
+        <text x="838" y="39" font-size="13" font-weight="600" fill="var(--ink-3)" text-anchor="middle">법인</text>
+        <circle cx="838" cy="106" r="6" fill="var(--surface)" stroke="var(--ink-3)" stroke-width="2.5"></circle>
+        <text x="838" y="84" font-size="27" font-weight="700" fill="var(--ink-3)" text-anchor="middle">익년 3월</text>
+        <text x="838" y="140" font-size="17" fill="var(--ink-3)" text-anchor="middle">법인세 신고</text>
+        <text x="838" y="162" font-size="13" fill="var(--ink-3)" text-anchor="middle">결산 후 3개월</text>
 
-        <circle cx="990" cy="106" r="7" fill="var(--surface)" stroke="var(--clay)" stroke-width="3.5"></circle>
+        <circle cx="978" cy="106" r="11" fill="var(--clay)"></circle>
+        <text x="978" y="110" font-size="14" font-weight="700" fill="var(--on-clay)" text-anchor="middle">2</text>
+        <circle cx="1002" cy="106" r="11" fill="var(--clay)"></circle>
+        <text x="1002" y="110" font-size="14" font-weight="700" fill="var(--on-clay)" text-anchor="middle">3</text>
         <text x="990" y="84" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">익년 5월</text>
         <text x="990" y="140" font-size="17" fill="var(--ink-2)" text-anchor="middle">종합소득세 신고</text>
-        <text x="990" y="162" font-size="15" fill="var(--ink-3)" text-anchor="middle">(5.31까지)</text>
+        <text x="990" y="162" font-size="13" fill="var(--ink-3)" text-anchor="middle">1.1~12.31 모든 소득 · 5.31까지</text>
 
-        <circle cx="1180" cy="106" r="7" fill="var(--surface)" stroke="var(--clay)" stroke-width="3.5"></circle>
+        <circle cx="1180" cy="106" r="12" fill="var(--clay)"></circle>
+        <text x="1180" y="111" font-size="15" font-weight="700" fill="var(--on-clay)" text-anchor="middle">4</text>
         <text x="1180" y="84" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">6월</text>
         <text x="1180" y="140" font-size="17" fill="var(--ink-2)" text-anchor="middle">건강보험료 정산</text>
-        <text x="1180" y="162" font-size="15" fill="var(--ink-3)" text-anchor="middle">(대표자 · 직장)</text>
+        <text x="1180" y="162" font-size="13" fill="var(--ink-3)" text-anchor="middle">대표자 · 직장가입자</text>
 
-        <circle cx="1345" cy="106" r="7" fill="var(--surface)" stroke="var(--clay)" stroke-width="3.5"></circle>
+        <circle cx="1345" cy="106" r="12" fill="var(--clay)"></circle>
+        <text x="1345" y="111" font-size="15" font-weight="700" fill="var(--on-clay)" text-anchor="middle">4</text>
         <text x="1345" y="84" font-size="27" font-weight="700" fill="var(--ink)" text-anchor="middle">11월</text>
         <text x="1345" y="140" font-size="17" fill="var(--ink-2)" text-anchor="middle">건강보험료 조정</text>
-        <text x="1345" y="162" font-size="15" fill="var(--ink-3)" text-anchor="middle">(지역가입자)</text>
+        <text x="1345" y="162" font-size="13" fill="var(--ink-3)" text-anchor="middle">지역가입자</text>
 
         <!-- ═══════════ 준비 · 사업자등록 ═══════════ -->
 
@@ -442,7 +451,7 @@
 
         <!-- ═══════════ ① 부가가치세 ═══════════ -->
 
-        <rect x="304" y="192" width="290" height="346" rx="14"
+        <rect x="304" y="192" width="290" height="356" rx="14"
               fill="var(--jade-soft)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
 
         <circle cx="340" cy="228" r="17" fill="var(--jade)"></circle>
@@ -454,20 +463,27 @@
 
         <line x1="330" y1="266" x2="572" y2="266" stroke="var(--jade-line)" stroke-width="1.5"></line>
 
-        <text x="370" y="300" font-size="23" font-weight="700" fill="var(--ink)">매출액</text>
-        <text x="370" y="324" font-size="15" fill="var(--ink-3)">세금계산서 발급 · 플랫폼 매출</text>
+        <text x="370" y="292" font-size="23" font-weight="700" fill="var(--ink)">매출액</text>
+        <text x="370" y="313" font-size="15" fill="var(--ink-3)">세금계산서 발급 · 플랫폼 매출</text>
+        <text x="370" y="332" font-size="15" fill="var(--ink-3)">신용카드 · 현금영수증 매출</text>
 
         <text x="360" y="366" font-size="19" fill="var(--ink-3)" text-anchor="end">(−)</text>
         <text x="370" y="366" font-size="23" font-weight="700" fill="var(--ink)">매입액</text>
-        <text x="370" y="390" font-size="15" fill="var(--ink-3)">세금계산서 · 계산서 ·</text>
-        <text x="370" y="411" font-size="15" fill="var(--ink-3)">현금영수증 · 카드 매입</text>
+        <text x="370" y="387" font-size="15" fill="var(--ink-3)">세금계산서 · 계산서 ·</text>
+        <text x="370" y="406" font-size="15" fill="var(--ink-3)">현금영수증 · 카드 매입</text>
 
-        <line x1="330" y1="434" x2="572" y2="434" stroke="var(--jade)" stroke-width="2" opacity=".5"></line>
+        <line x1="330" y1="424" x2="572" y2="424" stroke="var(--jade)" stroke-width="2" opacity=".5"></line>
 
-        <text x="449" y="474" font-size="32" font-weight="700" fill="var(--jade)"
+        <text x="449" y="456" font-size="30" font-weight="700" fill="var(--jade)"
               font-family="'Gowun Batang', serif" text-anchor="middle">부가세</text>
-        <text x="449" y="498" font-size="16" fill="var(--ink-2)" text-anchor="middle">(매출 − 매입)의 약 10%</text>
-        <text x="449" y="520" font-size="13" fill="var(--ink-3)" text-anchor="middle">일반과세자 기준 · 간이과세자는 연 1회</text>
+
+        <!-- 과세유형별 계산식 : 일반은 세액 차감, 간이는 업종별 부가율 방식 -->
+        <text x="376" y="486" font-size="13" font-weight="700" fill="var(--jade)" text-anchor="end">일반</text>
+        <text x="386" y="486" font-size="14" fill="var(--ink)">(매출 − 매입) × 10%</text>
+
+        <text x="376" y="510" font-size="13" font-weight="700" fill="var(--ink-3)" text-anchor="end">간이</text>
+        <text x="386" y="510" font-size="13" fill="var(--ink-2)">매출 × 부가율(15~40%) × 10%</text>
+        <text x="386" y="530" font-size="13" fill="var(--ink-2)">− 매입액 × 0.5%</text>
 
         <!-- ═══════════ 인건비 신고 ═══════════ -->
 
@@ -531,7 +547,7 @@
 
         <!-- ═══════════ ③ 세액 산출 ═══════════ -->
 
-        <rect x="1100" y="192" width="300" height="346" rx="14"
+        <rect x="1100" y="192" width="300" height="356" rx="14"
               fill="var(--clay-soft)" stroke="var(--clay-line)" stroke-width="1.5"></rect>
 
         <circle cx="1136" cy="228" r="17" fill="var(--clay)"></circle>
@@ -543,25 +559,33 @@
 
         <line x1="1126" y1="266" x2="1378" y2="266" stroke="var(--clay-line)" stroke-width="1.5"></line>
 
-        <text x="1250" y="304" font-size="22" fill="var(--ink)" text-anchor="middle">소득금액 × 세율(%)</text>
-        <text x="1250" y="328" font-size="14" fill="var(--ink-3)" text-anchor="middle">※ 소득공제는 고려하지 않음</text>
-        <line x1="1150" y1="350" x2="1350" y2="350" stroke="var(--clay-line)" stroke-width="1.5"></line>
+        <text x="1250" y="290" font-size="20" font-weight="600" fill="var(--ink)" text-anchor="middle">소득금액 + 타소득</text>
+        <text x="1250" y="317" font-size="20" fill="var(--ink)" text-anchor="middle">× 세율(%)</text>
+        <text x="1250" y="337" font-size="12" fill="var(--ink-3)" text-anchor="middle">※ 타소득 = 근로 · 이자 · 배당 등</text>
+        <text x="1250" y="353" font-size="12" fill="var(--ink-3)" text-anchor="middle">※ 소득공제는 고려하지 않음</text>
 
-        <text x="1250" y="390" font-size="24" font-weight="700" fill="var(--ink)" text-anchor="middle">소득세액</text>
-        <text x="1250" y="428" font-size="20" fill="var(--ink-2)" text-anchor="middle">(−) 세액감면</text>
+        <line x1="1150" y1="366" x2="1350" y2="366" stroke="var(--clay-line)" stroke-width="1.5"></line>
 
-        <line x1="1150" y1="452" x2="1350" y2="452" stroke="var(--clay)" stroke-width="2" opacity=".5"></line>
+        <text x="1250" y="388" font-size="22" font-weight="700" fill="var(--ink)" text-anchor="middle">소득세액</text>
+        <text x="1250" y="411" font-size="18" fill="var(--ink-2)" text-anchor="middle">(−) 세액감면</text>
+        <text x="1250" y="428" font-size="12" fill="var(--ink-3)" text-anchor="middle">※ 세액공제 등은 고려하지 않음</text>
 
-        <text x="1250" y="496" font-size="32" font-weight="700" fill="var(--clay)"
+        <line x1="1150" y1="442" x2="1350" y2="442" stroke="var(--clay)" stroke-width="2" opacity=".5"></line>
+
+        <text x="1250" y="470" font-size="26" font-weight="700" fill="var(--clay)"
               font-family="'Gowun Batang', serif" text-anchor="middle">최종세액</text>
-        <text x="1250" y="520" font-size="15" fill="var(--ink-3)" text-anchor="middle">5월 종합소득세 신고 · 납부</text>
+        <text x="1250" y="492" font-size="17" fill="var(--ink-2)" text-anchor="middle">(−) 기납부세액</text>
+        <text x="1250" y="510" font-size="13" fill="var(--ink-3)" text-anchor="middle">= 실제 납부 · 환급액</text>
+        <text x="1250" y="530" font-size="12" fill="var(--ink-3)" text-anchor="middle">5월 종합소득세 신고 · 납부</text>
 
         <!-- ═══════════ 건강보험료 ═══════════ -->
 
         <rect x="1100" y="574" width="300" height="140" rx="14"
               fill="var(--clay-soft)" stroke="var(--clay-line)" stroke-width="1.5"></rect>
 
-        <text x="1126" y="612" font-size="22" font-weight="700" fill="var(--ink)">건강보험료</text>
+        <circle cx="1132" cy="606" r="15" fill="var(--clay)"></circle>
+        <text x="1132" y="612" font-size="16" font-weight="700" fill="var(--on-clay)" text-anchor="middle">4</text>
+        <text x="1155" y="612" font-size="21" font-weight="700" fill="var(--ink)">건강보험료</text>
         <rect x="1278" y="594" width="100" height="28" rx="14" fill="none" stroke="var(--clay-line)" stroke-width="1.5"></rect>
         <text x="1328" y="613" font-size="15" font-weight="600" fill="var(--clay)" text-anchor="middle">6월 · 11월</text>
 
@@ -580,7 +604,7 @@
         <path d="M594 644 H637 V390 H680" fill="none" stroke="var(--jade)" stroke-width="2.5"
               stroke-linejoin="round" marker-end="url(#ah-jade)"></path>
 
-        <path d="M1036 628 H1068 V365 H1094" fill="none" stroke="var(--seal)" stroke-width="2.5"
+        <path d="M1036 628 H1068 V296 H1094" fill="none" stroke="var(--seal)" stroke-width="2.5"
               stroke-linejoin="round" marker-end="url(#ah-seal)"></path>
         <line x1="1068" y1="628" x2="1094" y2="628" stroke="var(--seal)" stroke-width="2.5"
               marker-end="url(#ah-seal)"></line>
@@ -600,7 +624,7 @@
 
       <ul class="legend">
         <li><span class="swatch sw-dash"></span>개시 준비</li>
-        <li><span class="swatch sw-jade"></span>연중 실무</li>
+        <li><span class="swatch sw-jade"></span>연중 신고</li>
         <li><span class="swatch sw-clay"></span>익년 정산</li>
         <li><span class="swatch sw-seal"></span>소득금액에서 갈라지는 흐름</li>
         <li><span class="swatch sw-corp"></span>법인사업자 참고</li>
