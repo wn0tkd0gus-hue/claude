@@ -86,6 +86,8 @@ figcaption b{color:var(--ink);font-weight:600}
 .s-body{stroke:var(--limb);stroke-width:7;stroke-linecap:round;fill:none}
 .s-body-f{stroke:var(--fault);stroke-width:7;stroke-linecap:round;fill:none;opacity:.9}
 .s-body-g{stroke:var(--good);stroke-width:7;stroke-linecap:round;fill:none;opacity:.9}
+.s-body-w{stroke:var(--warn);stroke-width:7;stroke-linecap:round;fill:none;opacity:.9}
+.s-mini{stroke-width:11}
 .s-line{stroke:currentColor;stroke-width:1.6;fill:none}
 .s-thick{stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round}
 .s-hair{stroke:var(--rule-2);stroke-width:1;fill:none}
@@ -186,12 +188,12 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
 <header class="mast">
   <p class="eyebrow">Swing Diagnosis · Iron Strike &amp; Driver Distance</p>
   <h1>정타 회복 진단서</h1>
-  <p class="lede">아이언 정타 불량과 짧은 드라이버는 서로 다른 두 문제가 아닙니다. 같은 뿌리에서 나온 두 개의 증상입니다. 이 리포트는 그 뿌리를 찾아 없애는 순서로 짜여 있습니다.</p>
+  <p class="lede">드라이버 215 m는 이 스코어대에서 <b>이미 평균 이상</b>입니다. 그러니 문제는 거리가 아닙니다. 같은 클럽이 매번 다른 거리를 가는 것 — 그게 아이언 정타 불량의 정체이고, 이 리포트는 그 폭을 줄이는 순서로 짜여 있습니다.</p>
   <dl class="vitals">
     <div class="vital"><dt>스코어</dt><dd>80–85 <small>/ HDCP 10±</small></dd></div>
-    <div class="vital"><dt>드라이버</dt><dd>215 <small>평균</small></dd></div>
+    <div class="vital"><dt>드라이버</dt><dd>215<small> m / 235 y</small></dd></div>
     <div class="vital"><dt>주 증상</dt><dd>아이언 <small>정타 불량</small></dd></div>
-    <div class="vital"><dt>1차 목표</dt><dd>240<small>+ / 정타율 2배</small></dd></div>
+    <div class="vital"><dt>1차 목표</dt><dd>편차 <small>±16 → ±6 m</small></dd></div>
   </dl>
 </header>
 
@@ -210,7 +212,7 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
 
   <div class="prose">
     <p>80대 초중반을 치는 사람이 아이언 정타가 안 난다면, 백스윙 모양이나 그립을 의심할 단계는 이미 지났습니다. 그 점수대는 스윙 궤도가 대체로 일정하다는 증거니까요. 진짜 문제는 <em>클럽헤드가 볼에 도달하는 마지막 30cm</em>에서 매번 다른 일이 벌어진다는 것입니다.</p>
-    <p>그리고 이건 드라이버 비거리와 같은 문제입니다. 페이스 중앙을 벗어난 임팩트는 아이언에서는 "정타가 안 난다"로 나타나고, 드라이버에서는 "생각보다 안 나간다"로 나타납니다. 하나를 고치면 둘이 같이 해결되는 구조입니다.</p>
+    <p>그리고 이건 거리 편차와 같은 문제입니다. 페이스 중앙을 벗어난 임팩트는 방향보다 <b>거리를 먼저</b> 망칩니다. 같은 스윙을 했는데 어떤 날은 150 m, 어떤 날은 138 m가 나오는 것 — "정타가 안 난다"는 말의 실제 내용이 이것입니다. 하나를 고치면 둘이 같이 해결되는 구조입니다.</p>
   </div>
 
   <figure class="wide">
@@ -232,8 +234,8 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
       <text x="119" y="70" class="t" text-anchor="middle">뒤땅 · 토핑 · 토우 히트</text>
 
       <rect x="24" y="106" width="190" height="54" class="f-fault" stroke="var(--fault)" stroke-width="1.4"/>
-      <text x="119" y="129" class="t-b" text-anchor="middle" fill="var(--fault)">드라이버 215</text>
-      <text x="119" y="146" class="t" text-anchor="middle">핸디 대비 20~30 부족</text>
+      <text x="119" y="129" class="t-b" text-anchor="middle" fill="var(--fault)">거리 편차</text>
+      <text x="119" y="146" class="t" text-anchor="middle">같은 클럽, 다른 거리</text>
 
       <path d="M214,57 L262,80" class="s-line" marker-end="url(#a1)"/>
       <path d="M214,133 L262,110" class="s-line" marker-end="url(#a1)"/>
@@ -279,124 +281,94 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
 <section id="s2">
   <div class="shead">
     <span class="snum">02</span>
-    <h2>215라는 숫자를 분해하면</h2>
-    <p class="sub">비거리는 하나의 숫자가 아니라 세 개의 곱입니다. 어느 항이 새고 있는지 알면, 근력 훈련 없이 25야드를 찾을 수 있습니다.</p>
+    <h2>비거리는 이미 충분합니다</h2>
+    <p class="sub">215 m ≈ <b>235 야드</b>. 스코어 80대 초중반 구간에서 이건 부족한 게 아니라 <b>평균 이상</b>입니다. 그래서 이 리포트의 목표는 거리가 아니라 <b>편차</b>입니다.</p>
   </div>
 
   <div class="prose">
-    <p>드라이버 비거리는 이렇게 만들어집니다. <b>클럽 스피드 × 스매시 팩터 = 볼 스피드</b>, 그리고 볼 스피드에 <b>어택 앵글</b>이 결정하는 발사각·스핀이 곱해져 캐리가 나옵니다. 세 항 중 아마추어가 가장 많이 흘리는 것은 클럽 스피드가 아니라 <em>스매시 팩터</em>, 즉 페이스 중앙에 맞았는지 여부입니다.</p>
-    <p>스코어 80대 초중반을 치는 사람의 클럽 스피드는 보통 88~95 mph 구간입니다. 그 스피드로 스매시 팩터 1.47이 나오면 총거리 240~250야드가 정상값입니다. 지금 215가 나오고 있다면, <b>스피드가 부족한 게 아니라 스피드가 볼에 전달되지 않고 있는 것</b>입니다. 그리고 그 전달 손실의 원인이 바로 아이언 정타 불량과 같은 것입니다.</p>
+    <p>215가 미터라면 총거리는 약 235야드, 캐리로는 약 205야드입니다. 역산하면 볼 스피드 137~140 mph, <b>클럽 스피드는 95~100 mph</b> 구간입니다. 이건 80대 초중반을 치는 아마추어 중에서도 위쪽입니다. 티샷 거리는 문제가 아닙니다.</p>
+    <p>그러면 질문이 바뀝니다. <em>235야드를 치는 사람이 왜 80대 초중반에 머물러 있는가.</em> 답은 거의 항상 세컨드 샷입니다. 드라이버로 벌어놓은 거리를 아이언에서 다시 잃고 있는 겁니다. 그리고 그 손실은 <b>방향</b>이 아니라 <b>거리 편차</b>로 나타납니다 — 같은 7번인데 어떤 날은 150m, 어떤 날은 135m가 나오면 핀을 보고 칠 수가 없습니다.</p>
+    <p>정타가 안 난다는 말의 정확한 의미가 이것입니다. 페이스 중앙을 벗어난 임팩트는 방향보다 <b>거리를 먼저</b> 망칩니다. 힐이나 토우로 1cm만 벗어나도 볼 스피드가 3~5% 떨어지고, 그건 7번 아이언에서 <b>7~10 m</b>입니다.</p>
   </div>
 
   <figure class="wide">
-    <p class="figlabel">Fig. 02 — 215에서 240으로: 어느 레버가 얼마를 주는가</p>
+    <p class="figlabel">Fig. 02 — 문제는 평균이 아니라 폭이다</p>
     <div class="figscroll">
-    <svg viewBox="0 0 680 246" role="img" aria-label="드라이버 총거리 215야드에서 센터 히트로 18야드, 어택 앵글 개선으로 10야드를 더해 243야드에 도달하고, 추가로 스피드 훈련이 12야드를 더 줄 수 있음을 보여주는 누적 막대 차트">
+    <svg viewBox="0 0 680 306" role="img" aria-label="7번 아이언 캐리 거리 분포 비교. 현재는 34미터 폭으로 흩어져 10구 중 4구만 그린에 남지만, 편차를 줄이면 11미터 폭으로 모여 10구 중 9구가 그린에 남는다">
       <defs>
-        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" class="mk-i"/>
-        </marker>
-        <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
-          <line x1="0" y1="0" x2="0" y2="7" stroke="var(--rule-2)" stroke-width="2.5"/>
-        </pattern>
+        <marker id="a2a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-f"/></marker>
+        <marker id="a2b" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-g"/></marker>
       </defs>
 
-      <!-- leader labels -->
-      <text x="360" y="56" class="t-g" text-anchor="middle">센터 히트 회복</text>
-      <text x="360" y="70" class="t" text-anchor="middle">스매시 1.35 → 1.47</text>
-      <line x1="360" y1="76" x2="360" y2="94" class="s-good-d"/>
+      <!-- green zone -->
+      <rect x="262" y="72" width="196" height="158" class="f-good"/>
+      <text x="360" y="34" class="t-g" text-anchor="middle">그린에 남는 구간 · 핀 ±7 m</text>
 
-      <text x="456" y="26" class="t-a" text-anchor="middle">어택 앵글</text>
-      <text x="456" y="40" class="t" text-anchor="middle">−3° → +2°</text>
-      <line x1="456" y1="46" x2="456" y2="94" class="s-ref"/>
+      <!-- pin -->
+      <line x1="360" y1="72" x2="360" y2="240" class="s-good" stroke-dasharray="4 4"/>
+      <polygon points="360,44 380,50 360,56" class="mk-g"/>
+      <line x1="360" y1="44" x2="360" y2="72" class="s-good"/>
 
-      <text x="560" y="56" class="t" text-anchor="middle" fill="var(--ink-3)">스피드 훈련</text>
-      <text x="560" y="70" class="t" text-anchor="middle" fill="var(--ink-3)">(선택 · 3개월)</text>
-      <line x1="560" y1="76" x2="560" y2="94" class="s-hair" stroke-dasharray="4 4"/>
+      <!-- row A -->
+      <text x="24" y="102" class="t-f" font-weight="600">현재</text>
+      <text x="24" y="118" class="t" font-size="10.5">4 / 10</text>
+      <g class="mk-f">
+        <circle cx="122" cy="104" r="6"/><circle cx="178" cy="104" r="6"/><circle cx="234" cy="104" r="6"/>
+        <circle cx="290" cy="104" r="6"/><circle cx="332" cy="104" r="6"/><circle cx="374" cy="104" r="6"/>
+        <circle cx="430" cy="104" r="6"/><circle cx="486" cy="104" r="6"/><circle cx="542" cy="104" r="6"/>
+        <circle cx="598" cy="104" r="6"/>
+      </g>
+      <line x1="122" y1="132" x2="598" y2="132" class="s-fault" marker-start="url(#a2a)" marker-end="url(#a2a)"/>
+      <text x="360" y="150" class="t-f" text-anchor="middle">폭 34 m — 클럽 세 개 차이</text>
 
-      <!-- bars -->
-      <rect x="60" y="94" width="239" height="46" class="f-sur" stroke="var(--rule-2)" stroke-width="1.2"/>
-      <rect x="299" y="94" width="123" height="46" class="f-good" stroke="var(--good)" stroke-width="1.5"/>
-      <rect x="422" y="94" width="68" height="46" class="f-acc" stroke="var(--accent-line)" stroke-width="1.5"/>
-      <rect x="490" y="94" width="72" height="46" fill="url(#hatch)" stroke="var(--rule-2)" stroke-width="1.2" stroke-dasharray="5 4"/>
-
-      <text x="180" y="122" class="t-k" text-anchor="middle">현재 215</text>
-      <text x="360" y="122" class="t-g" text-anchor="middle">+18</text>
-      <text x="456" y="122" class="t-a" text-anchor="middle">+10</text>
-      <text x="526" y="122" class="t" text-anchor="middle" fill="var(--ink-3)">+12</text>
-
-      <!-- truncated-axis break -->
-      <path d="M54,150 L62,142 M60,150 L68,142" class="s-line" stroke-width="1.2"/>
+      <!-- row B -->
+      <text x="24" y="188" class="t-g" font-weight="600">목표</text>
+      <text x="24" y="204" class="t" font-size="10.5">9 / 10</text>
+      <g class="mk-g">
+        <circle cx="290" cy="190" r="6"/><circle cx="318" cy="190" r="6"/><circle cx="332" cy="190" r="6"/>
+        <circle cx="346" cy="190" r="6"/><circle cx="360" cy="190" r="6"/><circle cx="374" cy="190" r="6"/>
+        <circle cx="388" cy="190" r="6"/><circle cx="402" cy="190" r="6"/><circle cx="430" cy="190" r="6"/>
+        <circle cx="444" cy="190" r="6"/>
+      </g>
+      <line x1="290" y1="216" x2="444" y2="216" class="s-good" marker-start="url(#a2b)" marker-end="url(#a2b)"/>
+      <text x="367" y="234" class="t-g" text-anchor="middle">폭 11 m</text>
 
       <!-- axis -->
-      <line x1="60" y1="150" x2="648" y2="150" class="s-line"/>
+      <line x1="80" y1="258" x2="648" y2="258" class="s-line"/>
       <g class="t">
-        <line x1="60" y1="150" x2="60" y2="156" class="s-line"/><text x="60" y="170" text-anchor="middle">180</text>
-        <line x1="197" y1="150" x2="197" y2="156" class="s-line"/><text x="197" y="170" text-anchor="middle">200</text>
-        <line x1="333" y1="150" x2="333" y2="156" class="s-line"/><text x="333" y="170" text-anchor="middle">220</text>
-        <line x1="469" y1="150" x2="469" y2="156" class="s-line"/><text x="469" y="170" text-anchor="middle">240</text>
-        <line x1="606" y1="150" x2="606" y2="156" class="s-line"/><text x="606" y="170" text-anchor="middle">260</text>
+        <line x1="80" y1="258" x2="80" y2="264" class="s-line"/><text x="80" y="278" text-anchor="middle">130</text>
+        <line x1="220" y1="258" x2="220" y2="264" class="s-line"/><text x="220" y="278" text-anchor="middle">140</text>
+        <line x1="360" y1="258" x2="360" y2="264" class="s-line"/><text x="360" y="278" text-anchor="middle">150</text>
+        <line x1="500" y1="258" x2="500" y2="264" class="s-line"/><text x="500" y="278" text-anchor="middle">160</text>
+        <line x1="640" y1="258" x2="640" y2="264" class="s-line"/><text x="640" y="278" text-anchor="middle">170</text>
       </g>
-      <text x="648" y="192" class="t-s" text-anchor="end">야드 · 총거리</text>
-
-      <!-- target marker -->
-      <line x1="469" y1="86" x2="469" y2="150" class="s-line" stroke-dasharray="3 3" stroke-width="1.2"/>
-      <circle cx="490" cy="94" r="4" class="mk-a"/>
-      <text x="500" y="86" class="t-a">243 도달</text>
-
-      <!-- bracket -->
-      <path d="M60,198 L60,190 L490,190 L490,198" class="s-good"/>
-      <rect x="196" y="180" width="158" height="20" fill="var(--surface)"/>
-      <text x="275" y="195" class="t-g" text-anchor="middle">근력·스피드 훈련 없이</text>
-      <text x="60" y="226" class="t">두 항 모두 “클럽헤드가 볼의 어디에 어떤 각도로 들어가는가”의 문제 — 아이언 정타와 정확히 같은 뿌리</text>
+      <text x="80" y="300" class="t-s">7번 아이언 캐리 (m) · 예시 분포 — 스코어 80~85 구간의 통상값이며 실측치가 아닙니다</text>
     </svg>
     </div>
-    <figcaption><b>핵심:</b> 215 → 243은 스윙을 빠르게 만들어서 얻는 게 아니라, 이미 내고 있는 스피드를 <b>안 흘리게</b> 해서 얻습니다. 빗금 구간(+12)은 그 다음 단계이고, 지금 손댈 곳이 아닙니다. 센터 히트 하나만 회복해도 <b>+18야드가 아이언 정타 회복과 함께 따라옵니다</b>.</figcaption>
+    <figcaption>두 줄의 <b>평균은 같습니다</b>(둘 다 150 m). 다른 것은 폭뿐입니다. 그런데 스코어를 만드는 건 평균이 아니라 폭입니다 — 위쪽은 핀을 보고 칠 수 없어서 매번 그린 한복판을 노려야 하고, 그래도 10번 중 6번은 그린을 놓칩니다. <b>이 폭을 줄이는 것이 4주 프로그램의 전부</b>이고, 그 부산물로 드라이버가 10~15야드 더 갑니다.</figcaption>
   </figure>
 
-  <h3 style="font-size:18px;margin:34px 0 6px">단위 확인 — 215가 야드인가 미터인가</h3>
-  <p class="prose" style="font-size:14.5px;color:var(--ink-2);margin-bottom:0">국내 연습장·스크린은 미터 표기가 섞여 있어 진단이 갈립니다. 둘 중 어느 쪽인지에 따라 <b>지금 해야 할 일이 달라집니다.</b></p>
+  <div class="keybox">
+    <span class="nh">방향 전환</span>
+    <p>거리를 <span style="color:var(--accent)">더 내려고</span> 하지 마세요. 235야드는 이미 충분합니다. 지금 필요한 건 <span style="color:var(--accent)">같은 클럽이 항상 같은 거리를 가게 만드는 것</span>입니다.</p>
+  </div>
+
+  <h3 style="font-size:18px;margin:34px 0 6px">그래도 거리는 따라옵니다 (부산물)</h3>
+  <p class="prose" style="font-size:14.5px;color:var(--ink-2)">센터 히트가 회복되면 드라이버도 같이 늘어납니다. 다만 이건 <b>목표가 아니라 결과</b>이므로, 연습장에서 이 숫자를 쫓지 마세요.</p>
 
   <div class="tw">
     <table>
-      <thead><tr><th>215의 정체</th><th class="num">환산</th><th class="num">추정 클럽 스피드</th><th>이 경우의 진단</th><th>우선순위</th></tr></thead>
+      <thead><tr><th>계측 항목</th><th class="num">현재 추정</th><th class="num">4주 후</th><th>무엇으로 바뀌나</th></tr></thead>
       <tbody>
-        <tr>
-          <td class="on">215 야드</td>
-          <td class="num">≈ 197 m</td>
-          <td class="num">88–95 mph<br><small style="color:var(--ink-3)">스매시 1.33–1.38</small></td>
-          <td>스피드는 충분한데 전달 효율이 낮은 전형. 페이스 중앙을 벗어난 임팩트가 아이언·드라이버 양쪽에 동시에 나타나는 상태.</td>
-          <td><span class="tag a">센터 히트 최우선</span></td>
-        </tr>
-        <tr>
-          <td class="on">215 미터</td>
-          <td class="num">≈ 235 y</td>
-          <td class="num">95–100 mph<br><small style="color:var(--ink-3)">스매시 1.42–1.46</small></td>
-          <td>비거리 자체는 핸디에 맞는 정상 범위. 문제는 거리가 아니라 <b>편차</b> — 잘 맞을 때와 아닐 때의 차이가 스코어를 만들고 있음.</td>
-          <td><span class="tag b">아이언 편차 축소</span></td>
-        </tr>
+        <tr><td class="on">드라이버 총거리</td><td class="num">215 m <small style="color:var(--ink-3)">(235 y)</small></td><td class="num">225 m <small style="color:var(--ink-3)">(246 y)</small></td><td>센터 히트 + 어택 앵글 — §06</td></tr>
+        <tr><td class="on">스매시 팩터 <small style="color:var(--ink-3)">(드라이버)</small></td><td class="num">1.38 – 1.42</td><td class="num">1.47 +</td><td>페이스 중앙 접촉 — §03 · §07 D1</td></tr>
+        <tr><td class="on">어택 앵글 <small style="color:var(--ink-3)">(드라이버)</small></td><td class="num">−3° – 0°</td><td class="num">+2° – +4°</td><td>볼 위치 + 척추 우측 기울기 — §06</td></tr>
+        <tr><td class="on">로우포인트 <small style="color:var(--ink-3)">(7번)</small></td><td class="num">볼 뒤 0–5 cm</td><td class="num">볼 앞 5–10 cm</td><td>라인 드릴 — §04 · §07 D2</td></tr>
+        <tr class="on" style="background:var(--good-soft)"><td class="on">7번 캐리 편차</td><td class="num">± 16 m</td><td class="num">± 6 m</td><td><b>이것이 진짜 목표입니다</b></td></tr>
       </tbody>
     </table>
   </div>
-
-  <div class="note">
-    <span class="nh">어느 쪽이든 같은 결론</span>
-    두 경우 모두 <b>§03의 셀프 진단과 §04의 로우포인트 훈련이 1순위</b>입니다. 야드였다면 비거리와 정타를 같이 얻고, 미터였다면 정타의 <b>편차</b>가 줄어 스코어가 먼저 내려갑니다. 다음 라운드에서 드라이버 잔여거리를 홀 야디지로 역산해 보면 단위는 바로 확정됩니다.
-  </div>
-
-  <div class="tw">
-    <table>
-      <thead><tr><th>계측 항목</th><th class="num">현재 추정</th><th class="num">1차 목표</th><th>무엇으로 바꾸나</th></tr></thead>
-      <tbody>
-        <tr><td class="on">스매시 팩터 <small style="color:var(--ink-3)">(드라이버)</small></td><td class="num">1.33 – 1.38</td><td class="num">1.45 +</td><td>페이스 중앙 접촉 — §03 임팩트 마크, §07 티 게이트 드릴</td></tr>
-        <tr><td class="on">어택 앵글 <small style="color:var(--ink-3)">(드라이버)</small></td><td class="num">−4° – 0°</td><td class="num">+2° – +4°</td><td>볼 위치 앞으로 + 척추 우측 기울기 — §06</td></tr>
-        <tr><td class="on">로우포인트 <small style="color:var(--ink-3)">(7번 아이언)</small></td><td class="num">볼 뒤 0–5 cm</td><td class="num">볼 앞 5–10 cm</td><td>라인 드릴 · 체중 전방 이동 — §04, §07</td></tr>
-        <tr><td class="on">백스핀 <small style="color:var(--ink-3)">(드라이버)</small></td><td class="num">3,000 – 3,800 rpm</td><td class="num">2,200 – 2,600 rpm</td><td>어택 앵글 + 페이스 높은 지점 접촉 — §06</td></tr>
-        <tr><td class="on">7번 캐리 편차</td><td class="num">± 15 y</td><td class="num">± 7 y</td><td>정타율 상승의 자동 결과</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p style="font-size:12.5px;color:var(--ink-3);margin-top:-12px">추정값은 스코어 80~85·총거리 215야드라는 조건에서 역산한 것입니다. 실제 계측기(트랙맨·GC계열) 수치가 있으면 이 표를 그 값으로 교체해 사용하세요.</p>
+  <p style="font-size:12.5px;color:var(--ink-3);margin-top:-12px">추정값은 스코어 80~85 · 드라이버 215 m라는 조건에서 역산한 것입니다. 스크린골프 계측 수치가 있으면 그 값으로 교체해 사용하세요 — 특히 <b>스매시 팩터</b>와 <b>백스핀</b>이 있으면 원인이 훨씬 빨리 좁혀집니다.</p>
 </section>
 
 <!-- ══════════════════ 03 ══════════════════ -->
@@ -469,7 +441,7 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
       <text x="505" y="228" class="t-g" text-anchor="middle">정타 존 = 중앙에서 8~10mm 위</text>
     </svg>
     </div>
-    <figcaption><b>아이언과 드라이버의 정타 지점은 다릅니다.</b> 아이언은 정중앙이지만, 드라이버는 <b>중앙보다 살짝 위</b>가 최적입니다. 기어 효과로 백스핀이 줄고 발사각이 올라가 캐리가 늘기 때문입니다. 드라이버 페이스 <b>아래쪽</b>에 자국이 남는 것이 아마추어 비거리 손실의 최대 원인 — 볼 스피드가 떨어지는 동시에 스핀이 폭증합니다. 지금 215가 나온다면 <b>페이스 아래쪽 자국을 가장 먼저 의심</b>하세요.</figcaption>
+    <figcaption><b>아이언과 드라이버의 정타 지점은 다릅니다.</b> 아이언은 정중앙이지만, 드라이버는 <b>중앙보다 살짝 위</b>가 최적입니다. 기어 효과로 백스핀이 줄고 발사각이 올라가 캐리가 늘기 때문입니다. 드라이버 페이스 <b>아래쪽</b>에 자국이 남는 것이 비거리 손실의 최대 원인 — 볼 스피드가 떨어지는 동시에 스핀이 폭증합니다. 다만 <b>지금 급한 것은 드라이버가 아니라 아이언입니다</b>. 7번 아이언 자국이 9칸 중 몇 칸에 흩어지는지부터 세세요. 세 칸 이상에 흩어지면 그게 곧 캐리 편차 ±16 m의 정체입니다.</figcaption>
   </figure>
 
   <div class="zones">
@@ -1109,7 +1081,7 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
       </g>
     </svg>
     </div>
-    <figcaption><b>가장 빠른 자가 확인:</b> 정면 영상에서 임팩트 프레임을 정지시키고 <b>손과 볼 중 어느 쪽이 타겟에 가까운지</b>만 보세요. 손이 뒤에 있으면 그 샷은 이미 로프트가 커지고 로우포인트가 뒤로 간 상태입니다. 7번 아이언 기준 샤프트가 5° 뒤로 기울면 실질 로프트가 약 5° 커져 <b>한 클럽 이상 짧아지고</b> 스핀만 늘어납니다. 오른쪽 도해가 드라이버 215야드와 아이언 정타 불량을 동시에 만드는 바로 그 자세입니다.</figcaption>
+    <figcaption><b>가장 빠른 자가 확인:</b> 정면 영상에서 임팩트 프레임을 정지시키고 <b>손과 볼 중 어느 쪽이 타겟에 가까운지</b>만 보세요. 손이 뒤에 있으면 그 샷은 이미 로프트가 커지고 로우포인트가 뒤로 간 상태입니다. 7번 아이언 기준 샤프트가 5° 뒤로 기울면 실질 로프트가 약 5° 커져 <b>한 클럽 이상 짧아지고</b> 스핀만 늘어납니다. 오른쪽 도해가 <b>캐리 편차 ±16 m를 만드는 바로 그 자세</b>입니다 — 샤프트 기울기가 샷마다 −5°에서 +8° 사이를 오가면, 같은 7번이 실질적으로 6번과 9번 사이를 오가는 셈입니다.</figcaption>
   </figure>
 </section>
 
@@ -1117,8 +1089,8 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
 <section id="s6">
   <div class="shead">
     <span class="snum">06</span>
-    <h2>드라이버 — 25야드는 힘이 아니라 각도에 있다</h2>
-    <p class="sub">아이언은 <b>내려치고</b> 드라이버는 <b>올려칩니다</b>. 같은 스윙 스피드에서 어택 앵글 −4°와 +4°의 캐리 차이는 20야드가 넘습니다.</p>
+    <h2>드라이버 — 남은 10 m는 각도에 있다</h2>
+    <p class="sub">거리는 이미 충분하니 이 섹션은 <b>보너스</b>입니다. 다만 셋업 네 가지만 바꾸면 힘을 더 쓰지 않고 10 m가 붙습니다 — 아이언 교정이 자리 잡은 3~4주차에 손대세요.</p>
   </div>
 
   <div class="prose">
@@ -1399,9 +1371,204 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
     </table>
   </div>
 
+  <h3 style="font-size:19px;margin:38px 0 0">스윙이 바뀌는 순서 — 4주 동안 실제로 보이는 것</h3>
+  <p class="prose" style="margin-top:8px">교정은 한 번에 되지 않고 <b>단계적으로</b> 움직입니다. 아래 두 도해가 그 경로입니다. 지금 어디쯤 와 있는지 확인하는 용도로 쓰세요.</p>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 13 — 골반 밀림이 줄어드는 경로 (P6 · 후방)</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 292" role="img" aria-label="4주에 걸쳐 다운스윙에서 골반이 엉덩이 기준선에서 떨어진 거리가 15센티에서 0센티로 줄어들고, 그에 따라 척추각이 유지되며 손이 지나갈 공간이 회복되는 4단계 진행 도해">
+      <defs>
+        <marker id="a14f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-f"/></marker>
+        <marker id="a14w" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--warn)"/></marker>
+      </defs>
+      <text x="16" y="24" class="t-s">점선 = 어드레스에서 그은 엉덩이 라인 · 몸통이 이 선에서 얼마나 떨어지는가</text>
+
+      <g class="s-line">
+        <line x1="24" y1="200" x2="158" y2="200"/><line x1="190" y1="200" x2="324" y2="200"/>
+        <line x1="356" y1="200" x2="490" y2="200"/><line x1="522" y1="200" x2="656" y2="200"/>
+      </g>
+      <g class="s-ref">
+        <line x1="63" y1="100" x2="63" y2="205"/><line x1="229" y1="100" x2="229" y2="205"/>
+        <line x1="395" y1="100" x2="395" y2="205"/><line x1="561" y1="100" x2="561" y2="205"/>
+      </g>
+
+      <g transform="translate(-6.5,51) scale(0.62)">
+        <path d="M136,238 L150,194 L152,150" class="s-body-f s-mini"/>
+        <path d="M152,150 L160,84" class="s-body-f s-mini"/>
+        <path d="M160,84 L190,156" class="s-body-f s-mini"/>
+        <circle cx="170" cy="62" r="15" fill="var(--fault)"/>
+        <line x1="108" y1="240" x2="152" y2="240" class="s-thick" stroke-width="5"/>
+        <line x1="190" y1="156" x2="128" y2="144" class="s-thick" stroke-width="3"/>
+        <circle cx="204" cy="228" r="6" class="f-ball"/>
+      </g>
+      <line x1="63" y1="168" x2="88" y2="168" class="s-fault" marker-end="url(#a14f)"/>
+
+      <g transform="translate(159.5,51) scale(0.62)">
+        <path d="M135,238 L147,193 L141,150" class="s-body-f s-mini"/>
+        <path d="M141,150 L158,88" class="s-body-f s-mini"/>
+        <path d="M158,88 L185,160" class="s-body-f s-mini"/>
+        <circle cx="168" cy="66" r="15" fill="var(--fault)"/>
+        <line x1="108" y1="240" x2="152" y2="240" class="s-thick" stroke-width="5"/>
+        <line x1="185" y1="160" x2="123" y2="148" class="s-thick" stroke-width="3"/>
+        <circle cx="204" cy="228" r="6" class="f-ball"/>
+      </g>
+      <line x1="229" y1="168" x2="247" y2="168" class="s-fault" marker-end="url(#a14f)"/>
+
+      <g transform="translate(325.5,51) scale(0.62)">
+        <path d="M133,238 L143,192 L130,148" class="s-body-w s-mini"/>
+        <path d="M130,148 L155,93" class="s-body-w s-mini"/>
+        <path d="M155,93 L178,164" class="s-body-w s-mini"/>
+        <circle cx="166" cy="71" r="15" fill="var(--warn)"/>
+        <line x1="108" y1="240" x2="152" y2="240" class="s-thick" stroke-width="5"/>
+        <line x1="178" y1="164" x2="116" y2="153" class="s-thick" stroke-width="3"/>
+        <circle cx="204" cy="228" r="6" class="f-ball"/>
+      </g>
+      <line x1="395" y1="168" x2="407" y2="168" stroke="var(--warn)" stroke-width="2" fill="none" marker-end="url(#a14w)"/>
+
+      <g transform="translate(491.5,51) scale(0.62)">
+        <path d="M132,238 L140,192 L118,146" class="s-body-g s-mini"/>
+        <path d="M118,146 L152,98" class="s-body-g s-mini"/>
+        <path d="M152,98 L172,168" class="s-body-g s-mini"/>
+        <circle cx="164" cy="76" r="15" fill="var(--good)"/>
+        <line x1="108" y1="240" x2="152" y2="240" class="s-thick" stroke-width="5"/>
+        <line x1="172" y1="168" x2="108" y2="158" class="s-thick" stroke-width="3"/>
+        <circle cx="204" cy="228" r="6" class="f-ball"/>
+      </g>
+      <circle cx="563" cy="168" r="4" class="mk-g"/>
+
+      <g text-anchor="middle">
+        <text x="91" y="228" class="t-k">현재</text>
+        <text x="91" y="246" class="t-f" font-weight="600">15 cm 밀림</text>
+        <text x="91" y="264" class="t" font-size="10">척추 세워짐 · 손 들림</text>
+        <text x="91" y="278" class="t" font-size="10">토우·얇게 산발</text>
+
+        <text x="257" y="228" class="t-k">1주차</text>
+        <text x="257" y="246" class="t-f" font-weight="600">10 cm</text>
+        <text x="257" y="264" class="t" font-size="10">뒤땅이 먼저 줄어듦</text>
+        <text x="257" y="278" class="t" font-size="10">대신 얇게가 늘어남</text>
+
+        <text x="423" y="228" class="t-k">2주차</text>
+        <text x="423" y="246" class="t" fill="var(--warn)" font-weight="600">5 cm</text>
+        <text x="423" y="264" class="t" font-size="10">공간이 열리기 시작</text>
+        <text x="423" y="278" class="t" font-size="10">왼쪽 미스가 늘어남</text>
+
+        <text x="589" y="228" class="t-k">4주차</text>
+        <text x="589" y="246" class="t-g" font-weight="600">0 cm</text>
+        <text x="589" y="264" class="t" font-size="10">척추각 유지 · 통로 확보</text>
+        <text x="589" y="278" class="t" font-size="10">자국이 센터로 모임</text>
+      </g>
+    </svg>
+    </div>
+    <figcaption>4주차 자세가 1주차보다 <b>덜 화려해 보이는 것이 정상</b>입니다. 몸이 세워지지 않으니 스윙이 작아진 것처럼 느껴지고, 실제로 힘을 덜 쓰는 것 같습니다. 그런데 볼은 더 멀리 갑니다 — 회전이 멈추지 않기 때문입니다. <b>느낌과 결과가 반대로 가는 구간</b>이라 영상 없이는 확신하기 어렵고, 그래서 매주 후방 영상 한 개는 꼭 찍어 두셔야 합니다.</figcaption>
+  </figure>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 14 — 페이스 자국이 모이는 과정 (7번 아이언 10구)</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 192" role="img" aria-label="4주에 걸쳐 7번 아이언 페이스 임팩트 자국이 9칸 전체에 흩어진 상태에서 중앙 한 칸으로 모여드는 과정">
+      <g text-anchor="middle" class="t-k">
+        <text x="90" y="40">0주 · 현재</text><text x="260" y="40">1주차</text>
+        <text x="430" y="40">2주차</text><text x="600" y="40">4주차</text>
+      </g>
+
+      <rect x="70" y="74" width="40" height="24" class="f-good"/>
+      <rect x="30" y="50" width="120" height="72" class="f-none" stroke="var(--ink)" stroke-width="1.6"/>
+      <g class="s-hair"><line x1="70" y1="50" x2="70" y2="122"/><line x1="110" y1="50" x2="110" y2="122"/><line x1="30" y1="74" x2="150" y2="74"/><line x1="30" y1="98" x2="150" y2="98"/></g>
+      <g fill="var(--fault)">
+        <circle cx="48" cy="64" r="3.4"/><circle cx="125" cy="70" r="3.4"/><circle cx="60" cy="108" r="3.4"/>
+        <circle cx="132" cy="112" r="3.4"/><circle cx="90" cy="62" r="3.4"/><circle cx="42" cy="90" r="3.4"/>
+        <circle cx="135" cy="88" r="3.4"/><circle cx="78" cy="114" r="3.4"/>
+      </g>
+      <g fill="var(--good)"><circle cx="88" cy="84" r="3.4"/><circle cx="96" cy="90" r="3.4"/></g>
+      <text x="90" y="142" class="t-f" text-anchor="middle">센터 2 / 10</text>
+      <text x="90" y="160" class="t" font-size="10" text-anchor="middle">9칸 전부에 흩어짐</text>
+
+      <rect x="240" y="74" width="40" height="24" class="f-good"/>
+      <rect x="200" y="50" width="120" height="72" class="f-none" stroke="var(--ink)" stroke-width="1.6"/>
+      <g class="s-hair"><line x1="240" y1="50" x2="240" y2="122"/><line x1="280" y1="50" x2="280" y2="122"/><line x1="200" y1="74" x2="320" y2="74"/><line x1="200" y1="98" x2="320" y2="98"/></g>
+      <g fill="var(--fault)">
+        <circle cx="220" cy="68" r="3.4"/><circle cx="298" cy="74" r="3.4"/><circle cx="235" cy="108" r="3.4"/>
+        <circle cx="295" cy="108" r="3.4"/><circle cx="245" cy="64" r="3.4"/><circle cx="280" cy="110" r="3.4"/>
+      </g>
+      <g fill="var(--good)"><circle cx="258" cy="84" r="3.4"/><circle cx="266" cy="90" r="3.4"/><circle cx="252" cy="80" r="3.4"/><circle cx="270" cy="94" r="3.4"/></g>
+      <text x="260" y="142" class="t" text-anchor="middle" fill="var(--warn)" font-weight="600">센터 4 / 10</text>
+      <text x="260" y="160" class="t" font-size="10" text-anchor="middle">아래쪽이 먼저 사라짐</text>
+
+      <rect x="410" y="74" width="40" height="24" class="f-good"/>
+      <rect x="370" y="50" width="120" height="72" class="f-none" stroke="var(--ink)" stroke-width="1.6"/>
+      <g class="s-hair"><line x1="410" y1="50" x2="410" y2="122"/><line x1="450" y1="50" x2="450" y2="122"/><line x1="370" y1="74" x2="490" y2="74"/><line x1="370" y1="98" x2="490" y2="98"/></g>
+      <g fill="var(--fault)">
+        <circle cx="398" cy="70" r="3.4"/><circle cx="460" cy="76" r="3.4"/><circle cx="410" cy="108" r="3.4"/><circle cx="455" cy="106" r="3.4"/>
+      </g>
+      <g fill="var(--good)">
+        <circle cx="425" cy="82" r="3.4"/><circle cx="433" cy="86" r="3.4"/><circle cx="440" cy="92" r="3.4"/>
+        <circle cx="428" cy="94" r="3.4"/><circle cx="436" cy="80" r="3.4"/><circle cx="422" cy="90" r="3.4"/>
+      </g>
+      <text x="430" y="142" class="t" text-anchor="middle" fill="var(--warn)" font-weight="600">센터 6 / 10</text>
+      <text x="430" y="160" class="t" font-size="10" text-anchor="middle">좌우 폭이 좁아짐</text>
+
+      <rect x="580" y="74" width="40" height="24" class="f-good"/>
+      <rect x="540" y="50" width="120" height="72" class="f-none" stroke="var(--ink)" stroke-width="1.6"/>
+      <g class="s-hair"><line x1="580" y1="50" x2="580" y2="122"/><line x1="620" y1="50" x2="620" y2="122"/><line x1="540" y1="74" x2="660" y2="74"/><line x1="540" y1="98" x2="660" y2="98"/></g>
+      <g fill="var(--fault)"><circle cx="584" cy="72" r="3.4"/><circle cx="618" cy="100" r="3.4"/></g>
+      <g fill="var(--good)">
+        <circle cx="596" cy="84" r="3.4"/><circle cx="602" cy="86" r="3.4"/><circle cx="606" cy="88" r="3.4"/>
+        <circle cx="598" cy="90" r="3.4"/><circle cx="604" cy="82" r="3.4"/><circle cx="600" cy="92" r="3.4"/>
+        <circle cx="594" cy="88" r="3.4"/><circle cx="608" cy="84" r="3.4"/>
+      </g>
+      <text x="600" y="142" class="t-g" text-anchor="middle">센터 8 / 10</text>
+      <text x="600" y="160" class="t" font-size="10" text-anchor="middle">캐리 편차 ±6 m</text>
+
+      <text x="30" y="184" class="t-s">초록 영역이 정타 존 · 붉은 점은 벗어난 샷 · 매 세션 10구를 기록하면 이 그림이 그대로 나옵니다</text>
+    </svg>
+    </div>
+    <figcaption>이 그림이 <b>진도표</b>입니다. 매 세션 마지막에 10구를 치고 "센터 몇 개"만 적으세요. 숫자가 올라가면 맞게 가는 것이고, 2주 연속 제자리면 드릴이 아니라 <b>진단이 틀린 것</b>이니 §03으로 돌아가 원인을 다시 잡아야 합니다. 주의할 점은 <b>자국이 모이는 순서</b>입니다 — 위아래(얇게·두껍게)가 먼저 정리되고 좌우(힐·토우)가 나중에 정리됩니다. 2주차에 좌우가 남아 있는 건 정상입니다.</figcaption>
+  </figure>
+
+  <h3 style="font-size:18px;margin:34px 0 14px">교정 중에 나타나는 미스 — 이건 정상입니다</h3>
+  <p class="prose" style="margin-bottom:0">교정이 시작되면 <b>없던 미스가 새로 생깁니다.</b> 대부분 이 지점에서 "이 방법이 틀렸나" 싶어 원래대로 돌아가고, 그래서 4주를 못 채웁니다. 아래가 나오면 <b>맞게 가고 있는 것</b>입니다.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>주차</th><th>새로 생기면 정상인 미스</th><th>왜 그런가</th><th>이게 나오면 잘못 가는 것</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="on">1주</td>
+          <td>뒤땅은 줄었는데 <b>얇게 맞고 탄도가 낮아짐</b>. 거리가 오히려 짧게 느껴짐</td>
+          <td>로우포인트가 앞으로 가면서 실질 로프트가 줄어든 것. 스핀이 줄어 <b>런이 늘기 때문에</b> 총거리는 오히려 늘어납니다</td>
+          <td>뒤땅이 그대로거나 늘어남 → 볼 없이 하는 빈 스윙으로 되돌아갈 것</td>
+        </tr>
+        <tr>
+          <td class="on">2주</td>
+          <td><b>왼쪽 미스(훅·풀)</b>가 눈에 띄게 늘어남</td>
+          <td>골반이 안 밀리니 클럽이 몸 안쪽에서 나옵니다. 갑자기 생긴 공간만큼 페이스가 더 닫혀 들어오는 것 — 궤도가 정상화되는 과정의 정상 반응</td>
+          <td>오른쪽 푸시가 늘어남 → 골반만 돌고 상체·팔이 안 따라온 것. 회전을 조금 늦추세요</td>
+        </tr>
+        <tr>
+          <td class="on">3주</td>
+          <td>잘 맞은 샷이 <b>한 클럽 더 감</b>. 그린을 넘기는 실수</td>
+          <td>스매시 팩터가 회복되면서 같은 스윙의 거리가 늘어난 것. <b>클럽별 거리표를 새로 만들어야 합니다</b></td>
+          <td>자국이 다시 흩어짐 → 티 게이트를 너무 빨리 좁힌 것. 한 단계 넓히세요</td>
+        </tr>
+        <tr>
+          <td class="on">4주</td>
+          <td>드라이버 <b>탄도가 높아지고 약간 오른쪽</b>으로 감</td>
+          <td>볼 위치가 앞으로 가면서 페이스가 덜 닫힌 상태로 만나는 것. 정렬을 조금 닫으면 드로우로 정리됩니다</td>
+          <td>몸을 뒤로 젖혀 치는 느낌 → 스웨이입니다. §06 경고 참조</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warnbox">
+    <span class="nh">가장 중요한 규칙</span>
+    <b>2주차의 왼쪽 미스를 페이스로 고치려 하지 마세요.</b> 그때 그립을 약하게 잡거나 페이스를 열면, 어렵게 만든 궤도가 그대로 원위치합니다 — §03 Fig.05에서 본 대로 <b>패스를 고친 뒤에 페이스를 고쳐야</b> 합니다. 왼쪽 미스는 3주차에 저절로 정리됩니다.
+  </div>
+
   <div class="keybox">
     <span class="nh">4주 뒤 기대치</span>
-    <p>드라이버 <span style="color:var(--accent)">+15~25야드</span>, 7번 아이언 캐리 편차 <span style="color:var(--accent)">±15y → ±8y</span>. 스코어는 보통 <span style="color:var(--accent)">2~4타</span> 내려갑니다 — 비거리보다 <b>미스의 크기가 줄어서</b>입니다.</p>
+    <p>7번 아이언 캐리 편차 <span style="color:var(--accent)">±16 m → ±6 m</span>, 그린 적중 <span style="color:var(--accent)">4/10 → 7/10</span>. 스코어는 보통 <span style="color:var(--accent)">3~5타</span> 내려갑니다. 드라이버 <span style="color:var(--accent)">+10 m</span>는 덤으로 따라옵니다.</p>
   </div>
 </section>
 
@@ -1414,7 +1581,7 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
   </div>
 
   <figure class="wide">
-    <p class="figlabel">Fig. 13 — 카메라 배치 (위에서 본 모습)</p>
+    <p class="figlabel">Fig. 15 — 카메라 배치 (위에서 본 모습)</p>
     <div class="figscroll">
     <svg viewBox="0 0 680 336" role="img" aria-label="위에서 본 카메라 배치도. 후방 카메라는 볼과 타겟을 잇는 선의 연장선 위 3~4미터 뒤에, 정면 카메라는 타겟 라인과 직각 방향으로 3~4미터 떨어진 곳에 놓는다">
       <defs>
@@ -1485,9 +1652,14 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
     </table>
   </div>
 
-  <div class="note">
-    <span class="nh">보내는 방법</span>
-    이 세션에서는 <b>E:\ 로컬 드라이브를 읽을 수 없습니다.</b> 대화창에 영상 파일이나 <b>임팩트·탑·다운스윙 정지 화면 캡처</b>를 직접 첨부해 주시면 됩니다. 영상 용량이 크면 각 스윙에서 <b>P1 어드레스 / P4 탑 / P6 다운스윙 / P7 임팩트</b> 네 프레임만 캡처해 보내셔도 이 리포트의 기준선을 그대로 겹쳐 판정할 수 있습니다.
+  <div class="warnbox">
+    <span class="nh">보내는 방법 — 폴더 화면 캡처는 안 됩니다</span>
+    <p style="margin:0 0 10px">탐색기에서 <b>파일이 있는 폴더를 찍은 사진</b>은 파일이 아니라 그 폴더의 그림입니다. 파일 자체가 대화창으로 넘어와야 열 수 있습니다.</p>
+    <ul class="plain" style="margin:0">
+      <li><b>영상 파일을 마우스로 끌어다</b> 대화 입력창에 놓기 (또는 입력창의 <b>+ / 클립 아이콘</b> → 파일 선택)</li>
+      <li>용량이 크면 영상을 재생하다 멈춘 뒤 <b>화면 캡처 4장</b>: P1 어드레스 / P4 탑 / P6 다운스윙 / P7 임팩트. 그 4장이면 판정 가능합니다</li>
+      <li>스크린골프라면 <b>계측 결과 화면</b>도 한 장 — 스매시 팩터·백스핀·클럽 스피드가 있으면 원인이 훨씬 빨리 좁혀집니다</li>
+    </ul>
   </div>
 </section>
 
@@ -1564,8 +1736,8 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
         <tr><td class="num on">1</td><td>발 스프레이로 페이스 자국 10샷 기록 → 원인 특정</td><td>모든 처방의 출발점</td><td class="num">§03</td></tr>
         <tr><td class="num on">2</td><td>로우포인트를 볼 앞으로 (D2 · D5)</td><td>아이언 정타 · 뒤땅 제거</td><td class="num">§04 · §07</td></tr>
         <tr><td class="num on">3</td><td>엉덩이 라인 유지 (D3)</td><td>정타 + 스피드 동시 회복</td><td class="num">§05 · §07</td></tr>
-        <tr><td class="num on">4</td><td>티 게이트로 센터 히트 고정 (D1)</td><td>드라이버 <b>+18 y</b></td><td class="num">§02 · §07</td></tr>
-        <tr><td class="num on">5</td><td>드라이버 셋업 4항목 + D6</td><td>드라이버 <b>+10 y</b></td><td class="num">§06</td></tr>
+        <tr><td class="num on">4</td><td>티 게이트로 센터 히트 고정 (D1)</td><td>캐리 편차 <b>절반으로</b></td><td class="num">§02 · §07</td></tr>
+        <tr><td class="num on">5</td><td>드라이버 셋업 4항목 + D6 <small style="color:var(--ink-3)">(3~4주차)</small></td><td>드라이버 <b>+10 m</b></td><td class="num">§06</td></tr>
         <tr><td class="num on">6</td><td>영상 촬영해서 실제 라인 분석 받기</td><td>남은 원인 정밀 특정</td><td class="num">§09</td></tr>
       </tbody>
     </table>
@@ -1579,7 +1751,7 @@ footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
 
 <footer>
   <p class="fmono">SWING DIAGNOSIS · 정타 회복 진단서</p>
-  <p style="margin-top:8px">스코어 80~85 · 드라이버 평균 215 · 아이언 정타 불량이라는 조건에서 작성했습니다. 수치(스매시 팩터, 어택 앵글, 캐리 추정치)는 해당 조건의 일반적인 범위에서 역산한 값이며, 실제 계측기 데이터가 있으면 그 값으로 대체해 읽으세요. 도해의 각도와 깊이는 이해를 돕기 위해 실제보다 과장된 부분이 있습니다.</p>
+  <p style="margin-top:8px">스코어 80~85 · 드라이버 평균 <b style="color:var(--ink-2)">215 m(≈235 y)</b> · 아이언 정타 불량이라는 조건에서 작성했습니다. 수치(스매시 팩터, 어택 앵글, 캐리 편차)는 해당 조건에서 역산한 <b style="color:var(--ink-2)">일반 범위이며 실측치가 아닙니다</b> — Fig.02와 Fig.14의 분포도 실제 기록이 아니라 이 스코어대의 통상값을 그린 예시입니다. 스크린골프 계측 화면이 있으면 그 숫자로 교체해 읽으세요. 도해의 각도와 깊이는 이해를 돕기 위해 실제보다 과장된 부분이 있습니다.</p>
   <p style="margin-top:8px"><b style="color:var(--ink-2)">이 리포트는 실제 스윙 영상 없이 작성되었습니다.</b> §09 규격대로 촬영한 영상이나 네 개의 정지 프레임을 보내주시면, 그 위에 기준선을 직접 겹쳐 원인을 특정하고 이 문서를 갱신하겠습니다.</p>
 </footer>
 
