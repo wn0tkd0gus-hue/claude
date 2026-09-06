@@ -1,0 +1,1586 @@
+<title>정타 회복 진단서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700;800;900&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F2F3F1; --surface:#FFFFFF; --surface-2:#E8EBE7; --sunk:#E4E7E3;
+  --ink:#15191A; --ink-2:#586060; --ink-3:#868E8A;
+  --rule:#DBDFDA; --rule-2:#BEC4BE;
+  --accent:#1B4D5A; --accent-soft:#E0EBEE; --accent-line:#2C6E80;
+  --fault:#B03D28; --fault-soft:#F8E7E2;
+  --good:#376E42; --good-soft:#E2EDE4;
+  --warn:#9E7214; --warn-soft:#F6EDD9;
+  --limb:#C6CCC7;
+  --display:'Gothic A1',system-ui,-apple-system,sans-serif;
+  --body:'IBM Plex Sans KR',system-ui,-apple-system,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#121514; --surface:#1A1E1D; --surface-2:#232827; --sunk:#0D100F;
+    --ink:#ECEFEB; --ink-2:#A0A8A3; --ink-3:#79817C;
+    --rule:#2C3231; --rule-2:#454C49;
+    --accent:#7CC2D2; --accent-soft:#17313A; --accent-line:#5FAEC0;
+    --fault:#E58469; --fault-soft:#38221C;
+    --good:#7CBC89; --good-soft:#1C3122;
+    --warn:#D6A94C; --warn-soft:#332815;
+    --limb:#3D4441;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#121514; --surface:#1A1E1D; --surface-2:#232827; --sunk:#0D100F;
+  --ink:#ECEFEB; --ink-2:#A0A8A3; --ink-3:#79817C;
+  --rule:#2C3231; --rule-2:#454C49;
+  --accent:#7CC2D2; --accent-soft:#17313A; --accent-line:#5FAEC0;
+  --fault:#E58469; --fault-soft:#38221C;
+  --good:#7CBC89; --good-soft:#1C3122;
+  --warn:#D6A94C; --warn-soft:#332815;
+  --limb:#3D4441;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--body); font-size:16px; line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:64rem;margin:0 auto;padding:0 clamp(16px,4vw,44px)}
+.prose{max-width:42rem}
+h1,h2,h3,h4{font-family:var(--display);font-weight:900;text-wrap:balance;margin:0;line-height:1.28}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+em{font-style:normal;background:var(--warn-soft);box-shadow:0 -0.32em 0 var(--warn-soft) inset;font-weight:500}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent-line);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ── masthead ───────────────────────────── */
+.mast{border-bottom:2px solid var(--ink);padding:clamp(30px,6vw,60px) 0 22px;margin-bottom:0}
+.eyebrow{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+.mast h1{font-size:clamp(38px,8.5vw,68px);letter-spacing:-.03em}
+.mast .lede{font-size:clamp(15px,2vw,17px);color:var(--ink-2);max-width:38rem;margin-top:14px}
+.vitals{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:28px}
+.vital{background:var(--ground);padding:13px 15px}
+.vital dt{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin:0 0 5px}
+.vital dd{margin:0;font-family:var(--mono);font-size:19px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.vital dd small{font-size:11px;font-weight:400;color:var(--ink-2);letter-spacing:0}
+
+/* ── section frame ──────────────────────── */
+section{padding:clamp(40px,7vw,72px) 0;border-bottom:1px solid var(--rule)}
+.shead{display:grid;grid-template-columns:auto 1fr;gap:0 18px;align-items:start;margin-bottom:26px}
+.snum{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);border:1px solid var(--rule-2);padding:3px 8px;letter-spacing:.06em;white-space:nowrap;margin-top:6px}
+.shead h2{font-size:clamp(24px,4.2vw,36px);letter-spacing:-.025em}
+.shead .sub{grid-column:2;color:var(--ink-2);font-size:15px;margin-top:8px;max-width:40rem}
+
+/* ── figures ────────────────────────────── */
+figure{margin:30px 0;background:var(--surface);border:1px solid var(--rule);padding:clamp(14px,2.4vw,24px)}
+figure.wide{margin-inline:calc(-1 * clamp(0px,1.4vw,18px))}
+.figscroll{overflow-x:auto;overflow-y:hidden}
+figure svg{display:block;width:100%;height:auto;color:var(--ink);min-width:520px}
+figcaption{margin-top:16px;padding-top:13px;border-top:1px solid var(--rule);font-size:13.5px;line-height:1.62;color:var(--ink-2)}
+figcaption b{color:var(--ink);font-weight:600}
+.figlabel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+
+/* svg vocabulary */
+.s-body{stroke:var(--limb);stroke-width:7;stroke-linecap:round;fill:none}
+.s-body-f{stroke:var(--fault);stroke-width:7;stroke-linecap:round;fill:none;opacity:.9}
+.s-body-g{stroke:var(--good);stroke-width:7;stroke-linecap:round;fill:none;opacity:.9}
+.s-line{stroke:currentColor;stroke-width:1.6;fill:none}
+.s-thick{stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round}
+.s-hair{stroke:var(--rule-2);stroke-width:1;fill:none}
+.s-ref{stroke:var(--accent-line);stroke-width:1.5;fill:none;stroke-dasharray:6 4}
+.s-refs{stroke:var(--accent-line);stroke-width:1.6;fill:none}
+.s-fault{stroke:var(--fault);stroke-width:2;fill:none}
+.s-fault-d{stroke:var(--fault);stroke-width:2;fill:none;stroke-dasharray:6 4}
+.s-good{stroke:var(--good);stroke-width:2;fill:none}
+.s-good-d{stroke:var(--good);stroke-width:2;fill:none;stroke-dasharray:6 4}
+.f-sur{fill:var(--surface-2)}
+.f-sunk{fill:var(--sunk)}
+.f-good{fill:var(--good-soft)}
+.f-fault{fill:var(--fault-soft)}
+.f-warn{fill:var(--warn-soft)}
+.f-acc{fill:var(--accent-soft)}
+.f-none{fill:none}
+.f-ink{fill:var(--ink)}
+.f-ball{fill:var(--surface);stroke:var(--ink);stroke-width:1.6}
+.t{font-family:var(--mono);font-size:11.5px;fill:var(--ink-2)}
+.t-k{font-family:var(--mono);font-size:11.5px;font-weight:600;fill:var(--ink)}
+.t-b{font-family:var(--body);font-size:12.5px;font-weight:500;fill:var(--ink)}
+.t-s{font-family:var(--mono);font-size:10px;fill:var(--ink-3);letter-spacing:.08em}
+.t-f{font-family:var(--mono);font-size:11.5px;font-weight:600;fill:var(--fault)}
+.t-g{font-family:var(--mono);font-size:11.5px;font-weight:600;fill:var(--good)}
+.t-a{font-family:var(--mono);font-size:11.5px;font-weight:600;fill:var(--accent-line)}
+.t-num{font-family:var(--mono);font-size:15px;font-weight:600;fill:var(--ink)}
+.mk-f{fill:var(--fault)}
+.mk-g{fill:var(--good)}
+.mk-a{fill:var(--accent-line)}
+.mk-i{fill:currentColor}
+
+/* ── callouts ───────────────────────────── */
+.note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:16px 20px;margin:26px 0;font-size:14.5px;line-height:1.68}
+.note .nh{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:600;display:block;margin-bottom:7px}
+.warnbox{border-left:3px solid var(--fault);background:var(--fault-soft);padding:16px 20px;margin:26px 0;font-size:14.5px}
+.warnbox .nh{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--fault);font-weight:600;display:block;margin-bottom:7px}
+.keybox{border:2px solid var(--ink);padding:20px 22px;margin:28px 0;background:var(--surface)}
+.keybox .nh{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);font-weight:600;display:block;margin-bottom:9px}
+.keybox p{font-family:var(--display);font-weight:800;font-size:clamp(17px,2.6vw,22px);line-height:1.5;letter-spacing:-.015em;margin:0}
+
+/* ── tables ─────────────────────────────── */
+.tw{overflow-x:auto;margin:26px 0;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:13.5px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55}
+thead th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:var(--surface-2);border-bottom:1px solid var(--rule-2)}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.on{font-weight:600}
+.tag{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.06em;padding:2px 7px;border-radius:2px;white-space:nowrap;display:inline-block}
+.tag.a{background:var(--fault-soft);color:var(--fault)}
+.tag.b{background:var(--warn-soft);color:var(--warn)}
+.tag.c{background:var(--accent-soft);color:var(--accent)}
+.tag.ok{background:var(--good-soft);color:var(--good)}
+
+/* ── zone cards ─────────────────────────── */
+.zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0}
+.zone{background:var(--surface);padding:15px 17px}
+.zone h4{font-size:14.5px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.zone .zn{font-family:var(--mono);font-size:10px;font-weight:600;background:var(--sunk);color:var(--ink-2);padding:2px 6px;border-radius:2px}
+.zone p{font-size:13px;line-height:1.6;color:var(--ink-2);margin:0}
+.zone p + p{margin-top:7px}
+.zone .fix{color:var(--good);font-weight:500}
+
+/* ── drills ─────────────────────────────── */
+.drill{border-top:1px solid var(--rule-2);padding:22px 0}
+.drill:first-of-type{border-top:2px solid var(--ink)}
+.drill h3{font-size:19px;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px}
+.drill h3 .dn{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.06em}
+.drill .aim{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.03em;margin-bottom:12px}
+.drill .dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 26px;margin-top:12px}
+.drill .dgrid > div{font-size:13.5px;line-height:1.62}
+.drill .dgrid dt{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:5px}
+.drill ol,.drill ul{margin:0;padding-left:1.15em}
+.drill li{margin-bottom:5px}
+.drill li:last-child{margin-bottom:0}
+
+/* ── checklist card ─────────────────────── */
+.card{border:2px solid var(--ink);background:var(--surface);padding:clamp(18px,3vw,28px);margin:28px 0}
+.card h3{font-size:20px;margin-bottom:4px}
+.card .csub{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em;margin-bottom:20px}
+.ck{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:22px 32px}
+.ck h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:600;padding-bottom:7px;border-bottom:1px solid var(--rule-2);margin-bottom:11px}
+.ck ul{list-style:none;margin:0;padding:0;font-size:13.5px;line-height:1.55}
+.ck li{display:grid;grid-template-columns:16px 1fr;gap:9px;margin-bottom:9px;align-items:start}
+.ck li::before{content:"";width:12px;height:12px;border:1.5px solid var(--rule-2);margin-top:5px}
+.ck li:last-child{margin-bottom:0}
+
+ul.plain{list-style:none;margin:0 0 1em;padding:0}
+ul.plain li{padding-left:1.15em;position:relative;margin-bottom:8px}
+ul.plain li::before{content:"—";position:absolute;left:0;color:var(--ink-3)}
+
+footer{padding:36px 0 60px;font-size:13px;color:var(--ink-3);line-height:1.7}
+footer .fmono{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">Swing Diagnosis · Iron Strike &amp; Driver Distance</p>
+  <h1>정타 회복 진단서</h1>
+  <p class="lede">아이언 정타 불량과 짧은 드라이버는 서로 다른 두 문제가 아닙니다. 같은 뿌리에서 나온 두 개의 증상입니다. 이 리포트는 그 뿌리를 찾아 없애는 순서로 짜여 있습니다.</p>
+  <dl class="vitals">
+    <div class="vital"><dt>스코어</dt><dd>80–85 <small>/ HDCP 10±</small></dd></div>
+    <div class="vital"><dt>드라이버</dt><dd>215 <small>평균</small></dd></div>
+    <div class="vital"><dt>주 증상</dt><dd>아이언 <small>정타 불량</small></dd></div>
+    <div class="vital"><dt>1차 목표</dt><dd>240<small>+ / 정타율 2배</small></dd></div>
+  </dl>
+</header>
+
+<div class="note" style="margin-top:26px">
+  <span class="nh">먼저 알려드릴 것</span>
+  이 세션에서는 <b>E:\ 드라이브의 스윙 영상에 접근할 수 없었습니다</b>(클라우드 환경이라 로컬 디스크가 연결되지 않습니다). 그래서 영상을 보고 그린 오버레이 대신, <b>본인이 자기 스윙에 직접 선을 그어 판정할 수 있는 기준선 도해</b>로 만들었습니다. §09의 촬영 규격대로 찍어서 영상이나 캡처를 올려주시면, 그 프레임 위에 실제 라인을 그어 원인을 특정해 드립니다.
+</div>
+
+<!-- ══════════════════ 01 ══════════════════ -->
+<section id="s1">
+  <div class="shead">
+    <span class="snum">01</span>
+    <h2>두 개의 증상, 하나의 뿌리</h2>
+    <p class="sub">스코어 80대 초중반은 스윙의 형태가 이미 완성 단계라는 뜻입니다. 남은 문제는 모양이 아니라 <b>임팩트 구간의 재현성</b>입니다.</p>
+  </div>
+
+  <div class="prose">
+    <p>80대 초중반을 치는 사람이 아이언 정타가 안 난다면, 백스윙 모양이나 그립을 의심할 단계는 이미 지났습니다. 그 점수대는 스윙 궤도가 대체로 일정하다는 증거니까요. 진짜 문제는 <em>클럽헤드가 볼에 도달하는 마지막 30cm</em>에서 매번 다른 일이 벌어진다는 것입니다.</p>
+    <p>그리고 이건 드라이버 비거리와 같은 문제입니다. 페이스 중앙을 벗어난 임팩트는 아이언에서는 "정타가 안 난다"로 나타나고, 드라이버에서는 "생각보다 안 나간다"로 나타납니다. 하나를 고치면 둘이 같이 해결되는 구조입니다.</p>
+  </div>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 01 — 증상에서 원인까지</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 322" role="img" aria-label="아이언 정타 불량과 드라이버 비거리 부족이라는 두 증상이 임팩트 재현성이라는 하나의 뿌리로 모이고, 그 뿌리가 얼리 익스텐션·캐스팅·아웃인 궤도라는 세 가지 원인에서 나온다는 인과 다이어그램">
+      <defs>
+        <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="mk-i"/>
+        </marker>
+        <marker id="a1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="mk-a"/>
+        </marker>
+      </defs>
+
+      <text x="24" y="18" class="t-s">증상 (내가 느끼는 것)</text>
+      <rect x="24" y="30" width="190" height="54" class="f-fault" stroke="var(--fault)" stroke-width="1.4"/>
+      <text x="119" y="53" class="t-b" text-anchor="middle" fill="var(--fault)">아이언 정타 불량</text>
+      <text x="119" y="70" class="t" text-anchor="middle">뒤땅 · 토핑 · 토우 히트</text>
+
+      <rect x="24" y="106" width="190" height="54" class="f-fault" stroke="var(--fault)" stroke-width="1.4"/>
+      <text x="119" y="129" class="t-b" text-anchor="middle" fill="var(--fault)">드라이버 215</text>
+      <text x="119" y="146" class="t" text-anchor="middle">핸디 대비 20~30 부족</text>
+
+      <path d="M214,57 L262,80" class="s-line" marker-end="url(#a1)"/>
+      <path d="M214,133 L262,110" class="s-line" marker-end="url(#a1)"/>
+
+      <text x="272" y="18" class="t-s">뿌리 (실제 문제)</text>
+      <rect x="272" y="52" width="192" height="86" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="368" y="80" class="t-b" text-anchor="middle" font-size="14">임팩트 재현성</text>
+      <line x1="292" y1="92" x2="444" y2="92" class="s-hair"/>
+      <text x="368" y="110" class="t-k" text-anchor="middle">① 로우포인트 위치</text>
+      <text x="368" y="127" class="t-k" text-anchor="middle">② 페이스 중앙 접촉</text>
+
+      <path d="M330,138 L150,204" class="s-ref" marker-end="url(#a1a)"/>
+      <path d="M368,138 L368,204" class="s-ref" marker-end="url(#a1a)"/>
+      <path d="M406,138 L570,204" class="s-ref" marker-end="url(#a1a)"/>
+
+      <text x="24" y="228" class="t-s">원인 후보 — §03에서 셀프 판정</text>
+      <rect x="24" y="238" width="196" height="66" class="f-sur" stroke="var(--rule-2)" stroke-width="1.2"/>
+      <text x="36" y="258" class="t-k">A · 얼리 익스텐션</text>
+      <text x="36" y="275" class="t">골반이 볼 쪽으로 밀림</text>
+      <text x="36" y="291" class="t">→ 공간 상실 · 토우/얇게</text>
+
+      <rect x="242" y="238" width="196" height="66" class="f-sur" stroke="var(--rule-2)" stroke-width="1.2"/>
+      <text x="254" y="258" class="t-k">B · 캐스팅</text>
+      <text x="254" y="275" class="t">손목 각을 위에서 품</text>
+      <text x="254" y="291" class="t">→ 로우포인트 뒤 · 뒤땅</text>
+
+      <rect x="460" y="238" width="196" height="66" class="f-sur" stroke="var(--rule-2)" stroke-width="1.2"/>
+      <text x="472" y="258" class="t-k">C · 아웃-인 궤도</text>
+      <text x="472" y="275" class="t">상체가 먼저 나감</text>
+      <text x="472" y="291" class="t">→ 힐/토 산발 · 스핀 과다</text>
+    </svg>
+    </div>
+    <figcaption><b>읽는 법:</b> 왼쪽 두 증상은 하나의 뿌리로 모이고, 그 뿌리는 아래 세 원인 중 하나(또는 둘)에서 나옵니다. 셋 다 고치려 들면 아무것도 안 고쳐집니다. §03의 셀프 진단으로 <b>내 경우가 A·B·C 중 무엇인지 먼저 특정</b>한 다음, 해당하는 드릴만 하는 것이 순서입니다.</figcaption>
+  </figure>
+
+  <div class="keybox">
+    <span class="nh">이 리포트의 전제</span>
+    <p>80대 초중반에서 비거리와 정타를 동시에 얻는 길은 스윙을 바꾸는 것이 아니라, 이미 가진 스윙의 <span style="color:var(--accent)">낭비를 없애는 것</span>입니다.</p>
+  </div>
+</section>
+
+<!-- ══════════════════ 02 ══════════════════ -->
+<section id="s2">
+  <div class="shead">
+    <span class="snum">02</span>
+    <h2>215라는 숫자를 분해하면</h2>
+    <p class="sub">비거리는 하나의 숫자가 아니라 세 개의 곱입니다. 어느 항이 새고 있는지 알면, 근력 훈련 없이 25야드를 찾을 수 있습니다.</p>
+  </div>
+
+  <div class="prose">
+    <p>드라이버 비거리는 이렇게 만들어집니다. <b>클럽 스피드 × 스매시 팩터 = 볼 스피드</b>, 그리고 볼 스피드에 <b>어택 앵글</b>이 결정하는 발사각·스핀이 곱해져 캐리가 나옵니다. 세 항 중 아마추어가 가장 많이 흘리는 것은 클럽 스피드가 아니라 <em>스매시 팩터</em>, 즉 페이스 중앙에 맞았는지 여부입니다.</p>
+    <p>스코어 80대 초중반을 치는 사람의 클럽 스피드는 보통 88~95 mph 구간입니다. 그 스피드로 스매시 팩터 1.47이 나오면 총거리 240~250야드가 정상값입니다. 지금 215가 나오고 있다면, <b>스피드가 부족한 게 아니라 스피드가 볼에 전달되지 않고 있는 것</b>입니다. 그리고 그 전달 손실의 원인이 바로 아이언 정타 불량과 같은 것입니다.</p>
+  </div>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 02 — 215에서 240으로: 어느 레버가 얼마를 주는가</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 246" role="img" aria-label="드라이버 총거리 215야드에서 센터 히트로 18야드, 어택 앵글 개선으로 10야드를 더해 243야드에 도달하고, 추가로 스피드 훈련이 12야드를 더 줄 수 있음을 보여주는 누적 막대 차트">
+      <defs>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="mk-i"/>
+        </marker>
+        <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="7" stroke="var(--rule-2)" stroke-width="2.5"/>
+        </pattern>
+      </defs>
+
+      <!-- leader labels -->
+      <text x="360" y="56" class="t-g" text-anchor="middle">센터 히트 회복</text>
+      <text x="360" y="70" class="t" text-anchor="middle">스매시 1.35 → 1.47</text>
+      <line x1="360" y1="76" x2="360" y2="94" class="s-good-d"/>
+
+      <text x="456" y="26" class="t-a" text-anchor="middle">어택 앵글</text>
+      <text x="456" y="40" class="t" text-anchor="middle">−3° → +2°</text>
+      <line x1="456" y1="46" x2="456" y2="94" class="s-ref"/>
+
+      <text x="560" y="56" class="t" text-anchor="middle" fill="var(--ink-3)">스피드 훈련</text>
+      <text x="560" y="70" class="t" text-anchor="middle" fill="var(--ink-3)">(선택 · 3개월)</text>
+      <line x1="560" y1="76" x2="560" y2="94" class="s-hair" stroke-dasharray="4 4"/>
+
+      <!-- bars -->
+      <rect x="60" y="94" width="239" height="46" class="f-sur" stroke="var(--rule-2)" stroke-width="1.2"/>
+      <rect x="299" y="94" width="123" height="46" class="f-good" stroke="var(--good)" stroke-width="1.5"/>
+      <rect x="422" y="94" width="68" height="46" class="f-acc" stroke="var(--accent-line)" stroke-width="1.5"/>
+      <rect x="490" y="94" width="72" height="46" fill="url(#hatch)" stroke="var(--rule-2)" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+      <text x="180" y="122" class="t-k" text-anchor="middle">현재 215</text>
+      <text x="360" y="122" class="t-g" text-anchor="middle">+18</text>
+      <text x="456" y="122" class="t-a" text-anchor="middle">+10</text>
+      <text x="526" y="122" class="t" text-anchor="middle" fill="var(--ink-3)">+12</text>
+
+      <!-- truncated-axis break -->
+      <path d="M54,150 L62,142 M60,150 L68,142" class="s-line" stroke-width="1.2"/>
+
+      <!-- axis -->
+      <line x1="60" y1="150" x2="648" y2="150" class="s-line"/>
+      <g class="t">
+        <line x1="60" y1="150" x2="60" y2="156" class="s-line"/><text x="60" y="170" text-anchor="middle">180</text>
+        <line x1="197" y1="150" x2="197" y2="156" class="s-line"/><text x="197" y="170" text-anchor="middle">200</text>
+        <line x1="333" y1="150" x2="333" y2="156" class="s-line"/><text x="333" y="170" text-anchor="middle">220</text>
+        <line x1="469" y1="150" x2="469" y2="156" class="s-line"/><text x="469" y="170" text-anchor="middle">240</text>
+        <line x1="606" y1="150" x2="606" y2="156" class="s-line"/><text x="606" y="170" text-anchor="middle">260</text>
+      </g>
+      <text x="648" y="192" class="t-s" text-anchor="end">야드 · 총거리</text>
+
+      <!-- target marker -->
+      <line x1="469" y1="86" x2="469" y2="150" class="s-line" stroke-dasharray="3 3" stroke-width="1.2"/>
+      <circle cx="490" cy="94" r="4" class="mk-a"/>
+      <text x="500" y="86" class="t-a">243 도달</text>
+
+      <!-- bracket -->
+      <path d="M60,198 L60,190 L490,190 L490,198" class="s-good"/>
+      <rect x="196" y="180" width="158" height="20" fill="var(--surface)"/>
+      <text x="275" y="195" class="t-g" text-anchor="middle">근력·스피드 훈련 없이</text>
+      <text x="60" y="226" class="t">두 항 모두 “클럽헤드가 볼의 어디에 어떤 각도로 들어가는가”의 문제 — 아이언 정타와 정확히 같은 뿌리</text>
+    </svg>
+    </div>
+    <figcaption><b>핵심:</b> 215 → 243은 스윙을 빠르게 만들어서 얻는 게 아니라, 이미 내고 있는 스피드를 <b>안 흘리게</b> 해서 얻습니다. 빗금 구간(+12)은 그 다음 단계이고, 지금 손댈 곳이 아닙니다. 센터 히트 하나만 회복해도 <b>+18야드가 아이언 정타 회복과 함께 따라옵니다</b>.</figcaption>
+  </figure>
+
+  <h3 style="font-size:18px;margin:34px 0 6px">단위 확인 — 215가 야드인가 미터인가</h3>
+  <p class="prose" style="font-size:14.5px;color:var(--ink-2);margin-bottom:0">국내 연습장·스크린은 미터 표기가 섞여 있어 진단이 갈립니다. 둘 중 어느 쪽인지에 따라 <b>지금 해야 할 일이 달라집니다.</b></p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>215의 정체</th><th class="num">환산</th><th class="num">추정 클럽 스피드</th><th>이 경우의 진단</th><th>우선순위</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="on">215 야드</td>
+          <td class="num">≈ 197 m</td>
+          <td class="num">88–95 mph<br><small style="color:var(--ink-3)">스매시 1.33–1.38</small></td>
+          <td>스피드는 충분한데 전달 효율이 낮은 전형. 페이스 중앙을 벗어난 임팩트가 아이언·드라이버 양쪽에 동시에 나타나는 상태.</td>
+          <td><span class="tag a">센터 히트 최우선</span></td>
+        </tr>
+        <tr>
+          <td class="on">215 미터</td>
+          <td class="num">≈ 235 y</td>
+          <td class="num">95–100 mph<br><small style="color:var(--ink-3)">스매시 1.42–1.46</small></td>
+          <td>비거리 자체는 핸디에 맞는 정상 범위. 문제는 거리가 아니라 <b>편차</b> — 잘 맞을 때와 아닐 때의 차이가 스코어를 만들고 있음.</td>
+          <td><span class="tag b">아이언 편차 축소</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="nh">어느 쪽이든 같은 결론</span>
+    두 경우 모두 <b>§03의 셀프 진단과 §04의 로우포인트 훈련이 1순위</b>입니다. 야드였다면 비거리와 정타를 같이 얻고, 미터였다면 정타의 <b>편차</b>가 줄어 스코어가 먼저 내려갑니다. 다음 라운드에서 드라이버 잔여거리를 홀 야디지로 역산해 보면 단위는 바로 확정됩니다.
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>계측 항목</th><th class="num">현재 추정</th><th class="num">1차 목표</th><th>무엇으로 바꾸나</th></tr></thead>
+      <tbody>
+        <tr><td class="on">스매시 팩터 <small style="color:var(--ink-3)">(드라이버)</small></td><td class="num">1.33 – 1.38</td><td class="num">1.45 +</td><td>페이스 중앙 접촉 — §03 임팩트 마크, §07 티 게이트 드릴</td></tr>
+        <tr><td class="on">어택 앵글 <small style="color:var(--ink-3)">(드라이버)</small></td><td class="num">−4° – 0°</td><td class="num">+2° – +4°</td><td>볼 위치 앞으로 + 척추 우측 기울기 — §06</td></tr>
+        <tr><td class="on">로우포인트 <small style="color:var(--ink-3)">(7번 아이언)</small></td><td class="num">볼 뒤 0–5 cm</td><td class="num">볼 앞 5–10 cm</td><td>라인 드릴 · 체중 전방 이동 — §04, §07</td></tr>
+        <tr><td class="on">백스핀 <small style="color:var(--ink-3)">(드라이버)</small></td><td class="num">3,000 – 3,800 rpm</td><td class="num">2,200 – 2,600 rpm</td><td>어택 앵글 + 페이스 높은 지점 접촉 — §06</td></tr>
+        <tr><td class="on">7번 캐리 편차</td><td class="num">± 15 y</td><td class="num">± 7 y</td><td>정타율 상승의 자동 결과</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12.5px;color:var(--ink-3);margin-top:-12px">추정값은 스코어 80~85·총거리 215야드라는 조건에서 역산한 것입니다. 실제 계측기(트랙맨·GC계열) 수치가 있으면 이 표를 그 값으로 교체해 사용하세요.</p>
+</section>
+
+<!-- ══════════════════ 03 ══════════════════ -->
+<section id="s3">
+  <div class="shead">
+    <span class="snum">03</span>
+    <h2>셀프 진단 키트 — 연습장 15분</h2>
+    <p class="sub">영상 없이도 원인을 특정할 수 있습니다. 클럽이 남긴 증거 세 가지 — <b>페이스 자국</b>, <b>디봇</b>, <b>구질</b> — 을 조합하면 A·B·C 중 무엇인지 나옵니다.</p>
+  </div>
+
+  <div class="prose">
+    <p>준비물은 <b>발 스프레이(풋 스프레이) 한 통</b>이면 됩니다. 아이언 페이스에 얇게 뿌리고 치면 볼이 맞은 자리가 하얗게 남습니다. 임팩트 테이프보다 싸고, 매 샷 다시 뿌릴 수 있습니다. 이게 없으면 헤드에 묻은 잔디 자국이나 볼 자국으로도 대충 읽을 수 있습니다.</p>
+    <p><b>순서:</b> 7번 아이언으로 10개를 치면서 ① 매 샷 페이스 자국 위치를 아래 9칸 중 어디인지 기록 → ② 디봇 모양이 4가지 중 어느 패턴인지 확인 → ③ 구질이 9구 중 어디인지 확인. 세 가지를 다 적고 나면 §03 마지막 표에서 원인이 결정됩니다.</p>
+  </div>
+
+  <h3 style="font-size:18px;margin:32px 0 0">3.1 — 페이스 임팩트 맵</h3>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 03 — 자국이 남은 자리가 곧 진단명</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 246" role="img" aria-label="7번 아이언과 드라이버 페이스를 각각 9칸으로 나눈 임팩트 위치 지도. 아이언은 정중앙이, 드라이버는 중앙에서 약간 위가 정타 존이다">
+      <!-- ── IRON ── -->
+      <text x="175" y="22" class="t-b" text-anchor="middle" font-size="13">7번 아이언 페이스</text>
+      <line x1="76" y1="56" x2="66" y2="32" class="s-thick"/>
+      <rect x="70" y="56" width="210" height="126" class="f-sur" stroke="var(--ink)" stroke-width="1.8"/>
+      <rect x="140" y="98" width="70" height="42" class="f-good"/>
+      <g class="s-hair">
+        <line x1="140" y1="56" x2="140" y2="182"/><line x1="210" y1="56" x2="210" y2="182"/>
+        <line x1="70" y1="98" x2="280" y2="98"/><line x1="70" y1="140" x2="280" y2="140"/>
+      </g>
+      <!-- groove hint -->
+      <g class="s-hair" opacity=".55">
+        <line x1="70" y1="150" x2="280" y2="150"/><line x1="70" y1="160" x2="280" y2="160"/><line x1="70" y1="170" x2="280" y2="170"/>
+      </g>
+      <g class="t" font-size="10.5" text-anchor="middle">
+        <text x="105" y="81">얇게+힐</text><text x="175" y="81" fill="var(--fault)">토핑 위험</text><text x="245" y="81">얇게+토우</text>
+        <text x="105" y="123">힐 히트</text><text x="245" y="123">토우 히트</text>
+        <text x="105" y="165">뒤땅 직전</text><text x="175" y="165">낮은 접촉</text><text x="245" y="165">뒤땅+토우</text>
+      </g>
+      <text x="175" y="123" class="t-g" text-anchor="middle" font-size="11.5">정타</text>
+      <circle cx="175" cy="132" r="4" class="mk-g"/>
+      <g class="t-s">
+        <text x="74" y="68">1</text><text x="144" y="68">2</text><text x="214" y="68">3</text>
+        <text x="74" y="110">4</text><text x="144" y="110">5</text><text x="214" y="110">6</text>
+        <text x="74" y="152">7</text><text x="144" y="152">8</text><text x="214" y="152">9</text>
+      </g>
+      <g class="t" text-anchor="end"><text x="62" y="82">위</text><text x="62" y="124">중</text><text x="62" y="166">아래</text></g>
+      <g class="t" text-anchor="middle"><text x="105" y="200">힐</text><text x="175" y="200">센터</text><text x="245" y="200">토우</text></g>
+      <text x="175" y="228" class="t-g" text-anchor="middle">정타 존 = 페이스 정중앙 (5번 칸)</text>
+
+      <!-- ── DRIVER ── -->
+      <text x="505" y="22" class="t-b" text-anchor="middle" font-size="13">드라이버 페이스</text>
+      <line x1="406" y1="56" x2="396" y2="32" class="s-thick"/>
+      <rect x="400" y="56" width="210" height="126" rx="6" class="f-sur" stroke="var(--ink)" stroke-width="1.8"/>
+      <rect x="470" y="98" width="70" height="42" class="f-good"/>
+      <g class="s-hair">
+        <line x1="470" y1="56" x2="470" y2="182"/><line x1="540" y1="56" x2="540" y2="182"/>
+        <line x1="400" y1="98" x2="610" y2="98"/><line x1="400" y1="140" x2="610" y2="140"/>
+      </g>
+      <circle cx="505" cy="106" r="19" class="s-good-d" fill="none"/>
+      <circle cx="505" cy="106" r="4" class="mk-g"/>
+      <g class="t" font-size="10.5" text-anchor="middle">
+        <text x="435" y="78">힐 상단</text><text x="575" y="78">토우 상단</text>
+        <text x="435" y="117">힐</text><text x="435" y="132">슬라이스</text>
+        <text x="575" y="117">토우</text><text x="575" y="132">훅</text>
+        <text x="435" y="165" fill="var(--fault)">최악</text><text x="505" y="165" fill="var(--fault)">스핀 폭증</text><text x="575" y="165" fill="var(--fault)">최악</text>
+      </g>
+      <g class="t" text-anchor="end"><text x="392" y="82">위</text><text x="392" y="124">중</text><text x="392" y="166">아래</text></g>
+      <g class="t" text-anchor="middle"><text x="435" y="200">힐</text><text x="505" y="200">센터</text><text x="575" y="200">토우</text></g>
+      <text x="505" y="228" class="t-g" text-anchor="middle">정타 존 = 중앙에서 8~10mm 위</text>
+    </svg>
+    </div>
+    <figcaption><b>아이언과 드라이버의 정타 지점은 다릅니다.</b> 아이언은 정중앙이지만, 드라이버는 <b>중앙보다 살짝 위</b>가 최적입니다. 기어 효과로 백스핀이 줄고 발사각이 올라가 캐리가 늘기 때문입니다. 드라이버 페이스 <b>아래쪽</b>에 자국이 남는 것이 아마추어 비거리 손실의 최대 원인 — 볼 스피드가 떨어지는 동시에 스핀이 폭증합니다. 지금 215가 나온다면 <b>페이스 아래쪽 자국을 가장 먼저 의심</b>하세요.</figcaption>
+  </figure>
+
+  <div class="zones">
+    <div class="zone">
+      <h4><span class="zn">1·4·7</span> 힐 쪽 자국</h4>
+      <p><b>원인</b> — 다운스윙에서 몸이 볼 쪽으로 밀리며(얼리 익스텐션) 손이 몸 가까이 당겨지는 경우, 또는 셋업에서 볼과 너무 가까이 선 경우.</p>
+      <p><b>드라이버</b>에서는 기어 효과로 슬라이스 스핀이 추가되어 거리 손실이 두 배가 됩니다.</p>
+      <p class="fix">→ 원인 A 의심. §05 P6 벽 드릴 + 티 게이트 드릴.</p>
+    </div>
+    <div class="zone">
+      <h4><span class="zn">3·6·9</span> 토우 쪽 자국</h4>
+      <p><b>원인</b> — 임팩트에서 상체가 일어나며 클럽이 몸에서 멀어지는 경우, 또는 팔이 접힌 채 내려오는 경우. 볼과 너무 멀리 선 셋업도 원인.</p>
+      <p><b>드라이버</b>에서는 훅 스핀이 걸려 왼쪽으로 감기는 구질이 나옵니다.</p>
+      <p class="fix">→ 원인 A 또는 셋업 거리 문제. §05 P1 · P7 확인.</p>
+    </div>
+    <div class="zone">
+      <h4><span class="zn">1·2·3</span> 페이스 위쪽 · 아이언</h4>
+      <p><b>원인</b> — 로우포인트가 볼 뒤에 있는데 뒤땅을 피하려고 몸이 순간적으로 일어난 상태. 뒤땅과 토핑이 번갈아 나오는 전형적 패턴.</p>
+      <p>거리는 정상보다 <b>한 클럽 이상</b> 짧고 탄도가 낮습니다.</p>
+      <p class="fix">→ 원인 B 의심. §04 로우포인트 · §07 라인 드릴.</p>
+    </div>
+    <div class="zone">
+      <h4><span class="zn">7·8·9</span> 페이스 아래쪽</h4>
+      <p><b>원인</b> — 클럽이 너무 가파르게 내려오거나 로우포인트가 볼 뒤에 있어 리딩 엣지 쪽으로 맞는 상태.</p>
+      <p><b>결과</b> — 다이내믹 로프트가 커져 스핀이 과다해지고 캐리가 짧아집니다. <b>드라이버 비거리 손실의 1순위 범인</b>입니다.</p>
+      <p class="fix">→ 원인 B·C 의심. §04 · §06을 함께.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;margin:36px 0 0">3.2 — 디봇 패턴</h3>
+  <p class="prose" style="margin-top:8px">잔디에서만 가능합니다. 매트 연습장이라면 이 항목은 건너뛰고 3.1과 3.3으로 판정하세요. <b>디봇이 시작되는 지점이 볼의 앞인지 뒤인지</b>가 전부입니다.</p>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 04 — 디봇 4패턴 (위에서 본 모습 · 타겟은 위쪽)</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 226" role="img" aria-label="위에서 본 디봇 네 가지 패턴: 볼 앞에서 시작하는 정상 디봇, 볼 뒤에서 시작하는 뒤땅 디봇, 디봇이 없는 토핑, 타겟 왼쪽을 향하는 아웃인 디봇">
+      <defs>
+        <marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="mk-i"/>
+        </marker>
+      </defs>
+      <text x="20" y="18" class="t-s">타겟 방향</text>
+      <line x1="86" y1="14" x2="112" y2="14" class="s-line" marker-end="url(#a4)" transform="rotate(-90 99 14)"/>
+
+      <!-- A -->
+      <rect x="20" y="44" width="150" height="116" class="f-sunk" stroke="var(--rule-2)" stroke-width="1"/>
+      <line x1="95" y1="50" x2="95" y2="154" class="s-hair" stroke-dasharray="4 4"/>
+      <rect x="84" y="78" width="22" height="44" rx="10" class="f-good" stroke="var(--good)" stroke-width="1.6"/>
+      <circle cx="95" cy="128" r="7" class="f-ball" stroke-dasharray="3 2.5"/>
+      <text x="95" y="180" class="t-g" text-anchor="middle">정상</text>
+      <text x="95" y="197" class="t" font-size="10.5" text-anchor="middle">디봇이 볼 앞에서</text>
+      <text x="95" y="212" class="t" font-size="10.5" text-anchor="middle">시작 — 볼 먼저</text>
+
+      <!-- B -->
+      <rect x="187" y="44" width="150" height="116" class="f-sunk" stroke="var(--rule-2)" stroke-width="1"/>
+      <line x1="262" y1="50" x2="262" y2="154" class="s-hair" stroke-dasharray="4 4"/>
+      <rect x="251" y="100" width="22" height="52" rx="10" class="f-fault" stroke="var(--fault)" stroke-width="1.6"/>
+      <circle cx="262" cy="128" r="7" class="f-ball" stroke-dasharray="3 2.5"/>
+      <text x="262" y="180" class="t-f" text-anchor="middle">뒤땅</text>
+      <text x="262" y="197" class="t" font-size="10.5" text-anchor="middle">디봇이 볼 뒤에서</text>
+      <text x="262" y="212" class="t" font-size="10.5" text-anchor="middle">시작 — 잔디 먼저</text>
+
+      <!-- C -->
+      <rect x="354" y="44" width="150" height="116" class="f-sunk" stroke="var(--rule-2)" stroke-width="1"/>
+      <line x1="429" y1="50" x2="429" y2="154" class="s-hair" stroke-dasharray="4 4"/>
+      <line x1="414" y1="126" x2="444" y2="126" class="s-fault" stroke-width="3"/>
+      <circle cx="429" cy="128" r="7" class="f-ball" stroke-dasharray="3 2.5"/>
+      <text x="429" y="180" class="t-f" text-anchor="middle">디봇 없음</text>
+      <text x="429" y="197" class="t" font-size="10.5" text-anchor="middle">스치기만 함</text>
+      <text x="429" y="212" class="t" font-size="10.5" text-anchor="middle">— 토핑·얇게</text>
+
+      <!-- D -->
+      <rect x="521" y="44" width="150" height="116" class="f-sunk" stroke="var(--rule-2)" stroke-width="1"/>
+      <line x1="596" y1="50" x2="596" y2="154" class="s-hair" stroke-dasharray="4 4"/>
+      <polygon points="586,122 608,122 590,76 568,76" class="f-warn" stroke="var(--warn)" stroke-width="1.6"/>
+      <circle cx="596" cy="128" r="7" class="f-ball" stroke-dasharray="3 2.5"/>
+      <text x="596" y="180" class="t" text-anchor="middle" fill="var(--warn)" font-weight="600">왼쪽 방향</text>
+      <text x="596" y="197" class="t" font-size="10.5" text-anchor="middle">디봇이 타겟 왼쪽</text>
+      <text x="596" y="212" class="t" font-size="10.5" text-anchor="middle">— 아웃-인 궤도</text>
+    </svg>
+    </div>
+    <figcaption>점선 원은 <b>볼이 놓여 있던 자리</b>, 점선 세로선은 타겟 라인입니다. <b>정상 디봇은 볼이 있던 자리보다 앞(타겟 쪽)에서 시작</b>합니다. 볼 자리를 포함하거나 그보다 뒤에서 시작하면 클럽이 잔디를 먼저 친 것 — 로우포인트가 뒤에 있다는 뜻입니다(§04). 디봇의 <b>방향</b>은 클럽 패스를 그대로 보여주므로, 왼쪽을 향하면 아웃-인입니다.</figcaption>
+  </figure>
+
+  <h3 style="font-size:18px;margin:36px 0 0">3.3 — 구질 매트릭스</h3>
+  <p class="prose" style="margin-top:8px">볼이 어디로 <b>출발</b>했고 어디로 <b>휘었는지</b>, 두 가지만 보면 됩니다. 출발 방향은 임팩트 순간의 <b>페이스 방향</b>이 약 85%를 결정하고, 휘는 방향은 <b>페이스와 클럽 패스의 차이</b>가 결정합니다. 아래 9칸 중 내 미스가 반복되는 칸을 찾으세요.</p>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 05 — 클럽 패스 × 페이스 = 9가지 구질</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 436" role="img" aria-label="클럽 패스 세 가지와 페이스 방향 세 가지를 조합한 아홉 가지 구질 매트릭스. 아웃인 패스에 열린 페이스가 만드는 풀 슬라이스가 아마추어 최다 미스이고, 인아웃 패스에 닫힌 페이스가 만드는 드로우가 목표 구질이다">
+      <defs>
+        <marker id="a5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="mk-i"/>
+        </marker>
+        <marker id="a5f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="mk-f"/>
+        </marker>
+        <marker id="a5g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="mk-g"/>
+        </marker>
+      </defs>
+
+      <text x="20" y="36" class="t-s">세로 = 페이스 방향</text>
+      <text x="20" y="52" class="t-s">가로 = 클럽 패스</text>
+
+      <g text-anchor="middle">
+        <text x="229" y="34" class="t-k">인 → 아웃</text><text x="229" y="50" class="t" font-size="10.5">오른쪽으로 지나감</text>
+        <text x="399" y="34" class="t-k">스퀘어</text><text x="399" y="50" class="t" font-size="10.5">타겟 라인과 일치</text>
+        <text x="569" y="34" class="t-k">아웃 → 인</text><text x="569" y="50" class="t" font-size="10.5">왼쪽으로 지나감</text>
+      </g>
+
+      <!-- highlighted cells -->
+      <rect x="484" y="64" width="170" height="112" class="f-fault"/>
+      <rect x="144" y="288" width="170" height="112" class="f-good"/>
+
+      <!-- grid -->
+      <g class="s-hair">
+        <line x1="144" y1="64" x2="654" y2="64"/><line x1="144" y1="176" x2="654" y2="176"/>
+        <line x1="144" y1="288" x2="654" y2="288"/><line x1="144" y1="400" x2="654" y2="400"/>
+        <line x1="144" y1="64" x2="144" y2="400"/><line x1="314" y1="64" x2="314" y2="400"/>
+        <line x1="484" y1="64" x2="484" y2="400"/><line x1="654" y1="64" x2="654" y2="400"/>
+      </g>
+
+      <!-- row labels -->
+      <g class="t" text-anchor="end">
+        <text x="134" y="114" class="t-k">페이스 열림</text><text x="134" y="130">패스보다 오른쪽</text>
+        <text x="134" y="226" class="t-k">페이스 일치</text><text x="134" y="242">패스와 같은 방향</text>
+        <text x="134" y="338" class="t-k">페이스 닫힘</text><text x="134" y="354">패스보다 왼쪽</text>
+      </g>
+
+      <!-- target reference lines + ground ticks -->
+      <g class="s-hair" stroke-dasharray="3 3">
+        <line x1="229" y1="80" x2="229" y2="156"/><line x1="399" y1="80" x2="399" y2="156"/><line x1="569" y1="80" x2="569" y2="156"/>
+        <line x1="229" y1="192" x2="229" y2="268"/><line x1="399" y1="192" x2="399" y2="268"/><line x1="569" y1="192" x2="569" y2="268"/>
+        <line x1="229" y1="304" x2="229" y2="380"/><line x1="399" y1="304" x2="399" y2="380"/><line x1="569" y1="304" x2="569" y2="380"/>
+      </g>
+
+      <!-- ROW 1 : face open to path -->
+      <path d="M229,156 Q251,120 287,84" class="s-line" marker-end="url(#a5)"/>
+      <path d="M399,156 Q402,120 439,84" class="s-line" marker-end="url(#a5)"/>
+      <path d="M569,156 Q549,120 583,84" class="s-fault" marker-end="url(#a5f)"/>
+      <g class="t" font-size="10.5" text-anchor="middle">
+        <text x="229" y="170">푸시 슬라이스</text><text x="399" y="170">페이드 · 슬라이스</text>
+      </g>
+      <text x="569" y="170" class="t-f" text-anchor="middle" font-size="10.5">풀 슬라이스 (최다)</text>
+
+      <!-- ROW 2 : face matches path -->
+      <path d="M229,268 L267,196" class="s-line" marker-end="url(#a5)"/>
+      <path d="M399,268 L399,196" class="s-line" marker-end="url(#a5)"/>
+      <path d="M569,268 L531,196" class="s-line" marker-end="url(#a5)"/>
+      <g class="t" font-size="10.5" text-anchor="middle">
+        <text x="229" y="282">푸시 (직선 우)</text><text x="399" y="282">스트레이트</text><text x="569" y="282">풀 (직선 좌)</text>
+      </g>
+
+      <!-- ROW 3 : face closed to path -->
+      <path d="M229,380 Q249,344 213,308" class="s-good" marker-end="url(#a5g)"/>
+      <path d="M399,380 Q396,344 359,308" class="s-line" marker-end="url(#a5)"/>
+      <path d="M569,380 Q547,344 511,308" class="s-line" marker-end="url(#a5)"/>
+      <text x="229" y="394" class="t-g" text-anchor="middle" font-size="10.5">드로우 · 목표 구질</text>
+      <g class="t" font-size="10.5" text-anchor="middle">
+        <text x="399" y="394">풀 드로우</text><text x="569" y="394">풀 훅</text>
+      </g>
+
+      <text x="20" y="424" class="t">출발 방향 ≈ 페이스 방향 &nbsp;·&nbsp; 휘는 방향 ≈ 페이스 − 패스 &nbsp;·&nbsp; 방향은 모두 오른손잡이 기준</text>
+    </svg>
+    </div>
+    <figcaption>붉은 칸(<b>풀 슬라이스</b>)은 아웃-인 궤도 + 열린 페이스로, 아마추어에게 가장 흔하면서 거리 손실이 가장 큰 조합입니다. 초록 칸(<b>드로우</b>)은 같은 클럽 스피드에서 스핀이 낮아 가장 멀리 가는 구질입니다. 중요한 것은 <b>페이스를 고치기 전에 패스를 고치는 것</b> — 아웃-인 상태에서 페이스만 닫으면 붉은 칸에서 오른쪽 아래 풀 훅 칸으로 이동할 뿐, 미스의 크기는 그대로입니다.</figcaption>
+  </figure>
+
+  <h3 style="font-size:18px;margin:36px 0 14px">3.4 — 종합 판정표</h3>
+  <p class="prose" style="margin-bottom:0">10샷을 치고 기록한 세 가지 증거를 아래에서 찾으세요. 가장 많이 나온 행이 <b>내 원인</b>입니다.</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>페이스 자국</th><th>디봇</th><th>구질</th><th>원인</th><th>가장 먼저 할 것</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>아래쪽 (7·8·9)</td><td>볼 뒤에서 시작</td><td>탄도 낮고 거리 짧음, 방향은 무난</td>
+          <td><span class="tag b">B 캐스팅</span></td>
+          <td class="on">§04 로우포인트 → §07 라인 드릴</td>
+        </tr>
+        <tr>
+          <td>위쪽 (1·2·3), 디봇 없음</td><td>스치기만 함</td><td>토핑·얇게, 뒤땅과 번갈아 나옴</td>
+          <td><span class="tag b">B + 보상</span></td>
+          <td class="on">§04 로우포인트 → §07 타월 드릴</td>
+        </tr>
+        <tr>
+          <td>힐·토우로 산발 (1·3·4·6)</td><td>정상~얕음</td><td>거리 편차가 큼, 방향은 랜덤</td>
+          <td><span class="tag a">A 얼리 익스텐션</span></td>
+          <td class="on">§05 P6 → §07 벽 드릴 + 티 게이트</td>
+        </tr>
+        <tr>
+          <td>아래+토우 (6·9)</td><td>깊고 왼쪽 방향</td><td>풀 슬라이스, 왼쪽 출발 후 우측 휨</td>
+          <td><span class="tag c">C 아웃-인</span></td>
+          <td class="on">§05 P4·P6 → 궤도 교정 우선</td>
+        </tr>
+        <tr>
+          <td>대체로 센터 (5)</td><td>정상</td><td>방향 좋은데 거리만 짧음</td>
+          <td><span class="tag ok">궤도 문제 아님</span></td>
+          <td class="on">§06 어택 앵글 · 로프트 · 클럽 피팅</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warnbox">
+    <span class="nh">두 행 이상 해당된다면</span>
+    가장 흔한 조합은 <b>A + B</b>입니다. 골반이 볼 쪽으로 밀리면(A) 팔이 갈 공간이 없어져 손목 각을 일찍 풀어버리기(B) 때문입니다. 이 경우 <b>A를 먼저</b> 잡으세요. 공간이 생기면 B는 상당 부분 저절로 따라옵니다. 반대 순서로 하면 잘 안 됩니다.
+  </div>
+</section>
+
+<!-- ══════════════════ 04 ══════════════════ -->
+<section id="s4">
+  <div class="shead">
+    <span class="snum">04</span>
+    <h2>로우포인트 — 아이언 정타의 거의 전부</h2>
+    <p class="sub">클럽헤드는 원을 그립니다. 그 원의 <b>가장 낮은 지점이 볼의 앞이냐 뒤냐</b>가 정타와 뒤땅을 가릅니다. 다른 모든 것은 이것을 만들기 위한 수단입니다.</p>
+  </div>
+
+  <div class="prose">
+    <p>아이언 정타의 정의는 단순합니다. <b>볼을 먼저 맞히고, 그 다음에 잔디를 깎는 것.</b> 이게 되려면 클럽헤드가 그리는 원의 최저점이 볼보다 <em>타겟 쪽으로 5~10cm 앞</em>에 있어야 합니다. 최저점이 볼 뒤에 있으면 잔디를 먼저 치고(뒤땅), 그걸 피하려고 몸이 일어나면 볼 윗부분을 칩니다(토핑). 뒤땅과 토핑은 반대 현상이 아니라 <b>같은 원인의 두 얼굴</b>입니다.</p>
+  </div>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 06 — 클럽헤드 아크와 로우포인트</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 326" role="img" aria-label="클럽헤드가 그리는 원호에서 최저점이 볼보다 타겟 쪽 앞에 있으면 볼을 먼저 맞히고 잔디를 깎지만, 최저점이 볼 뒤로 밀리면 잔디를 먼저 쳐서 뒤땅이 된다는 다이어그램">
+      <defs>
+        <marker id="a6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" class="mk-i"/>
+        </marker>
+      </defs>
+
+      <text x="464" y="30" class="t-s">스윙 진행 방향</text>
+      <line x1="574" y1="26" x2="628" y2="26" class="s-line" marker-end="url(#a6)"/>
+
+      <!-- turf -->
+      <rect x="40" y="237" width="608" height="24" class="f-sunk"/>
+      <line x1="40" y1="237" x2="648" y2="237" class="s-line"/>
+
+      <!-- divot (correct) -->
+      <path d="M298,237 Q340,252 382,237 Z" class="f-good" stroke="var(--good)" stroke-width="1.4"/>
+
+      <!-- arcs -->
+      <path d="M40,120 A300,300 0 0 0 520,120" class="s-fault-d"/>
+      <path d="M100,120 A300,300 0 0 0 580,120" class="s-line" stroke-width="2.2"/>
+
+      <!-- legend -->
+      <rect x="60" y="44" width="322" height="72" fill="var(--surface)" stroke="var(--rule-2)" stroke-width="1"/>
+      <line x1="74" y1="66" x2="104" y2="66" class="s-line" stroke-width="2.2"/>
+      <text x="112" y="70" class="t-k" font-size="11">정상 아크 — 로우포인트가 볼 앞</text>
+      <line x1="74" y1="94" x2="104" y2="94" class="s-fault-d"/>
+      <text x="112" y="98" class="t-f" font-size="11">캐스팅 아크 — 로우포인트가 볼 뒤</text>
+
+      <!-- iron ball -->
+      <circle cx="298" cy="231" r="6" class="f-ball"/>
+      <line x1="298" y1="222" x2="298" y2="196" class="s-hair"/>
+      <text x="292" y="192" class="t-k" text-anchor="end">7번 아이언 볼</text>
+      <text x="292" y="176" class="t" text-anchor="end" font-size="10.5">스탠스 중앙</text>
+
+      <!-- driver ball -->
+      <circle cx="440" cy="223" r="8" class="f-ball"/>
+      <line x1="440" y1="231" x2="440" y2="237" class="s-thick"/>
+      <line x1="450" y1="216" x2="486" y2="192" class="s-hair"/>
+      <text x="490" y="190" class="t-k">드라이버 볼 (티업)</text>
+      <text x="490" y="206" class="t" font-size="10.5">최저점을 지난 뒤</text>
+      <text x="490" y="221" class="t" font-size="10.5">상승 구간에서 접촉</text>
+
+      <!-- low point -->
+      <circle cx="340" cy="240" r="4" class="mk-i"/>
+      <line x1="340" y1="244" x2="340" y2="270" class="s-hair"/>
+      <text x="348" y="274" class="t-k">로우포인트</text>
+
+      <!-- bracket -->
+      <path d="M298,282 L298,290 L340,290 L340,282" class="s-good"/>
+      <text x="319" y="308" class="t-g" text-anchor="middle">5~10 cm</text>
+
+      <!-- fault entry -->
+      <circle cx="238" cy="237" r="4.5" class="mk-f"/>
+      <line x1="234" y1="241" x2="206" y2="276" class="s-fault-d" stroke-width="1.2"/>
+      <text x="200" y="280" class="t-f" text-anchor="end">잔디 먼저 → 뒤땅</text>
+      <text x="200" y="296" class="t" text-anchor="end" font-size="10.5">여기서 이미 지면에 닿음</text>
+    </svg>
+    </div>
+    <figcaption>같은 스윙이라도 아크 전체가 <b>뒤로 60cm가 아니라 5cm만 밀려도</b> 결과가 뒤바뀝니다. 붉은 점선 아크는 최저점이 볼보다 뒤에 있어, 볼에 닿기 전에 이미 지면에 들어가 있습니다. 아이언 볼과 드라이버 볼의 위치가 다른 이유도 여기 있습니다 — 아이언은 최저점 <b>전</b>에서, 드라이버는 최저점 <b>후</b>에서 맞혀야 합니다. <span style="color:var(--ink-3)">각도와 깊이는 이해를 돕기 위해 실제보다 과장했습니다.</span></figcaption>
+  </figure>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>클럽</th><th>볼 위치</th><th class="num">로우포인트</th><th class="num">어택 앵글</th><th>임팩트에서 느껴야 할 것</th></tr></thead>
+      <tbody>
+        <tr><td class="on">드라이버</td><td>왼발 뒤꿈치 안쪽</td><td class="num">볼보다 뒤</td><td class="num">+2° ~ +4°</td><td>올려 치는 느낌 · 디봇 없음</td></tr>
+        <tr><td class="on">우드 · 유틸리티</td><td>중앙에서 2~3개 앞</td><td class="num">볼 위치와 비슷</td><td class="num">−1° ~ +1°</td><td>쓸어 치는 느낌 · 잔디만 스침</td></tr>
+        <tr><td class="on">롱 아이언 (4·5)</td><td>중앙에서 1개 앞</td><td class="num">볼 앞 3~5 cm</td><td class="num">−3°</td><td>볼 먼저 · 얕은 디봇</td></tr>
+        <tr><td class="on">미들 아이언 (6·7·8)</td><td>스탠스 중앙</td><td class="num">볼 앞 5~8 cm</td><td class="num">−4° ~ −5°</td><td>볼 먼저 · 지폐 한 장 두께 디봇</td></tr>
+        <tr><td class="on">웨지</td><td>중앙에서 반 개 뒤</td><td class="num">볼 앞 8~10 cm</td><td class="num">−6° ~ −8°</td><td>볼 먼저 · 깊은 디봇</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:18px;margin:34px 0 10px">로우포인트를 앞으로 옮기는 세 개의 스위치</h3>
+  <div class="prose">
+    <ul class="plain">
+      <li><b>체중 배분</b> — 임팩트에서 왼발(리드 발)에 85~90%. 아마추어는 여기서 50:50이거나 오히려 오른발에 남습니다. 아크의 중심(가슴)이 뒤에 있으면 최저점도 뒤에 남습니다.</li>
+      <li><b>손의 위치</b> — 임팩트에서 손이 볼보다 타겟 쪽으로 나가 있어야 합니다(핸드 퍼스트). 손이 아크의 중심을 끌고 가기 때문입니다.</li>
+      <li><b>가슴의 방향</b> — 임팩트 순간 가슴이 볼을 지나 타겟 쪽을 향하기 시작해야 합니다. 가슴이 볼 뒤에 머물면 클럽도 뒤에서 바닥을 칩니다.</li>
+    </ul>
+    <p style="margin-top:14px">이 셋은 별개 동작이 아니라 <b>하나의 움직임</b>입니다. 다운스윙에서 하체가 먼저 타겟 쪽으로 이동하면 셋이 동시에 만들어집니다. 반대로 상체가 먼저 나가면 셋 다 무너집니다 — 그게 §05에서 볼 내용입니다.</p>
+  </div>
+</section>
+
+<!-- ══════════════════ 05 ══════════════════ -->
+<section id="s5">
+  <div class="shead">
+    <span class="snum">05</span>
+    <h2>구간별 체크포인트 — 내 영상에 이 선을 그으세요</h2>
+    <p class="sub">코칭에서 쓰는 P-시스템(P1 어드레스 ~ P10 피니시) 중 <b>정타를 좌우하는 네 구간</b>만 봅니다. 각 도해의 점선이 본인 영상 위에 그어야 할 기준선입니다.</p>
+  </div>
+
+  <div class="note">
+    <span class="nh">선 긋는 법</span>
+    아이폰은 <b>사진 앱 → 마크업</b>, 안드로이드는 갤러리 편집기로도 됩니다. 무료 앱 중에는 <b>Hudl Technique</b>나 <b>Coach's Eye</b>류가 직선·각도·원 도구를 제공합니다. 프레임을 정지시킨 뒤 아래 도해와 <b>같은 위치에 같은 선</b>을 긋고 비교하면 됩니다.
+  </div>
+
+  <h3 style="font-size:19px;margin:34px 0 0">P1 — 어드레스</h3>
+  <p class="prose" style="margin-top:8px">셋업은 스윙 중 유일하게 <b>시간 제한 없이 완벽하게 만들 수 있는 구간</b>입니다. 여기서 어긋난 것은 스윙 중에 반드시 보상 동작으로 되돌아옵니다.</p>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 07 — P1 어드레스 기준선</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 346" role="img" aria-label="어드레스 자세를 후방과 정면에서 본 골격 도해. 후방에는 샤프트 플레인 라인과 엉덩이 라인, 정면에는 머리 위치와 어깨 기울기 기준선이 표시되어 있다">
+      <text x="170" y="20" class="t-b" text-anchor="middle" font-size="13">후방 (DTL) — 타겟 라인 뒤에서</text>
+      <text x="510" y="20" class="t-b" text-anchor="middle" font-size="13">정면 (FO) — 타겟은 오른쪽</text>
+
+      <!-- ══ DTL ══ -->
+      <g transform="translate(20,30)">
+        <line x1="10" y1="240" x2="290" y2="240" class="s-line"/>
+        <rect x="10" y="240" width="280" height="14" class="f-sunk"/>
+        <!-- reference lines -->
+        <line x1="204" y1="234" x2="107" y2="40" class="s-ref"/>
+        <line x1="112" y1="240" x2="112" y2="86" class="s-ref"/>
+        <!-- body -->
+        <path d="M130,238 L138,192 L124,148" class="s-body"/>
+        <path d="M124,148 L150,96" class="s-body" stroke-width="11"/>
+        <path d="M150,96 L162,150" class="s-body"/>
+        <circle cx="162" cy="74" r="15" fill="var(--limb)"/>
+        <line x1="108" y1="240" x2="152" y2="240" class="s-thick" stroke-width="4"/>
+        <!-- club -->
+        <line x1="162" y1="150" x2="204" y2="234" class="s-thick"/>
+        <line x1="198" y1="236" x2="212" y2="236" class="s-thick" stroke-width="4"/>
+        <circle cx="204" cy="228" r="6" class="f-ball"/>
+        <!-- markers -->
+        <circle cx="128" cy="66" r="10" class="mk-a"/><text x="128" y="70" class="t" fill="var(--surface)" text-anchor="middle" font-weight="600">1</text>
+        <circle cx="112" cy="98" r="10" class="mk-a"/><text x="112" y="102" class="t" fill="var(--surface)" text-anchor="middle" font-weight="600">2</text>
+        <circle cx="140" cy="122" r="10" class="mk-a"/><text x="140" y="126" class="t" fill="var(--surface)" text-anchor="middle" font-weight="600">3</text>
+        <circle cx="204" cy="206" r="10" class="mk-a"/><text x="204" y="210" class="t" fill="var(--surface)" text-anchor="middle" font-weight="600">4</text>
+        <text x="10" y="276" class="t" font-size="10.5">척추각 · 무릎 굽힘 · 볼과의 거리를 함께 봅니다</text>
+      </g>
+
+      <!-- ══ FACE ON ══ -->
+      <g transform="translate(360,30)">
+        <line x1="10" y1="240" x2="290" y2="240" class="s-line"/>
+        <rect x="10" y="240" width="280" height="14" class="f-sunk"/>
+        <!-- reference lines -->
+        <line x1="144" y1="234" x2="144" y2="56" class="s-ref"/>
+        <line x1="156" y1="234" x2="156" y2="120" class="s-ref"/>
+        <!-- body -->
+        <path d="M120,238 L128,194 L132,152" class="s-body"/>
+        <path d="M184,238 L176,194 L170,152" class="s-body"/>
+        <line x1="132" y1="152" x2="170" y2="152" class="s-body" stroke-width="9"/>
+        <path d="M151,152 L147,100" class="s-body" stroke-width="11"/>
+        <line x1="124" y1="106" x2="172" y2="98" class="s-body" stroke-width="9"/>
+        <circle cx="144" cy="78" r="15" fill="var(--limb)"/>
+        <path d="M124,106 L160,152" class="s-body" stroke-width="6"/>
+        <path d="M172,98 L160,152" class="s-body" stroke-width="6"/>
+        <line x1="106" y1="240" x2="134" y2="240" class="s-thick" stroke-width="4"/>
+        <line x1="170" y1="240" x2="198" y2="240" class="s-thick" stroke-width="4"/>
+        <!-- club -->
+        <line x1="160" y1="152" x2="156" y2="234" class="s-thick"/>
+        <line x1="149" y1="236" x2="163" y2="236" class="s-thick" stroke-width="4"/>
+        <circle cx="156" cy="228" r="6" class="f-ball"/>
+        <!-- markers -->
+        <circle cx="144" cy="46" r="10" class="mk-a"/><text x="144" y="50" class="t" fill="var(--surface)" text-anchor="middle" font-weight="600">5</text>
+        <circle cx="192" cy="88" r="10" class="mk-a"/><text x="192" y="92" class="t" fill="var(--surface)" text-anchor="middle" font-weight="600">6</text>
+        <circle cx="176" cy="140" r="10" class="mk-a"/><text x="176" y="144" class="t" fill="var(--surface)" text-anchor="middle" font-weight="600">7</text>
+        <circle cx="222" cy="196" r="10" class="mk-a"/><text x="222" y="200" class="t" fill="var(--surface)" text-anchor="middle" font-weight="600">8</text>
+        <line x1="214" y1="196" x2="164" y2="196" class="s-hair"/>
+        <text x="10" y="276" class="t" font-size="10.5">머리는 볼보다 뒤 · 오른 어깨가 왼 어깨보다 낮음</text>
+      </g>
+    </svg>
+    </div>
+    <figcaption>
+      <b>1</b> 샤프트 플레인 — 볼에서 샤프트를 따라 그은 선이 어깨 부근을 지나야 합니다. 너무 위를 지나면 볼과 가까이 선 것, 너무 아래면 멀리 선 것입니다. &nbsp;·&nbsp;
+      <b>2</b> 엉덩이 라인 — 엉덩이 뒷면에 수직선. <b>이 선이 §05 P6의 핵심 기준</b>입니다. &nbsp;·&nbsp;
+      <b>3</b> 척추각 — 고관절에서 접어 약 30° 전방 경사, 등은 곧게. &nbsp;·&nbsp;
+      <b>4</b> 볼 위치 — 7번은 스탠스 정중앙. &nbsp;·&nbsp;
+      <b>5</b> 머리 — 볼보다 뒤(타겟 반대쪽). &nbsp;·&nbsp;
+      <b>6</b> 어깨 기울기 — 오른손이 아래에 있으므로 오른 어깨가 자연히 낮습니다. 수평이면 이미 아웃-인 유발. &nbsp;·&nbsp;
+      <b>7</b> 체중 50:50, 발 앞꿈치 쪽. &nbsp;·&nbsp;
+      <b>8</b> 손 — 볼보다 살짝 타겟 쪽(핸드 퍼스트 셋업). 여기서 손이 뒤에 있으면 임팩트에서 앞으로 나갈 수 없습니다.
+    </figcaption>
+  </figure>
+
+  <h3 style="font-size:19px;margin:36px 0 0">P4 — 백스윙 탑과 스윙 플레인</h3>
+  <p class="prose" style="margin-top:8px">탑의 모양보다 중요한 것은 <b>클럽이 내려올 통로</b>가 확보됐는지입니다. 아래 왼쪽의 초록 띠가 그 통로입니다.</p>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 08 — 플레인 띠와 백스윙 탑</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 362" role="img" aria-label="후방 시점에서 볼과 손을 잇는 샤프트 플레인과 볼과 어깨를 잇는 엘보 플레인 사이의 띠가 클럽이 내려올 정상 통로임을 보여주고, 정면 시점에서 백스윙 탑의 어깨 회전과 체중 배분을 보여주는 도해">
+      <text x="170" y="20" class="t-b" text-anchor="middle" font-size="13">후방 — 클럽이 내려올 통로</text>
+      <text x="510" y="20" class="t-b" text-anchor="middle" font-size="13">정면 — 백스윙 탑 (P4)</text>
+
+      <!-- ══ PLANE ══ -->
+      <g transform="translate(20,30)">
+        <line x1="10" y1="240" x2="290" y2="240" class="s-line"/>
+        <rect x="10" y="240" width="280" height="14" class="f-sunk"/>
+        <!-- plane band -->
+        <polygon points="204,234 107,40 128,40" class="f-good"/>
+        <line x1="204" y1="234" x2="107" y2="40" class="s-good"/>
+        <line x1="204" y1="234" x2="128" y2="40" class="s-good"/>
+        <!-- wrong planes -->
+        <line x1="204" y1="234" x2="152" y2="40" class="s-fault-d"/>
+        <line x1="204" y1="234" x2="41" y2="40" class="s-fault-d"/>
+        <!-- body -->
+        <path d="M130,238 L138,192 L124,148" class="s-body"/>
+        <path d="M124,148 L150,96" class="s-body" stroke-width="11"/>
+        <path d="M150,96 L162,150" class="s-body"/>
+        <circle cx="162" cy="74" r="15" fill="var(--limb)"/>
+        <line x1="108" y1="240" x2="152" y2="240" class="s-thick" stroke-width="4"/>
+        <circle cx="204" cy="228" r="6" class="f-ball"/>
+        <!-- legend -->
+        <line x1="12" y1="266" x2="40" y2="266" class="s-good" stroke-width="3"/>
+        <text x="48" y="270" class="t-g" font-size="10.5">정상 통로 — 볼–손 선과 볼–어깨 선 사이</text>
+        <line x1="12" y1="288" x2="40" y2="288" class="s-fault-d"/>
+        <text x="48" y="292" class="t-f" font-size="10.5">위로 벗어남 → 아웃-인 · 깊은 디봇</text>
+        <line x1="12" y1="310" x2="40" y2="310" class="s-fault-d"/>
+        <text x="48" y="314" class="t-f" font-size="10.5">아래로 벗어남 → 인-아웃 과다 · 푸시</text>
+      </g>
+
+      <!-- ══ TOP ══ -->
+      <g transform="translate(360,30)">
+        <line x1="10" y1="240" x2="290" y2="240" class="s-line"/>
+        <rect x="10" y="240" width="280" height="14" class="f-sunk"/>
+        <line x1="144" y1="234" x2="144" y2="40" class="s-ref"/>
+        <!-- body -->
+        <path d="M120,238 L126,194 L136,152" class="s-body"/>
+        <path d="M184,238 L172,196 L166,148" class="s-body"/>
+        <line x1="136" y1="152" x2="166" y2="148" class="s-body" stroke-width="9"/>
+        <path d="M151,150 L146,102" class="s-body" stroke-width="11"/>
+        <line x1="138" y1="110" x2="152" y2="92" class="s-body" stroke-width="9"/>
+        <circle cx="144" cy="76" r="15" fill="var(--limb)"/>
+        <path d="M138,110 L112,54" class="s-body" stroke-width="6"/>
+        <line x1="106" y1="240" x2="134" y2="240" class="s-thick" stroke-width="4"/>
+        <line x1="170" y1="240" x2="198" y2="240" class="s-thick" stroke-width="4"/>
+        <!-- club -->
+        <line x1="112" y1="54" x2="188" y2="46" class="s-thick"/>
+        <line x1="186" y1="40" x2="190" y2="52" class="s-thick" stroke-width="4"/>
+        <line x1="100" y1="50" x2="200" y2="40" class="s-ref"/>
+        <!-- weight -->
+        <rect x="106" y="258" width="28" height="12" class="f-sur" stroke="var(--rule-2)" stroke-width="1"/>
+        <rect x="106" y="258" width="20" height="12" fill="var(--ink)"/>
+        <rect x="170" y="258" width="28" height="12" class="f-sur" stroke="var(--rule-2)" stroke-width="1"/>
+        <rect x="170" y="258" width="8" height="12" fill="var(--ink)"/>
+        <text x="120" y="284" class="t" text-anchor="middle" font-size="10.5">70%</text>
+        <text x="184" y="284" class="t" text-anchor="middle" font-size="10.5">30%</text>
+        <text x="196" y="28" class="t-a" text-anchor="end" font-size="10.5">샤프트가 타겟 라인과 평행</text>
+        <text x="176" y="120" class="t" font-size="10.5">어깨 90°</text>
+        <text x="182" y="164" class="t" font-size="10.5">골반 45°</text>
+        <text x="86" y="72" class="t" text-anchor="end" font-size="10.5">리드 암</text>
+        <text x="86" y="86" class="t" text-anchor="end" font-size="10.5">곧게</text>
+      </g>
+    </svg>
+    </div>
+    <figcaption><b>왼쪽 초록 띠</b>는 볼–손 선과 볼–어깨 선 사이입니다. 다운스윙에서 클럽이 이 띠 안으로 내려오면 궤도는 자동으로 맞습니다. 붉은 점선 위쪽으로 벗어나면 아웃-인(풀 슬라이스·깊은 디봇), 아래쪽으로 벗어나면 인-아웃 과다(푸시·훅)입니다. <b>오른쪽 탑</b>에서 중요한 것은 높이가 아니라 <b>어깨는 90°, 골반은 45°</b>라는 비율 — 골반까지 90° 돌아가면 꼬임이 사라져 다운스윙에서 쓸 힘이 없습니다. 머리 기준선이 백스윙 중 오른쪽으로 밀리면 스웨이입니다.</figcaption>
+  </figure>
+
+  <h3 style="font-size:19px;margin:36px 0 0">P6 — 얼리 익스텐션 <span style="font-family:var(--mono);font-size:12px;color:var(--fault);font-weight:600">가장 흔한 원인</span></h3>
+  <p class="prose" style="margin-top:8px">국내 아마추어에게 <b>배치기</b>로 불리는 동작입니다. 다운스윙에서 골반이 볼 쪽으로 밀려 나가면, 손과 클럽이 지나갈 공간이 사라집니다. 몸은 그 자리에서 부딪히지 않으려고 팔을 들어 올리고 — 그 순간 정타는 물리적으로 불가능해집니다.</p>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 09 — P6 후방 시점 · 엉덩이 라인 비교</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 366" role="img" aria-label="후방 시점 다운스윙 비교. 정상은 엉덩이가 어드레스 때의 수직 기준선에 유지되어 손이 지나갈 공간이 있지만, 얼리 익스텐션은 골반이 볼 쪽으로 밀려 그 공간이 사라지고 척추가 세워진다">
+      <defs>
+        <marker id="a9f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-f"/></marker>
+        <marker id="a9g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-g"/></marker>
+      </defs>
+      <text x="170" y="20" class="t-g" text-anchor="middle" font-size="13" font-weight="600">정상 — 엉덩이가 라인에 남음</text>
+      <text x="510" y="20" class="t-f" text-anchor="middle" font-size="13" font-weight="600">얼리 익스텐션 — 골반이 볼 쪽으로</text>
+
+      <!-- ══ CORRECT ══ -->
+      <g transform="translate(20,30)">
+        <line x1="10" y1="240" x2="290" y2="240" class="s-line"/>
+        <rect x="10" y="240" width="280" height="14" class="f-sunk"/>
+        <line x1="112" y1="252" x2="112" y2="60" class="s-ref"/>
+        <text x="106" y="54" class="t-a" text-anchor="end" font-size="10.5">엉덩이 라인</text>
+        <path d="M132,238 L140,192 L120,146" class="s-body-g"/>
+        <path d="M120,146 L152,98" class="s-body-g" stroke-width="11"/>
+        <path d="M152,98 L172,168" class="s-body-g"/>
+        <circle cx="164" cy="76" r="15" fill="var(--good)" opacity=".9"/>
+        <line x1="108" y1="240" x2="152" y2="240" class="s-thick" stroke-width="4"/>
+        <line x1="172" y1="168" x2="108" y2="158" class="s-thick"/>
+        <line x1="104" y1="152" x2="108" y2="164" class="s-thick" stroke-width="4"/>
+        <circle cx="204" cy="228" r="6" class="f-ball"/>
+        <!-- space indicator -->
+        <line x1="134" y1="196" x2="168" y2="180" class="s-good" marker-end="url(#a9g)" marker-start="url(#a9g)"/>
+        <text x="196" y="200" class="t-g" font-size="10.5">공간 확보</text>
+        <text x="10" y="272" class="t-g" font-size="10.5">· 척추각 어드레스와 동일하게 유지</text>
+        <text x="10" y="288" class="t-g" font-size="10.5">· 골반은 회전만, 볼 쪽으로 이동 없음</text>
+        <text x="10" y="304" class="t-g" font-size="10.5">· 손이 몸 앞을 지나갈 통로가 열림</text>
+        <text x="10" y="320" class="t" font-size="10.5">→ 페이스 중앙 · 볼 먼저 · 얕은 디봇</text>
+      </g>
+
+      <!-- ══ FAULT ══ -->
+      <g transform="translate(360,30)">
+        <line x1="10" y1="240" x2="290" y2="240" class="s-line"/>
+        <rect x="10" y="240" width="280" height="14" class="f-sunk"/>
+        <line x1="112" y1="252" x2="112" y2="60" class="s-ref"/>
+        <text x="106" y="54" class="t-a" text-anchor="end" font-size="10.5">엉덩이 라인</text>
+        <!-- ghost of correct position -->
+        <path d="M120,146 L152,98" class="s-ref" stroke-width="2"/>
+        <circle cx="120" cy="146" r="7" class="s-ref" fill="none"/>
+        <text x="60" y="132" class="t-a" text-anchor="end" font-size="10.5">있어야 할 자리</text>
+        <line x1="64" y1="136" x2="110" y2="144" class="s-hair"/>
+        <!-- fault body -->
+        <path d="M134,238 L150,194 L142,150" class="s-body-f"/>
+        <path d="M142,150 L156,84" class="s-body-f" stroke-width="11"/>
+        <path d="M156,84 L186,158" class="s-body-f"/>
+        <circle cx="166" cy="62" r="15" fill="var(--fault)" opacity=".9"/>
+        <line x1="108" y1="240" x2="152" y2="240" class="s-thick" stroke-width="4"/>
+        <line x1="186" y1="158" x2="124" y2="146" class="s-thick"/>
+        <line x1="120" y1="140" x2="124" y2="152" class="s-thick" stroke-width="4"/>
+        <circle cx="204" cy="228" r="6" class="f-ball"/>
+        <!-- push arrow -->
+        <line x1="114" y1="176" x2="140" y2="176" class="s-fault" marker-end="url(#a9f)"/>
+        <text x="108" y="200" class="t-f" text-anchor="end" font-size="10.5">8~15 cm 밀림</text>
+        <!-- hands forced up -->
+        <line x1="200" y1="182" x2="200" y2="152" class="s-fault" marker-end="url(#a9f)"/>
+        <text x="208" y="172" class="t-f" font-size="10.5">손이 위로</text>
+        <text x="10" y="272" class="t-f" font-size="10.5">· 척추가 세워지며 머리가 올라감</text>
+        <text x="10" y="288" class="t-f" font-size="10.5">· 공간이 없어 팔을 들어 올림</text>
+        <text x="10" y="304" class="t-f" font-size="10.5">· 회전이 멈춰 스피드도 함께 손실</text>
+        <text x="10" y="320" class="t" font-size="10.5">→ 토우·얇게 · 거리 편차 · 스매시 저하</text>
+      </g>
+    </svg>
+    </div>
+    <figcaption><b>확인법:</b> 후방 영상에서 어드레스 프레임에 엉덩이 뒷면을 지나는 수직선을 긋고, 그 선을 그대로 둔 채 임팩트 직전 프레임으로 넘기세요. <b>엉덩이가 선에서 떨어져 볼 쪽으로 들어왔다면 얼리 익스텐션</b>입니다. 8cm 이상이면 정타는 운에 맡기는 상태입니다. 이 동작은 정타뿐 아니라 <b>회전 속도까지 죽이기 때문에</b>, 교정하면 아이언 정타와 드라이버 비거리가 동시에 회복됩니다. 교정 드릴은 §07-3 벽 드릴.</figcaption>
+  </figure>
+
+  <h3 style="font-size:19px;margin:36px 0 0">P7 — 임팩트</h3>
+  <p class="prose" style="margin-top:8px">스윙의 결과가 확정되는 0.0005초입니다. 여기서 확인할 것은 딱 세 가지 — <b>손의 위치</b>, <b>골반의 열림</b>, <b>체중의 위치</b>.</p>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 10 — P7 정면 시점 · 핸드 퍼스트 대 플리핑</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 384" role="img" aria-label="정면 시점 임팩트 비교. 정상은 손이 볼보다 타겟 쪽에 있고 골반이 열리며 체중이 왼발에 실리지만, 결함은 손이 볼 뒤에 남아 샤프트가 뒤로 기울고 체중이 오른발에 남는다">
+      <defs>
+        <marker id="a10f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-f"/></marker>
+        <marker id="a10g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-g"/></marker>
+      </defs>
+      <text x="170" y="20" class="t-g" text-anchor="middle" font-size="13" font-weight="600">정상 — 핸드 퍼스트</text>
+      <text x="510" y="20" class="t-f" text-anchor="middle" font-size="13" font-weight="600">결함 — 플리핑 (손목 풀림)</text>
+
+      <!-- ══ CORRECT ══ -->
+      <g transform="translate(20,30)">
+        <line x1="10" y1="240" x2="290" y2="240" class="s-line"/>
+        <rect x="10" y="240" width="280" height="14" class="f-sunk"/>
+        <line x1="140" y1="234" x2="140" y2="52" class="s-ref"/>
+        <line x1="156" y1="234" x2="156" y2="176" class="s-ref"/>
+        <text x="136" y="46" class="t-a" text-anchor="end" font-size="10.5">머리</text>
+        <!-- legs -->
+        <path d="M124,236 L136,196 L150,150" class="s-body-g"/>
+        <path d="M184,238 L180,192 L176,146" class="s-body-g"/>
+        <line x1="150" y1="150" x2="176" y2="146" class="s-body-g" stroke-width="9"/>
+        <path d="M163,148 L150,98" class="s-body-g" stroke-width="11"/>
+        <line x1="132" y1="106" x2="172" y2="96" class="s-body-g" stroke-width="9"/>
+        <circle cx="140" cy="76" r="15" fill="var(--good)" opacity=".9"/>
+        <path d="M172,96 L178,150" class="s-body-g" stroke-width="6"/>
+        <path d="M132,106 L178,150" class="s-body-g" stroke-width="6"/>
+        <line x1="170" y1="240" x2="198" y2="240" class="s-thick" stroke-width="4"/>
+        <line x1="120" y1="240" x2="136" y2="234" class="s-thick" stroke-width="4"/>
+        <!-- club with forward lean -->
+        <line x1="158" y1="180" x2="158" y2="236" class="s-hair" stroke-dasharray="3 3"/>
+        <line x1="178" y1="150" x2="158" y2="236" class="s-thick"/>
+        <line x1="151" y1="238" x2="165" y2="238" class="s-thick" stroke-width="4"/>
+        <circle cx="156" cy="228" r="6" class="f-ball"/>
+        <path d="M158,196 A40,40 0 0 0 172,192" class="s-good"/>
+        <text x="188" y="196" class="t-g" font-size="10.5">샤프트 린 +8~12°</text>
+        <!-- weight -->
+        <rect x="120" y="258" width="28" height="12" class="f-sur" stroke="var(--rule-2)" stroke-width="1"/>
+        <rect x="120" y="258" width="4" height="12" fill="var(--good)"/>
+        <rect x="170" y="258" width="28" height="12" class="f-sur" stroke="var(--rule-2)" stroke-width="1"/>
+        <rect x="170" y="258" width="24" height="12" fill="var(--good)"/>
+        <text x="134" y="284" class="t" text-anchor="middle" font-size="10.5">15%</text>
+        <text x="184" y="284" class="t-g" text-anchor="middle" font-size="10.5">85%</text>
+        <text x="10" y="308" class="t-g" font-size="10.5">· 손이 볼보다 앞 · 골반 40° 오픈</text>
+        <text x="10" y="324" class="t-g" font-size="10.5">· 머리는 볼 뒤 유지 · 왼다리 펴짐</text>
+        <text x="10" y="340" class="t" font-size="10.5">→ 로우포인트가 볼 앞으로 이동</text>
+      </g>
+
+      <!-- ══ FAULT ══ -->
+      <g transform="translate(360,30)">
+        <line x1="10" y1="240" x2="290" y2="240" class="s-line"/>
+        <rect x="10" y="240" width="280" height="14" class="f-sunk"/>
+        <line x1="152" y1="234" x2="152" y2="52" class="s-ref"/>
+        <line x1="156" y1="234" x2="156" y2="176" class="s-ref"/>
+        <path d="M120,238 L134,196 L138,152" class="s-body-f"/>
+        <path d="M184,238 L176,194 L168,152" class="s-body-f"/>
+        <line x1="138" y1="152" x2="168" y2="152" class="s-body-f" stroke-width="9"/>
+        <path d="M153,152 L156,100" class="s-body-f" stroke-width="11"/>
+        <line x1="136" y1="102" x2="176" y2="100" class="s-body-f" stroke-width="9"/>
+        <circle cx="152" cy="78" r="15" fill="var(--fault)" opacity=".9"/>
+        <path d="M176,100 L152,152" class="s-body-f" stroke-width="6"/>
+        <path d="M136,102 L152,152" class="s-body-f" stroke-width="6"/>
+        <line x1="170" y1="240" x2="198" y2="240" class="s-thick" stroke-width="4"/>
+        <line x1="106" y1="240" x2="134" y2="240" class="s-thick" stroke-width="4"/>
+        <!-- club leaning back -->
+        <line x1="160" y1="180" x2="160" y2="236" class="s-hair" stroke-dasharray="3 3"/>
+        <line x1="152" y1="152" x2="160" y2="236" class="s-thick"/>
+        <line x1="153" y1="238" x2="167" y2="238" class="s-thick" stroke-width="4"/>
+        <circle cx="156" cy="228" r="6" class="f-ball"/>
+        <path d="M160,196 A40,40 0 0 1 154,193" class="s-fault"/>
+        <text x="188" y="196" class="t-f" font-size="10.5">샤프트 −5° 뒤로</text>
+        <line x1="180" y1="200" x2="166" y2="196" class="s-hair"/>
+        <!-- weight -->
+        <rect x="106" y="258" width="28" height="12" class="f-sur" stroke="var(--rule-2)" stroke-width="1"/>
+        <rect x="106" y="258" width="14" height="12" fill="var(--fault)"/>
+        <rect x="170" y="258" width="28" height="12" class="f-sur" stroke="var(--rule-2)" stroke-width="1"/>
+        <rect x="170" y="258" width="14" height="12" fill="var(--fault)"/>
+        <text x="120" y="284" class="t-f" text-anchor="middle" font-size="10.5">50%</text>
+        <text x="184" y="284" class="t" text-anchor="middle" font-size="10.5">50%</text>
+        <text x="10" y="308" class="t-f" font-size="10.5">· 손이 볼과 나란하거나 뒤</text>
+        <text x="10" y="324" class="t-f" font-size="10.5">· 골반 안 열림 · 체중 오른발 잔류</text>
+        <text x="10" y="340" class="t" font-size="10.5">→ 로프트 증가 · 스핀↑ · 뒤땅/토핑</text>
+      </g>
+    </svg>
+    </div>
+    <figcaption><b>가장 빠른 자가 확인:</b> 정면 영상에서 임팩트 프레임을 정지시키고 <b>손과 볼 중 어느 쪽이 타겟에 가까운지</b>만 보세요. 손이 뒤에 있으면 그 샷은 이미 로프트가 커지고 로우포인트가 뒤로 간 상태입니다. 7번 아이언 기준 샤프트가 5° 뒤로 기울면 실질 로프트가 약 5° 커져 <b>한 클럽 이상 짧아지고</b> 스핀만 늘어납니다. 오른쪽 도해가 드라이버 215야드와 아이언 정타 불량을 동시에 만드는 바로 그 자세입니다.</figcaption>
+  </figure>
+</section>
+
+<!-- ══════════════════ 06 ══════════════════ -->
+<section id="s6">
+  <div class="shead">
+    <span class="snum">06</span>
+    <h2>드라이버 — 25야드는 힘이 아니라 각도에 있다</h2>
+    <p class="sub">아이언은 <b>내려치고</b> 드라이버는 <b>올려칩니다</b>. 같은 스윙 스피드에서 어택 앵글 −4°와 +4°의 캐리 차이는 20야드가 넘습니다.</p>
+  </div>
+
+  <div class="prose">
+    <p>드라이버는 볼이 티 위에 있고, 로프트가 10도 안팎으로 작습니다. 그래서 <b>클럽이 올라가는 구간에서 맞혀야</b> 충분한 발사각이 나오고 백스핀이 줄어듭니다. 내려치면 발사각은 낮은데 스핀은 오히려 늘어나는 최악의 조합이 됩니다 — 볼이 낮게 떠서 앞으로 못 가고 위로 솟구쳤다 떨어집니다.</p>
+  </div>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 11 — 같은 스피드, 다른 어택 앵글</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 352" role="img" aria-label="같은 클럽 스피드에서 어택 앵글이 마이너스 4도일 때와 플러스 4도일 때의 탄도 비교. 상승 타격이 발사각은 높고 스핀은 낮아 캐리가 22야드 더 나간다">
+      <defs>
+        <marker id="a11f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-f"/></marker>
+        <marker id="a11g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-g"/></marker>
+      </defs>
+
+      <!-- inset: impact angles -->
+      <rect x="34" y="212" width="190" height="112" class="f-sunk" stroke="var(--rule-2)" stroke-width="1"/>
+      <text x="40" y="228" class="t-s">임팩트 확대</text>
+      <line x1="46" y1="300" x2="214" y2="300" class="s-line"/>
+      <line x1="60" y1="262" x2="180" y2="302" class="s-fault-d" marker-end="url(#a11f)"/>
+      <line x1="60" y1="302" x2="180" y2="262" class="s-good-d" marker-end="url(#a11g)"/>
+      <line x1="120" y1="290" x2="120" y2="300" class="s-thick" stroke-width="3"/>
+      <circle cx="120" cy="282" r="8" class="f-ball"/>
+      <text x="188" y="316" class="t-f" text-anchor="end" font-size="10">−4°</text>
+      <text x="188" y="256" class="t-g" text-anchor="end" font-size="10">+4°</text>
+
+      <!-- main ground -->
+      <line x1="230" y1="300" x2="660" y2="300" class="s-line"/>
+      <line x1="240" y1="290" x2="240" y2="300" class="s-thick" stroke-width="3"/>
+      <circle cx="240" cy="282" r="7" class="f-ball"/>
+
+      <!-- trajectories -->
+      <path d="M240,292 Q355,40 470,300" class="s-fault"/>
+      <path d="M240,292 Q410,20 580,300" class="s-good"/>
+
+      <!-- carry markers -->
+      <line x1="470" y1="300" x2="470" y2="312" class="s-fault"/>
+      <text x="470" y="326" class="t-f" text-anchor="middle">캐리 183 y</text>
+      <line x1="580" y1="300" x2="580" y2="312" class="s-good"/>
+      <text x="580" y="326" class="t-g" text-anchor="middle">캐리 205 y</text>
+
+      <!-- data callouts -->
+      <text x="252" y="76" class="t-f">−4° 하강 · 발사 11° · 스핀 3,400</text>
+      <line x1="330" y1="82" x2="348" y2="162" class="s-hair"/>
+      <text x="436" y="44" class="t-g">+4° 상승 · 발사 14° · 스핀 2,400</text>
+      <line x1="492" y1="50" x2="478" y2="166" class="s-hair"/>
+
+      <text x="34" y="348" class="t" font-size="11">동일 조건 — 클럽 스피드 90 mph · 스매시 1.45 · 어택 앵글만 변경 → 캐리 <tspan class="t-g" font-weight="600" font-size="11">+22 y</tspan></text>
+    </svg>
+    </div>
+    <figcaption>두 탄도는 <b>클럽 스피드가 완전히 같습니다.</b> 차이는 클럽이 볼에 들어가는 각도뿐입니다. 하강 타격(붉은색)은 발사각이 낮은데 스핀은 높아 볼이 뜨기만 하고 나아가지 못합니다. 상승 타격(초록)은 발사각이 높고 스핀이 낮아 같은 힘으로 22야드를 더 보냅니다. <b>연습장에서 힘을 더 쓰지 않고 오늘 당장 바꿀 수 있는 항목</b>입니다.</figcaption>
+  </figure>
+
+  <h3 style="font-size:18px;margin:34px 0 14px">상승 타격을 만드는 셋업 네 가지</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>항목</th><th>지금 하고 있을 가능성</th><th>바꿀 것</th><th>이유</th></tr></thead>
+      <tbody>
+        <tr><td class="on">볼 위치</td><td>스탠스 중앙~약간 앞</td><td class="on">왼발 뒤꿈치 안쪽 선상</td><td>최저점을 지난 뒤 볼을 만나게 됨</td></tr>
+        <tr><td class="on">척추 기울기</td><td>수직에 가까움</td><td class="on">오른쪽으로 5~8° 기울임<br><small style="color:var(--ink-3)">오른 어깨가 확실히 낮게</small></td><td>스윙 중심이 볼 뒤에 놓여 상승 구간이 만들어짐</td></tr>
+        <tr><td class="on">티 높이</td><td>페이스 중앙 높이</td><td class="on">볼의 절반이 크라운 위로</td><td>페이스 위쪽 접촉 유도 → 기어 효과로 스핀 감소</td></tr>
+        <tr><td class="on">스탠스 너비</td><td>어깨 너비</td><td class="on">어깨 너비 + 한 발 폭</td><td>넓을수록 최저점이 뒤에 형성됨</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="nh">연습장 확인 드릴</span>
+    볼 앞쪽 <b>30cm 지점에 헤드커버</b>를 놓고 치세요. 하강 타격이면 클럽이 내려간 뒤 올라오면서 헤드커버를 칩니다. 상승 타격이면 클럽이 이미 올라가는 중이라 넘어갑니다. 티를 볼 뒤쪽에 하나 더 꽂아두고 그것을 건드리지 않는 방법도 같은 원리입니다.
+  </div>
+
+  <div class="warnbox">
+    <span class="nh">주의</span>
+    상승 타격을 만든다고 <b>몸을 뒤로 젖히거나 오른발에 체중을 남기면 안 됩니다.</b> 그건 어택 앵글이 아니라 스웨이이고, 슬라이스와 뒤땅이 같이 옵니다. 척추는 임팩트 전에 <b>미리</b> 기울여 놓고, 하체는 §05 P7처럼 정상적으로 타겟 쪽으로 이동합니다.
+  </div>
+</section>
+
+<!-- ══════════════════ 07 ══════════════════ -->
+<section id="s7">
+  <div class="shead">
+    <span class="snum">07</span>
+    <h2>드릴 처방 — 진단명에 맞는 것만</h2>
+    <p class="sub">여섯 개를 다 하지 마세요. §03에서 나온 <b>내 원인에 해당하는 두세 개</b>만 4주간 반복하는 것이 훨씬 빠릅니다.</p>
+  </div>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 12 — 핵심 드릴 3종 배치도</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 238" role="img" aria-label="티 게이트 드릴은 볼 좌우에 티를 꽂아 클럽이 그 사이로 지나가게 하고, 라인 드릴은 볼 위치에 그은 선 앞쪽에만 디봇이 생기게 하며, 벽 드릴은 엉덩이가 벽에서 떨어지지 않게 유지하는 배치도">
+      <defs>
+        <marker id="a12" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-i"/></marker>
+        <marker id="a12f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-f"/></marker>
+      </defs>
+
+      <!-- ① TEE GATE -->
+      <text x="120" y="30" class="t-b" text-anchor="middle" font-size="12.5">① 티 게이트 — 센터 히트</text>
+      <rect x="20" y="44" width="200" height="150" class="f-sunk" stroke="var(--rule-2)" stroke-width="1"/>
+      <line x1="120" y1="54" x2="120" y2="186" class="s-hair" stroke-dasharray="4 4"/>
+      <text x="26" y="66" class="t-s">위에서 본 모습 · 타겟 ↑</text>
+      <rect x="106" y="164" width="28" height="10" rx="4" fill="var(--limb)"/>
+      <line x1="120" y1="182" x2="120" y2="160" class="s-line" marker-end="url(#a12)"/>
+      <circle cx="98" cy="150" r="4.5" class="f-ink"/>
+      <circle cx="142" cy="150" r="4.5" class="f-ink"/>
+      <circle cx="120" cy="150" r="8" class="f-ball"/>
+      <path d="M98,132 L98,126 L142,126 L142,132" class="s-good"/>
+      <text x="120" y="118" class="t-g" text-anchor="middle" font-size="10.5">클럽 폭 + 2cm</text>
+      <text x="120" y="212" class="t" text-anchor="middle" font-size="10.5">티를 건드리지 않고 통과</text>
+
+      <!-- ② LINE -->
+      <text x="340" y="30" class="t-b" text-anchor="middle" font-size="12.5">② 라인 드릴 — 로우포인트</text>
+      <rect x="240" y="44" width="200" height="150" class="f-sunk" stroke="var(--rule-2)" stroke-width="1"/>
+      <line x1="340" y1="54" x2="340" y2="186" class="s-hair" stroke-dasharray="4 4"/>
+      <text x="246" y="66" class="t-s">위에서 본 모습 · 타겟 ↑</text>
+      <rect x="330" y="104" width="20" height="44" rx="9" class="f-good" stroke="var(--good)" stroke-width="1.5"/>
+      <line x1="256" y1="152" x2="424" y2="152" class="s-refs" stroke-width="4"/>
+      <text x="256" y="144" class="t-a" font-size="10.5">스프레이 라인</text>
+      <circle cx="340" cy="152" r="8" class="f-ball"/>
+      <rect x="328" y="158" width="24" height="24" rx="4" class="s-fault-d" fill="none"/>
+      <path d="M332,162 L348,178 M348,162 L332,178" class="s-fault" stroke-width="1.5"/>
+      <text x="340" y="212" class="t" text-anchor="middle" font-size="10.5">디봇이 라인 앞쪽에만</text>
+
+      <!-- ③ WALL -->
+      <text x="560" y="30" class="t-b" text-anchor="middle" font-size="12.5">③ 벽 드릴 — 얼리 익스텐션</text>
+      <rect x="460" y="44" width="200" height="150" class="f-sunk" stroke="var(--rule-2)" stroke-width="1"/>
+      <text x="466" y="66" class="t-s">뒤에서 본 모습</text>
+      <line x1="514" y1="72" x2="514" y2="186" class="s-line" stroke-width="3"/>
+      <g class="s-hair">
+        <line x1="514" y1="82" x2="504" y2="90"/><line x1="514" y1="102" x2="504" y2="110"/>
+        <line x1="514" y1="122" x2="504" y2="130"/><line x1="514" y1="142" x2="504" y2="150"/>
+        <line x1="514" y1="162" x2="504" y2="170"/>
+      </g>
+      <text x="500" y="76" class="t" text-anchor="end" font-size="10.5">벽 · 의자</text>
+      <line x1="470" y1="182" x2="650" y2="182" class="s-line"/>
+      <path d="M528,181 L532,156 L524,131" class="s-body"/>
+      <path d="M524,131 L539,103" class="s-body" stroke-width="9"/>
+      <path d="M539,103 L545,133" class="s-body"/>
+      <circle cx="545" cy="91" r="8" fill="var(--limb)"/>
+      <line x1="545" y1="133" x2="568" y2="179" class="s-thick"/>
+      <circle cx="570" cy="175" r="4.5" class="f-ball"/>
+      <circle cx="518" cy="132" r="5" class="mk-g"/>
+      <text x="576" y="120" class="t-g" font-size="10.5">임팩트까지</text>
+      <text x="576" y="134" class="t-g" font-size="10.5">접촉 유지</text>
+      <line x1="524" y1="152" x2="552" y2="152" class="s-fault" marker-end="url(#a12f)"/>
+      <text x="558" y="156" class="t-f" font-size="10.5">떨어지면 실패</text>
+      <text x="560" y="212" class="t" text-anchor="middle" font-size="10.5">엉덩이가 벽을 놓지 않게</text>
+    </svg>
+    </div>
+    <figcaption>세 드릴은 각각 <b>다른 원인</b>을 잡습니다. ① 은 페이스 중앙 접촉(모든 원인 공통), ② 는 로우포인트(원인 B), ③ 은 골반 밀림(원인 A)입니다. 라인 드릴은 매트에서도 됩니다 — 매트 위에 마스킹 테이프를 붙이고 테이프 <b>앞쪽</b>만 쓸리는지 보면 같은 효과입니다.</figcaption>
+  </figure>
+
+  <div class="drill">
+    <h3><span class="dn">D1</span> 티 게이트</h3>
+    <p class="aim">목표: 페이스 중앙 접촉 · 대상: 힐/토우 산발 (원인 A·C 공통)</p>
+    <div class="dgrid">
+      <div><dt>준비</dt>볼 좌우에 티를 꽂습니다. 간격은 <b>클럽헤드 폭 + 좌우 1cm씩</b>. 처음엔 여유 있게, 성공률이 오르면 좁힙니다.</div>
+      <div><dt>방법</dt><ol><li>7번 아이언, 하프 스윙부터</li><li>티를 건드리지 않고 볼만 친다</li><li>10개 중 8개 성공하면 간격 1cm 축소</li></ol></div>
+      <div><dt>성공 기준</dt>티를 안 건드리고 <b>10개 중 8개</b>. 어느 쪽 티를 치는지가 곧 미스 방향입니다 — 몸 쪽 티를 치면 힐, 바깥 티를 치면 토우.</div>
+      <div><dt>횟수</dt>매 세션 <b>20구</b>. 4주 내내 유지하는 유일한 드릴입니다.</div>
+    </div>
+  </div>
+
+  <div class="drill">
+    <h3><span class="dn">D2</span> 라인 드릴</h3>
+    <p class="aim">목표: 로우포인트를 볼 앞으로 · 대상: 뒤땅·토핑 (원인 B)</p>
+    <div class="dgrid">
+      <div><dt>준비</dt>잔디면 발 스프레이로, 매트면 마스킹 테이프로 <b>타겟 라인과 직각인 선</b>을 긋습니다. 볼은 선 위에 놓습니다.</div>
+      <div><dt>방법</dt><ol><li>먼저 <b>볼 없이</b> 10번 스윙 — 선 앞쪽만 쓸기</li><li>되면 볼을 놓고 10구</li><li>선 뒤가 쓸리면 즉시 볼 없는 스윙으로 복귀</li></ol></div>
+      <div><dt>성공 기준</dt>디봇(또는 쓸린 자국)이 <b>선보다 앞에서만</b> 시작. 선을 물면 실패로 셉니다.</div>
+      <div><dt>횟수</dt>빈 스윙 10 + 실타 15구. 1~2주차 핵심.</div>
+    </div>
+  </div>
+
+  <div class="drill">
+    <h3><span class="dn">D3</span> 벽 드릴</h3>
+    <p class="aim">목표: 골반 밀림 차단 · 대상: 얼리 익스텐션 (원인 A)</p>
+    <div class="dgrid">
+      <div><dt>준비</dt>엉덩이가 벽(또는 의자 등받이, 골프백)에 닿도록 어드레스합니다. 클럽 없이 시작.</div>
+      <div><dt>방법</dt><ol><li>백스윙 — 엉덩이 접촉 유지</li><li>다운스윙 — <b>왼쪽 엉덩이가 벽을 따라 뒤로 미끄러지듯</b> 회전</li><li>임팩트까지 벽에서 떨어지지 않게</li></ol></div>
+      <div><dt>성공 기준</dt>임팩트 지점까지 엉덩이가 벽에 <b>계속 닿아 있음</b>. 떨어지는 순간이 곧 얼리 익스텐션 발생 시점입니다.</div>
+      <div><dt>횟수</dt>빈 스윙 20회. 집에서 매일 해도 좋습니다.</div>
+    </div>
+  </div>
+
+  <div class="drill">
+    <h3><span class="dn">D4</span> 타월 드릴</h3>
+    <p class="aim">목표: 뒤땅 제거 · 대상: 볼 뒤 디봇 (원인 B)</p>
+    <div class="dgrid">
+      <div><dt>준비</dt>볼 <b>뒤쪽 15cm</b>에 수건을 접어 놓습니다.</div>
+      <div><dt>방법</dt>수건을 건드리지 않고 볼만 칩니다. D2보다 피드백이 강해서(치면 바로 압니다) 뒤땅이 심할 때 먼저 씁니다.</div>
+      <div><dt>성공 기준</dt>10구 중 9구 수건 미접촉.</div>
+      <div><dt>횟수</dt>10~15구. D2와 같은 날 하지 말고 번갈아 씁니다.</div>
+    </div>
+  </div>
+
+  <div class="drill">
+    <h3><span class="dn">D5</span> 9시–3시 하프 스윙</h3>
+    <p class="aim">목표: 정타 감각 재학습 · 대상: 전원</p>
+    <div class="dgrid">
+      <div><dt>준비</dt>없음. 8번 또는 9번 아이언.</div>
+      <div><dt>방법</dt>손이 <b>9시(허리 높이)까지만</b> 올라가고 <b>3시까지만</b> 지나가는 스윙. 속도는 70%. 작은 스윙에서 정타가 안 나면 큰 스윙에서는 절대 안 납니다.</div>
+      <div><dt>성공 기준</dt>페이스 자국이 <b>연속 5개 센터</b>. 되면 10시–2시로, 그 다음 풀 스윙으로 확장.</div>
+      <div><dt>횟수</dt>매 세션 워밍업으로 <b>15구</b>. 모든 세션의 시작.</div>
+    </div>
+  </div>
+
+  <div class="drill">
+    <h3><span class="dn">D6</span> 헤드커버 드릴</h3>
+    <p class="aim">목표: 드라이버 상승 타격 · 대상: 비거리 (§06)</p>
+    <div class="dgrid">
+      <div><dt>준비</dt>드라이버, 티, 볼 <b>앞쪽 30cm</b>에 헤드커버.</div>
+      <div><dt>방법</dt>헤드커버를 건드리지 않고 티 위의 볼을 칩니다. 하강 타격이면 클럽이 바닥을 훑고 올라오면서 반드시 헤드커버를 칩니다.</div>
+      <div><dt>성공 기준</dt>10구 중 8구 미접촉 + 탄도가 눈에 띄게 높아짐.</div>
+      <div><dt>횟수</dt>세션당 <b>10구</b>. 3~4주차부터.</div>
+    </div>
+  </div>
+
+  <div class="warnbox">
+    <span class="nh">드릴을 망치는 가장 흔한 방식</span>
+    <b>드릴 중에 볼의 결과를 보는 것</b>입니다. 드릴은 볼이 어디 가는지가 아니라 <b>클럽이 무엇을 건드렸는지</b>만 봅니다. 티·수건·라인. 볼의 방향은 드릴이 끝난 뒤 실전 스윙에서 확인하세요.
+  </div>
+</section>
+
+<!-- ══════════════════ 08 ══════════════════ -->
+<section id="s8">
+  <div class="shead">
+    <span class="snum">08</span>
+    <h2>4주 프로그램</h2>
+    <p class="sub">주 3회 · 회당 60분 기준. 한 번에 한 가지만 바꿉니다. 두 가지를 동시에 고치려 하면 <b>둘 다 안 됩니다.</b></p>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>주차</th><th>이번 주에 바꿀 단 하나</th><th>드릴</th><th>측정</th><th>합격선</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="on">1주</td>
+          <td>로우포인트를 볼 앞으로<br><small style="color:var(--ink-3)">§03 진단 먼저 · §04</small></td>
+          <td class="num">D5 → D2 → D1</td>
+          <td>디봇 시작 위치 · 페이스 자국</td>
+          <td>라인 앞 디봇 <b>10 중 7</b></td>
+        </tr>
+        <tr>
+          <td class="on">2주</td>
+          <td>골반이 볼 쪽으로 안 밀리게<br><small style="color:var(--ink-3)">§05 P6</small></td>
+          <td class="num">D3 → D5 → D1</td>
+          <td>후방 영상 · 엉덩이 라인</td>
+          <td>임팩트까지 접촉 유지</td>
+        </tr>
+        <tr>
+          <td class="on">3주</td>
+          <td>페이스 중앙에만 맞히기<br><small style="color:var(--ink-3)">§03 임팩트 마크</small></td>
+          <td class="num">D1 (게이트 좁힘) → D4</td>
+          <td>매 샷 페이스 자국 기록</td>
+          <td>센터 존 <b>10 중 6</b></td>
+        </tr>
+        <tr>
+          <td class="on">4주</td>
+          <td>드라이버를 올려치기<br><small style="color:var(--ink-3)">§06</small></td>
+          <td class="num">D6 → D1 → 랜덤 연습</td>
+          <td>탄도 높이 · 총거리</td>
+          <td>평균 <b>+15 y 이상</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:18px;margin:34px 0 14px">60분 세션의 구성</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th class="num">시간</th><th>내용</th><th>왜 이 순서인가</th></tr></thead>
+      <tbody>
+        <tr><td class="num on">0–10분</td><td>웨지·9번으로 D5 하프 스윙 15구</td><td>몸을 데우면서 정타 감각부터 켭니다. 처음부터 드라이버를 잡으면 그날 세션 전체가 망가집니다.</td></tr>
+        <tr><td class="num on">10–35분</td><td><b>블록 연습</b> — 그 주의 드릴 2개, 같은 클럽으로 반복</td><td>새 동작을 <b>습득</b>하는 구간. 같은 것을 연속으로 반복해야 신경이 붙습니다.</td></tr>
+        <tr><td class="num on">35–50분</td><td><b>랜덤 연습</b> — 매 샷 클럽과 타겟을 바꿔가며 15구</td><td>습득한 것을 <b>전이</b>시키는 구간. 연습장에서만 잘 되고 필드에서 안 되는 이유의 90%가 이 구간을 건너뛰기 때문입니다.</td></tr>
+        <tr><td class="num on">50–55분</td><td>드라이버 10구 (3~4주차는 D6)</td><td>피로한 상태에서의 드라이버가 실제 라운드 후반과 가장 비슷합니다.</td></tr>
+        <tr><td class="num on">55–60분</td><td>기록 — 페이스 자국 사진 1장, 성공률 숫자 1개</td><td>다음 세션의 시작점이 됩니다. 안 적으면 4주 뒤에 나아졌는지 알 수 없습니다.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="keybox">
+    <span class="nh">4주 뒤 기대치</span>
+    <p>드라이버 <span style="color:var(--accent)">+15~25야드</span>, 7번 아이언 캐리 편차 <span style="color:var(--accent)">±15y → ±8y</span>. 스코어는 보통 <span style="color:var(--accent)">2~4타</span> 내려갑니다 — 비거리보다 <b>미스의 크기가 줄어서</b>입니다.</p>
+  </div>
+</section>
+
+<!-- ══════════════════ 09 ══════════════════ -->
+<section id="s9">
+  <div class="shead">
+    <span class="snum">09</span>
+    <h2>촬영 규격 — 이렇게 찍어 주시면 실제 분석해 드립니다</h2>
+    <p class="sub">이 리포트의 도해는 <b>기준선</b>입니다. 본인 영상 위에 실제로 선을 그어 어긋난 각도까지 특정하려면 아래 규격이 필요합니다.</p>
+  </div>
+
+  <figure class="wide">
+    <p class="figlabel">Fig. 13 — 카메라 배치 (위에서 본 모습)</p>
+    <div class="figscroll">
+    <svg viewBox="0 0 680 336" role="img" aria-label="위에서 본 카메라 배치도. 후방 카메라는 볼과 타겟을 잇는 선의 연장선 위 3~4미터 뒤에, 정면 카메라는 타겟 라인과 직각 방향으로 3~4미터 떨어진 곳에 놓는다">
+      <defs>
+        <marker id="a13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-i"/></marker>
+        <marker id="a13d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mk-a"/></marker>
+      </defs>
+
+      <!-- target line -->
+      <line x1="110" y1="150" x2="260" y2="150" class="s-hair" stroke-dasharray="5 4"/>
+      <line x1="260" y1="150" x2="614" y2="150" class="s-line" marker-end="url(#a13)"/>
+      <text x="628" y="154" class="t-k">타겟</text>
+      <text x="470" y="140" class="t-s">타겟 라인</text>
+
+      <!-- golfer feet -->
+      <rect x="236" y="112" width="13" height="28" rx="5" fill="var(--limb)"/>
+      <rect x="270" y="112" width="13" height="28" rx="5" fill="var(--limb)"/>
+      <text x="292" y="118" class="t" font-size="10.5">스탠스</text>
+      <!-- ball -->
+      <circle cx="260" cy="150" r="7" class="f-ball"/>
+      <text x="248" y="176" class="t-k" text-anchor="end">볼</text>
+
+      <!-- right angle marker -->
+      <polyline points="274,150 274,164 260,164" class="s-hair" fill="none"/>
+      <text x="286" y="170" class="t-s">90°</text>
+
+      <!-- DTL camera -->
+      <rect x="72" y="140" width="26" height="20" rx="2" class="f-sur" stroke="var(--ink)" stroke-width="1.6"/>
+      <polygon points="98,143 110,137 110,163 98,157" class="f-sur" stroke="var(--ink)" stroke-width="1.6"/>
+      <circle cx="85" cy="136" r="3" class="f-ink"/>
+      <text x="30" y="196" class="t-k">① 후방 (DTL)</text>
+      <text x="30" y="213" class="t" font-size="10.5">타겟 라인 연장선 위</text>
+      <text x="30" y="229" class="t" font-size="10.5">볼에서 3~4 m</text>
+      <text x="30" y="245" class="t" font-size="10.5">높이 = 손·벨트 높이</text>
+      <line x1="86" y1="166" x2="86" y2="188" class="s-hair"/>
+
+      <!-- FO camera -->
+      <line x1="260" y1="150" x2="260" y2="262" class="s-ref"/>
+      <rect x="247" y="266" width="26" height="20" rx="2" class="f-sur" stroke="var(--ink)" stroke-width="1.6"/>
+      <polygon points="250,266 270,266 266,254 254,254" class="f-sur" stroke="var(--ink)" stroke-width="1.6"/>
+      <text x="300" y="266" class="t-k">② 정면 (FO)</text>
+      <text x="300" y="283" class="t" font-size="10.5">타겟 라인과 직각 · 볼에서 3~4 m</text>
+      <text x="300" y="299" class="t" font-size="10.5">높이 = 가슴~벨트 높이</text>
+
+      <!-- dimensions -->
+      <line x1="112" y1="120" x2="252" y2="120" class="s-refs" marker-start="url(#a13d)" marker-end="url(#a13d)"/>
+      <text x="182" y="112" class="t-a" text-anchor="middle">3~4 m</text>
+      <line x1="228" y1="162" x2="228" y2="258" class="s-refs" marker-start="url(#a13d)" marker-end="url(#a13d)"/>
+      <text x="220" y="214" class="t-a" text-anchor="end">3~4 m</text>
+
+      <text x="30" y="326" class="t" font-size="10.5">삼각대가 없으면 골프백에 기대어 고정 — 손으로 들고 찍으면 기준선을 그을 수 없습니다</text>
+    </svg>
+    </div>
+    <figcaption>두 각도가 <b>모두</b> 필요합니다. 후방(DTL)에서만 스윙 플레인과 엉덩이 라인을 볼 수 있고, 정면(FO)에서만 로우포인트·체중·핸드 퍼스트를 볼 수 있습니다. 하나만 있으면 원인을 절반밖에 못 좁힙니다. <b>카메라 높이가 특히 중요합니다</b> — 후방을 눈높이에서 찍으면 플레인이 실제보다 가팔라 보여 없는 문제가 보이고, 있는 문제는 가려집니다.</figcaption>
+  </figure>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>항목</th><th>규격</th><th>이유</th></tr></thead>
+      <tbody>
+        <tr><td class="on">프레임레이트</td><td class="num">120 fps 이상 (가능하면 240)</td><td>임팩트 구간은 30fps로는 프레임이 아예 없습니다</td></tr>
+        <tr><td class="on">화면 구성</td><td>발끝부터 머리 위까지 + 여유 20%</td><td>클럽 전체와 손 궤적이 프레임 안에 있어야 함</td></tr>
+        <tr><td class="on">방향</td><td class="num">세로 촬영</td><td>몸 전체 + 클럽 높이가 다 들어갑니다</td></tr>
+        <tr><td class="on">클럽</td><td>7번 아이언 3스윙 + 드라이버 3스윙</td><td>두 클럽의 로우포인트 차이를 봐야 원인이 특정됩니다</td></tr>
+        <tr><td class="on">영상 개수</td><td class="num">총 4개 (7번 후방·정면, 드라이버 후방·정면)</td><td>—</td></tr>
+        <tr><td class="on">배경</td><td>기둥·창틀 같은 <b>수직선</b>이 보이면 좋음</td><td>카메라가 기울었는지 검증할 기준이 됩니다</td></tr>
+        <tr><td class="on">함께 알려줄 것</td><td>계측기 수치(있으면), 사용 클럽 스펙, 최근 미스 경향</td><td>영상만으로는 스핀·스매시를 알 수 없습니다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="nh">보내는 방법</span>
+    이 세션에서는 <b>E:\ 로컬 드라이브를 읽을 수 없습니다.</b> 대화창에 영상 파일이나 <b>임팩트·탑·다운스윙 정지 화면 캡처</b>를 직접 첨부해 주시면 됩니다. 영상 용량이 크면 각 스윙에서 <b>P1 어드레스 / P4 탑 / P6 다운스윙 / P7 임팩트</b> 네 프레임만 캡처해 보내셔도 이 리포트의 기준선을 그대로 겹쳐 판정할 수 있습니다.
+  </div>
+</section>
+
+<!-- ══════════════════ 10 ══════════════════ -->
+<section id="s10" style="border-bottom:0">
+  <div class="shead">
+    <span class="snum">10</span>
+    <h2>연습장 체크카드</h2>
+    <p class="sub">폰으로 열어두고 쓰는 요약본입니다. 이것만 지켜도 4주 프로그램의 8할은 굴러갑니다.</p>
+  </div>
+
+  <div class="card">
+    <h3>세션 체크리스트</h3>
+    <p class="csub">매 세션 시작 전 · 60분 기준</p>
+    <div class="ck">
+      <div>
+        <h4>시작 전 90초</h4>
+        <ul>
+          <li>발 스프레이 챙겼는가</li>
+          <li>오늘 고칠 것 <b>한 가지</b>를 말로 정했는가</li>
+          <li>티·수건·테이프 준비했는가</li>
+        </ul>
+      </div>
+      <div>
+        <h4>셋업 (매 샷)</h4>
+        <ul>
+          <li>볼 위치 — 7번은 스탠스 중앙</li>
+          <li>오른 어깨가 왼 어깨보다 낮은가</li>
+          <li>손이 볼보다 살짝 앞인가</li>
+          <li>체중 발 앞꿈치 쪽 50:50</li>
+        </ul>
+      </div>
+      <div>
+        <h4>스윙 중 단 하나</h4>
+        <ul>
+          <li>다운스윙에서 <b>엉덩이가 뒤에 남는다</b></li>
+          <li>임팩트에서 <b>손이 볼보다 앞</b></li>
+          <li>왼발로 <b>딛고 돌린다</b></li>
+        </ul>
+      </div>
+      <div>
+        <h4>매 10구마다 확인</h4>
+        <ul>
+          <li>페이스 자국이 몇 번 칸인가</li>
+          <li>디봇이 볼 앞에서 시작하는가</li>
+          <li>구질이 9구 중 어디인가</li>
+        </ul>
+      </div>
+      <div>
+        <h4>드라이버</h4>
+        <ul>
+          <li>볼은 왼발 뒤꿈치 안쪽</li>
+          <li>볼 절반이 크라운 위로</li>
+          <li>척추를 오른쪽으로 살짝 기울였는가</li>
+          <li>앞쪽 헤드커버를 안 쳤는가</li>
+        </ul>
+      </div>
+      <div>
+        <h4>끝내기 전</h4>
+        <ul>
+          <li>페이스 자국 사진 1장</li>
+          <li>성공률 숫자 1개 기록</li>
+          <li>다음 세션에 할 것 한 줄</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;margin:36px 0 12px">우선순위 요약</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th class="num">순서</th><th>할 것</th><th>기대 효과</th><th>참조</th></tr></thead>
+      <tbody>
+        <tr><td class="num on">1</td><td>발 스프레이로 페이스 자국 10샷 기록 → 원인 특정</td><td>모든 처방의 출발점</td><td class="num">§03</td></tr>
+        <tr><td class="num on">2</td><td>로우포인트를 볼 앞으로 (D2 · D5)</td><td>아이언 정타 · 뒤땅 제거</td><td class="num">§04 · §07</td></tr>
+        <tr><td class="num on">3</td><td>엉덩이 라인 유지 (D3)</td><td>정타 + 스피드 동시 회복</td><td class="num">§05 · §07</td></tr>
+        <tr><td class="num on">4</td><td>티 게이트로 센터 히트 고정 (D1)</td><td>드라이버 <b>+18 y</b></td><td class="num">§02 · §07</td></tr>
+        <tr><td class="num on">5</td><td>드라이버 셋업 4항목 + D6</td><td>드라이버 <b>+10 y</b></td><td class="num">§06</td></tr>
+        <tr><td class="num on">6</td><td>영상 촬영해서 실제 라인 분석 받기</td><td>남은 원인 정밀 특정</td><td class="num">§09</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="keybox">
+    <span class="nh">한 문장으로</span>
+    <p>드라이버가 안 나가는 이유와 아이언 정타가 안 나는 이유는 같습니다 — <span style="color:var(--accent)">클럽헤드가 매번 다른 자리에서 바닥을 치기 때문</span>. 그 자리를 볼 앞으로 고정하는 것이 4주간의 전부입니다.</p>
+  </div>
+</section>
+
+<footer>
+  <p class="fmono">SWING DIAGNOSIS · 정타 회복 진단서</p>
+  <p style="margin-top:8px">스코어 80~85 · 드라이버 평균 215 · 아이언 정타 불량이라는 조건에서 작성했습니다. 수치(스매시 팩터, 어택 앵글, 캐리 추정치)는 해당 조건의 일반적인 범위에서 역산한 값이며, 실제 계측기 데이터가 있으면 그 값으로 대체해 읽으세요. 도해의 각도와 깊이는 이해를 돕기 위해 실제보다 과장된 부분이 있습니다.</p>
+  <p style="margin-top:8px"><b style="color:var(--ink-2)">이 리포트는 실제 스윙 영상 없이 작성되었습니다.</b> §09 규격대로 촬영한 영상이나 네 개의 정지 프레임을 보내주시면, 그 위에 기준선을 직접 겹쳐 원인을 특정하고 이 문서를 갱신하겠습니다.</p>
+</footer>
+
+</div>
