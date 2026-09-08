@@ -473,7 +473,10 @@
   }
 
   @media print {
-    @page { size: A4 landscape; margin: 8mm; }
+    /* 본문은 세로, 판정 흐름도 한 장만 가로 */
+    @page { size: A4 portrait; margin: 11mm 10mm; }
+    @page wide { size: A4 landscape; margin: 8mm; }
+    .masthead, figure { page: wide; }
     :root {
       --paper: #FFFFFF; --surface: #FFFFFF; --ink: #1C2320; --ink-2: #46534D;
       --ink-3: #75837C; --rule: #E3E0D7; --jade: #2A6350; --jade-soft: #E7F0EB;
@@ -482,14 +485,29 @@
       --focus-fill: #A32E24; --focus-text: #FDF3EC; --focus-ring: #E6C983; --shadow: none;
     }
     body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .controls, footer { display: none; }
+    .controls { display: none; }
     .page { padding: 0; gap: 10px; max-width: none; }
-    figure, .block { border-radius: 0; border: 0; padding-inline: 0; break-inside: avoid; }
+    figure, .block { border-radius: 0; border: 0; padding-inline: 0; box-shadow: none; }
     #stage { padding: 0; overflow: visible; }
     #stage svg { width: 100% !important; min-width: 0 !important; }
-    .points { break-inside: avoid; }
+    .tablewrap { overflow: visible; }
+    table.sched, table.verdict { min-width: 0; font-size: 13px; }
+    table.sched th, table.sched td { padding: 6px 8px; }
+    table.sched td:last-child, table.verdict td:last-child { font-size: 12px; }
+    table.verdict td.v { font-size: 12.5px; }
+    thead { display: table-header-group; }
+    tr, .point, .ref, .figfoot { break-inside: avoid; }
+
+    .points { grid-template-columns: repeat(2, 1fr); }
+    .point h3 { font-size: 15.5px; }
+    .point p { font-size: 13px; }
+    .intake { grid-template-columns: repeat(3, 1fr); }
+    .block > h2 { font-size: 21px; }
+    .block > .lede { font-size: 13.5px; margin-bottom: 12px; }
+
+    /* 섹션마다 새 페이지 — 표가 헤더와 갈라지지 않도록 */
     .block { break-before: page; }
-    figure + .block { break-before: auto; }
+    footer { margin-top: 14px; break-inside: avoid; }
   }
 </style>
 

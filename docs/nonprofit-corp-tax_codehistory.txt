@@ -56,6 +56,61 @@ docs/nonprofit-corp-tax.html — 작업 이력
   - 개별 법인의 판정 결과·수임 내역은 이 저장소에 커밋하지 말 것.
     저장소를 Private으로 전환한 뒤에야 개별 건 메모를 올릴 수 있다.
 
+--------------------------------------------------------------------------------
+[작업일자] 2026-09-08 (2차) — PDF · 워드 산출
+
+[작업요약]
+  1. 인쇄 CSS 수정
+     - 기존: A4 가로 전체 + footer(면책 문구)가 인쇄에서 숨겨짐 → 10페이지, 표가 계속 잘림
+     - 변경: 본문은 A4 세로, 판정 흐름도 한 장만 가로(CSS named page 사용)
+         @page { size: A4 portrait; margin: 11mm 10mm; }
+         @page wide { size: A4 landscape; margin: 8mm; }
+         .masthead, figure { page: wide; }
+       → 6페이지(p1 가로 = 표제+도표, p2~6 세로)
+     - footer를 인쇄에 다시 노출(면책 문구는 인쇄물에 있어야 함)
+     - 인쇄용 표 글자 13px, 카드 2단, 체크리스트 3단으로 축소
+     - thead { display: table-header-group } — 표가 페이지 넘어가도 머리행 반복
+  2. PDF 생성 (컨테이너 내장 Chromium)
+  3. 워드(.docx) 생성 — docx-js. 도표는 PNG로 넣음(SVG는 워드가 못 읽음).
+
+[사용코드]
+  # (1) 도표만 PNG로 추출 — .page의 max-width 때문에 잘리므로 반드시 풀어줄 것
+  #     별도 래퍼 HTML을 만들어 masthead/block/figfoot 숨기고 .page{max-width:none;width:1800px}
+  BIN=/opt/pw-browsers/chromium-1194/chrome-linux/chrome
+  "$BIN" --headless --disable-gpu --no-sandbox --hide-scrollbars \
+    --force-device-scale-factor=2 --window-size=1800,812 \
+    --screenshot=diagram.png --virtual-time-budget=5000 "file://.../np-diagram.html"
+  # → 3600 x 1624 (2배 해상도)
+
+  # (2) PDF
+  "$BIN" --headless --disable-gpu --no-sandbox --no-pdf-header-footer \
+    --print-to-pdf="비영리 사단법인 세무 실무 노트.pdf" --virtual-time-budget=8000 \
+    "file:///home/user/claude/docs/nonprofit-corp-tax.html"
+
+  # (3) 워드
+  npm install docx && node build-docx.js
+  #   A4 가로 섹션(표제+도표) + A4 세로 섹션(본문) 2섹션 구조
+  #   표는 columnWidths 합 = 표 width = 9638 DXA 로 맞출 것 (안 맞으면 워드에서 깨짐)
+  #   음영은 ShadingType.CLEAR (SOLID 쓰면 검게 나옴)
+  #   글꼴 '맑은 고딕'
+
+  # (4) 인쇄 레이아웃 미리보기 — @media print 를 @media all 로 바꿔 폭 고정 후 캡처
+  #     세로 본문 폭 = 210mm - 20mm ≈ 718px
+
+[검증]
+  - PDF : 6페이지, MediaBox로 p1 가로 / p2~6 세로 확인 (pymupdf로 판독)
+  - DOCX: 이 컨테이너의 LibreOffice에는 Writer 모듈이 없어(soffice는 코어+pdfimport만)
+          docx → pdf 변환이 불가능 → 렌더링 육안 확인은 못 함.
+          대신 zip/XML 구조를 직접 파싱해 검증:
+            섹션 2개(16838x11906 가로 / 11906x16838 세로), 표 2개(13x4, 17x3,
+            열너비합 9638), 이미지 1개, 페이지나눔 3개, 문단 75개, 본문 4,699자,
+            핵심 문구 10건 전수 존재 확인.
+          → 워드에서 처음 열 때 도표 위치와 표 열폭은 한 번 눈으로 볼 것.
+
+[산출물 위치]
+  PDF·DOCX는 저장소에 커밋하지 않음. HTML이 원본이고 위 명령으로 언제든 재생성 가능하며,
+  공개 저장소에 1.3MB 바이너리를 넣을 이유가 없다. 필요하면 Dropbox 쪽에 보관.
+
 [다음단계]
   1. 저장소 Public → Private 전환 여부 결정. (전환 전까지 개별 법인 정보 커밋 금지)
   2. 수임 법인의 주무관청 확인 → 해당 부처 「비영리법인의 설립 및 감독에 관한 규칙」에서
