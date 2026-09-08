@@ -1,0 +1,1030 @@
+<title>비영리 사단법인 세무 실무 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --paper:      #FAF8F3;
+    --surface:    #FFFFFF;
+    --ink:        #1C2320;
+    --ink-2:      #46534D;
+    --ink-3:      #75837C;
+    --rule:       #E3E0D7;
+
+    --jade:       #2A6350;
+    --jade-soft:  #E7F0EB;
+    --jade-line:  #AFCCBF;
+    --on-jade:    #FAF8F3;
+
+    --clay:       #A85F2B;
+    --clay-soft:  #FAEEE2;
+    --clay-line:  #E2C09C;
+    --on-clay:    #FFFFFF;
+
+    --seal:       #A8382E;
+    --gold:       #B8901F;
+
+    --focus-fill: #A32E24;
+    --focus-text: #FDF3EC;
+    --focus-ring: #E6C983;
+
+    --shadow:     0 1px 2px rgba(28,35,32,.05), 0 14px 34px -20px rgba(28,35,32,.3);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #131816;
+      --surface:    #1A211E;
+      --ink:        #EDEAE2;
+      --ink-2:      #B2BDB7;
+      --ink-3:      #869189;
+      --rule:       #2D3835;
+
+      --jade:       #86C6AB;
+      --jade-soft:  #1C2D26;
+      --jade-line:  #38584B;
+      --on-jade:    #101614;
+
+      --clay:       #E3A876;
+      --clay-soft:  #2D211A;
+      --clay-line:  #5A4331;
+      --on-clay:    #22180F;
+
+      --seal:       #E0796A;
+      --gold:       #DCBC66;
+
+      --focus-fill: #AB362C;
+      --focus-text: #FDF3EC;
+      --focus-ring: #EBD09A;
+
+      --shadow:     0 1px 2px rgba(0,0,0,.3), 0 14px 34px -20px rgba(0,0,0,.75);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #131816;
+    --surface:    #1A211E;
+    --ink:        #EDEAE2;
+    --ink-2:      #B2BDB7;
+    --ink-3:      #869189;
+    --rule:       #2D3835;
+
+    --jade:       #86C6AB;
+    --jade-soft:  #1C2D26;
+    --jade-line:  #38584B;
+    --on-jade:    #101614;
+
+    --clay:       #E3A876;
+    --clay-soft:  #2D211A;
+    --clay-line:  #5A4331;
+    --on-clay:    #22180F;
+
+    --seal:       #E0796A;
+    --gold:       #DCBC66;
+
+    --focus-fill: #AB362C;
+    --focus-text: #FDF3EC;
+    --focus-ring: #EBD09A;
+
+    --shadow:     0 1px 2px rgba(0,0,0,.3), 0 14px 34px -20px rgba(0,0,0,.75);
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans KR', system-ui, -apple-system, 'Malgun Gothic', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1720px;
+    margin: 0 auto;
+    padding: 26px 20px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ---------- header ---------- */
+
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px 32px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .titles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 18px; }
+
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    color: var(--seal);
+  }
+
+  h1 {
+    font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
+    font-weight: 700;
+    font-size: clamp(28px, 2.6vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+
+  .scope {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-2);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 3px 11px;
+    white-space: nowrap;
+  }
+
+  .standfirst {
+    font-size: 17px;
+    color: var(--ink-2);
+    margin: 0;
+    max-width: 92ch;
+  }
+
+  .standfirst b {
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: inset 0 -.45em 0 color-mix(in srgb, var(--gold) 32%, transparent);
+  }
+
+  /* ---------- controls ---------- */
+
+  .controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  .ctl-label { font-size: 13px; color: var(--ink-3); letter-spacing: .04em; }
+
+  .segmented {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+
+  .segmented button,
+  .plain-btn {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-2);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: background-color .16s ease, color .16s ease;
+  }
+
+  .segmented button:hover,
+  .plain-btn:hover { color: var(--ink); background: color-mix(in srgb, var(--jade) 10%, transparent); }
+
+  .segmented button[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+  }
+
+  .plain-btn { border: 1px solid var(--rule); background: var(--surface); }
+
+  .segmented button:focus-visible,
+  .plain-btn:focus-visible { outline: 2px solid var(--seal); outline-offset: 2px; }
+
+  /* ---------- figure ---------- */
+
+  figure {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  #stage { overflow-x: auto; padding: 16px 18px 8px; }
+
+  #stage svg {
+    display: block;
+    width: calc(100% * var(--zoom, 1));
+    min-width: calc(100% * var(--zoom, 1));
+    height: auto;
+  }
+
+  .figfoot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 28px;
+    border-top: 1px solid var(--rule);
+    margin: 6px 18px 0;
+    padding: 14px 0 16px;
+  }
+
+  figcaption { font-size: 15px; color: var(--ink-2); max-width: 78ch; margin: 0; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    font-size: 15.5px;
+    color: var(--ink-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .legend li { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+
+  .swatch { width: 24px; height: 13px; border-radius: 4px; flex: none; }
+  .sw-jade { background: var(--jade-soft); border: 1.5px solid var(--jade-line); }
+  .sw-clay { background: var(--clay-soft); border: 1.5px solid var(--clay-line); }
+  .sw-key  { background: var(--jade); border: 1.5px solid var(--jade); }
+  .sw-seal { height: 0; border-top: 2.5px solid var(--seal); border-radius: 0; }
+
+  /* ---------- section blocks ---------- */
+
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 20px 22px 22px;
+  }
+
+  .block > h2 {
+    font-family: 'Gowun Batang', 'Nanum Myeongjo', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: -.01em;
+  }
+
+  .block > .lede { font-size: 15px; color: var(--ink-2); margin: 0 0 16px; max-width: 84ch; }
+
+  /* ---------- schedule table ---------- */
+
+  .tablewrap { overflow-x: auto; }
+
+  table.sched {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    min-width: 640px;
+  }
+
+  table.sched th,
+  table.sched td {
+    text-align: left;
+    vertical-align: top;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  table.sched thead th {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--ink-3);
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 7px;
+  }
+
+  table.sched td:first-child {
+    white-space: nowrap;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    width: 1%;
+  }
+
+  table.sched td:last-child { color: var(--ink-2); font-size: 14px; }
+
+  tr.key td { background: color-mix(in srgb, var(--gold) 11%, transparent); }
+  tr.key td:first-child { color: var(--seal); }
+  tr.key td:nth-child(2) { font-weight: 600; }
+
+  tr.muted td { color: var(--ink-3); }
+  tr.muted td:first-child { font-weight: 500; }
+
+  /* ---------- verdict table ---------- */
+
+  table.verdict { min-width: 720px; }
+
+  table.verdict td:first-child { width: auto; white-space: normal; }
+
+  table.verdict td.v {
+    white-space: nowrap;
+    font-weight: 700;
+    font-size: 14px;
+    width: 1%;
+  }
+
+  .v-in  { color: var(--seal); }
+  .v-out { color: var(--jade); }
+  .v-chk { color: var(--clay); }
+  .v-na  { color: var(--ink-3); font-weight: 500 !important; }
+
+  table.verdict td:last-child { font-size: 13.5px; }
+
+  .verdict-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    font-size: 13.5px;
+    color: var(--ink-2);
+  }
+  .verdict-key b { font-weight: 700; }
+
+  .tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    border-radius: 999px;
+    padding: 1px 8px;
+    margin-right: 6px;
+    vertical-align: 1.5px;
+  }
+  .tag-a { background: var(--jade-soft); color: var(--jade); border: 1px solid var(--jade-line); }
+  .tag-b { background: var(--clay-soft); color: var(--clay); border: 1px solid var(--clay-line); }
+
+  /* ---------- talking points ---------- */
+
+  .points {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .point {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    border-top: 3px solid var(--seal);
+    padding: 15px 18px 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    break-inside: avoid;
+  }
+
+  .point h3 { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.35; text-wrap: balance; }
+  .point p { margin: 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
+  .point .cite { font-size: 12.5px; color: var(--ink-3); letter-spacing: .01em; }
+
+  /* ---------- references ---------- */
+
+  .refs { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+
+  .ref {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 4px 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+    break-inside: avoid;
+  }
+  .ref:last-child { border-bottom: 0; padding-bottom: 0; }
+
+  .ref .num {
+    font-family: 'Gowun Batang', serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--seal);
+    line-height: 1.3;
+  }
+  .ref .name { font-size: 17px; font-weight: 600; margin: 0; }
+  .ref .meta { grid-column: 2; font-size: 13.5px; color: var(--ink-3); margin: 0; }
+  .ref .why  { grid-column: 2; font-size: 14.5px; color: var(--ink-2); margin: 2px 0 0; }
+
+  .pill-free {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--jade);
+    background: var(--jade-soft);
+    border: 1px solid var(--jade-line);
+    border-radius: 999px;
+    padding: 1px 8px;
+    margin-left: 6px;
+    vertical-align: 2px;
+  }
+
+  /* ---------- intake list ---------- */
+
+  .intake {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 8px 22px;
+  }
+
+  .intake li {
+    font-size: 15px;
+    color: var(--ink-2);
+    padding-left: 26px;
+    position: relative;
+  }
+
+  .intake li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--ink-3);
+    border-radius: 3px;
+  }
+
+  .intake li b { color: var(--ink); font-weight: 600; }
+
+  footer { font-size: 13px; color: var(--ink-3); max-width: 92ch; }
+
+  @media (max-width: 760px) {
+    .page { padding: 20px 14px 40px; }
+    #stage { padding: 12px 12px 4px; }
+    .figfoot { margin-inline: 12px; }
+    .block { padding: 16px 15px 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  @media print {
+    @page { size: A4 landscape; margin: 8mm; }
+    :root {
+      --paper: #FFFFFF; --surface: #FFFFFF; --ink: #1C2320; --ink-2: #46534D;
+      --ink-3: #75837C; --rule: #E3E0D7; --jade: #2A6350; --jade-soft: #E7F0EB;
+      --jade-line: #AFCCBF; --on-jade: #FFFFFF; --clay: #A85F2B; --clay-soft: #FAEEE2;
+      --clay-line: #E2C09C; --on-clay: #FFFFFF; --seal: #A8382E; --gold: #B8901F;
+      --focus-fill: #A32E24; --focus-text: #FDF3EC; --focus-ring: #E6C983; --shadow: none;
+    }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .controls, footer { display: none; }
+    .page { padding: 0; gap: 10px; max-width: none; }
+    figure, .block { border-radius: 0; border: 0; padding-inline: 0; break-inside: avoid; }
+    #stage { padding: 0; overflow: visible; }
+    #stage svg { width: 100% !important; min-width: 0 !important; }
+    .points { break-inside: avoid; }
+    .block { break-before: page; }
+    figure + .block { break-before: auto; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <div>
+      <div class="titles">
+        <span class="eyebrow">실무 노트</span>
+        <h1>비영리 사단법인 세무</h1>
+        <span class="scope">학술단체 · 12월 결산 기준</span>
+      </div>
+      <p class="standfirst">
+        학술단체에서 가장 많이 어긋나는 지점은 <b>부가세 면세와 법인세 비수익사업을 같은 것으로 아는 것</b>입니다.
+        학술대회 참가비는 부가세는 면세여도 법인세에서는 수익사업입니다.
+        여기에 법인세 트랙과 공익법인 트랙이 서로 다른 법에서 나오는 별개의 의무로 얹힙니다.
+      </p>
+    </div>
+
+    <div class="controls">
+      <span class="ctl-label">글자 크기</span>
+      <div class="segmented" role="group" aria-label="글자 크기">
+        <button type="button" data-zoom="1" aria-pressed="true">기본</button>
+        <button type="button" data-zoom="1.3" aria-pressed="false">크게</button>
+        <button type="button" data-zoom="1.6" aria-pressed="false">아주 크게</button>
+      </div>
+      <button type="button" class="plain-btn" id="printBtn">인쇄</button>
+    </div>
+  </header>
+
+  <figure>
+    <div id="stage">
+      <svg viewBox="0 0 1760 780" role="img"
+           aria-label="비영리 사단법인 세무 판정 흐름도. 법인은 법인세 트랙과 공익법인 트랙 두 갈래로 각각 별도 판정합니다. 법인세 트랙은 수익사업 유무에 따라 신고의무 없음, 이자·배당소득만 있는 경우의 분리과세 선택, 수익사업이 있는 경우의 사업자등록과 구분경리 및 3월 31일 법인세 신고로 갈라집니다. 공익법인 트랙은 전용계좌 개설 신고, 4월 30일 네 가지 보고, 6월 30일 기부금영수증 발급명세서 제출로 이어집니다."
+           font-family="'IBM Plex Sans KR', system-ui, 'Malgun Gothic', sans-serif">
+
+        <defs>
+          <marker id="np-jade" viewBox="0 0 12 12" refX="10" refY="6"
+                  markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+            <path d="M1 1 L11 6 L1 11 z" fill="var(--jade)"></path>
+          </marker>
+          <marker id="np-clay" viewBox="0 0 12 12" refX="10" refY="6"
+                  markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+            <path d="M1 1 L11 6 L1 11 z" fill="var(--clay)"></path>
+          </marker>
+          <marker id="np-seal" viewBox="0 0 12 12" refX="10" refY="6"
+                  markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+            <path d="M1 1 L11 6 L1 11 z" fill="var(--seal)"></path>
+          </marker>
+        </defs>
+
+        <!-- ===== 레인 배경 ===== -->
+
+        <rect x="278" y="30" width="1452" height="390" rx="18"
+              fill="var(--jade-soft)" stroke="var(--jade-line)" stroke-width="1.5" stroke-dasharray="7 6"></rect>
+        <text x="300" y="58" font-size="14.5" font-weight="700" fill="var(--jade)" letter-spacing="0.06em">트랙 1 — 법인세 · 법인세법</text>
+
+        <rect x="278" y="440" width="1452" height="310" rx="18"
+              fill="var(--clay-soft)" stroke="var(--clay-line)" stroke-width="1.5" stroke-dasharray="7 6"></rect>
+        <text x="300" y="470" font-size="14.5" font-weight="700" fill="var(--clay)" letter-spacing="0.06em">트랙 2 — 공익법인 · 상속세및증여세법</text>
+
+        <!-- ===== 시작 노드 ===== -->
+
+        <rect x="24" y="330" width="210" height="140" rx="14" fill="var(--focus-fill)"></rect>
+        <text x="129" y="384" text-anchor="middle" font-size="19" font-weight="700" fill="var(--focus-text)">비영리 사단법인</text>
+        <text x="129" y="410" text-anchor="middle" font-size="13.5" fill="var(--focus-ring)">설립허가 · 고유번호증</text>
+        <text x="129" y="432" text-anchor="middle" font-size="13.5" fill="var(--focus-ring)">정관 · 회칙 먼저 확인</text>
+        <text x="129" y="498" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--seal)">두 트랙은 각각 판정</text>
+
+        <!-- 시작 → 각 트랙 -->
+        <path d="M234,400 H262 V224 H292" fill="none" stroke="var(--seal)" stroke-width="2.5" marker-end="url(#np-seal)"></path>
+        <path d="M234,400 H262 V630 H292" fill="none" stroke="var(--seal)" stroke-width="2.5" marker-end="url(#np-seal)"></path>
+
+        <!-- ===== 트랙 1 : 분기 ===== -->
+
+        <rect x="306" y="154" width="196" height="140" rx="12"
+              fill="var(--surface)" stroke="var(--jade)" stroke-width="2"></rect>
+        <text x="404" y="200" text-anchor="middle" font-size="17.5" font-weight="700" fill="var(--ink)">수익사업이</text>
+        <text x="404" y="224" text-anchor="middle" font-size="17.5" font-weight="700" fill="var(--ink)">있는가?</text>
+        <text x="404" y="252" text-anchor="middle" font-size="13" fill="var(--ink-3)">법 §4③ · 영 §3</text>
+
+        <path d="M502,224 H531 V118 H552" fill="none" stroke="var(--jade)" stroke-width="2.2" marker-end="url(#np-jade)"></path>
+        <path d="M502,224 H552" fill="none" stroke="var(--jade)" stroke-width="2.2" marker-end="url(#np-jade)"></path>
+        <path d="M502,224 H531 V346 H552" fill="none" stroke="var(--jade)" stroke-width="2.2" marker-end="url(#np-jade)"></path>
+
+        <!-- 갈래 1 : 수익사업 없음 -->
+        <text x="560" y="70" font-size="13.5" font-weight="700" fill="var(--jade)">수익사업 없음</text>
+        <rect x="560" y="80" width="340" height="76" rx="11"
+              fill="var(--surface)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+        <text x="580" y="110" font-size="17" font-weight="600" fill="var(--ink)">법인세 신고의무 없음</text>
+        <text x="580" y="134" font-size="13.5" fill="var(--ink-2)">회비 · 기부금 · 보조금만 있는 경우</text>
+
+        <!-- 갈래 2 : 이자·배당소득만 -->
+        <text x="560" y="176" font-size="13.5" font-weight="700" fill="var(--jade)">이자 · 배당소득만</text>
+        <rect x="560" y="186" width="340" height="76" rx="11"
+              fill="var(--surface)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+        <text x="580" y="216" font-size="17" font-weight="600" fill="var(--ink)">분리과세 선택 (법 §62)</text>
+        <text x="580" y="240" font-size="13.5" fill="var(--ink-2)">원천징수로 종결 · 신고 생략 가능</text>
+
+        <!-- 갈래 3 : 수익사업 있음 -->
+        <text x="560" y="286" font-size="13.5" font-weight="700" fill="var(--jade)">수익사업 있음</text>
+
+        <rect x="560" y="296" width="272" height="100" rx="11"
+              fill="var(--surface)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+        <text x="580" y="326" font-size="17" font-weight="600" fill="var(--ink)">사업자등록 20일 이내</text>
+        <text x="580" y="349" font-size="13.5" fill="var(--ink-2)">수익사업 개시신고 2개월 이내</text>
+        <text x="580" y="371" font-size="12.5" fill="var(--ink-3)">별지 제75호의4 서식</text>
+
+        <path d="M832,346 H852" fill="none" stroke="var(--jade)" stroke-width="2.2" marker-end="url(#np-jade)"></path>
+
+        <rect x="860" y="296" width="236" height="100" rx="11"
+              fill="var(--surface)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+        <text x="880" y="326" font-size="17" font-weight="600" fill="var(--ink)">구분경리 (법 §113)</text>
+        <text x="880" y="349" font-size="13.5" fill="var(--ink-2)">수익 · 비수익 분리 기장</text>
+        <text x="880" y="371" font-size="13.5" fill="var(--ink-2)">공통손익은 수입금액 안분</text>
+
+        <path d="M1096,346 H1116" fill="none" stroke="var(--jade)" stroke-width="2.2" marker-end="url(#np-jade)"></path>
+
+        <rect x="1124" y="296" width="248" height="100" rx="11" fill="var(--jade)"></rect>
+        <text x="1144" y="328" font-size="19" font-weight="700" fill="var(--on-jade)">3.31 법인세 신고</text>
+        <text x="1144" y="352" font-size="13.5" fill="var(--on-jade)" opacity="0.9">지방소득세 4.30까지</text>
+        <text x="1144" y="374" font-size="13.5" fill="var(--on-jade)" opacity="0.9">중간예납 8.31</text>
+
+        <path d="M1372,346 H1392" fill="none" stroke="var(--jade)" stroke-width="2.2" marker-end="url(#np-jade)"></path>
+
+        <rect x="1400" y="296" width="300" height="100" rx="11"
+              fill="var(--surface)" stroke="var(--jade-line)" stroke-width="1.5"></rect>
+        <text x="1420" y="326" font-size="15.5" font-weight="600" fill="var(--ink)">고유목적사업준비금 (법 §29)</text>
+        <text x="1420" y="349" font-size="13.5" fill="var(--ink-2)">이자 · 배당 100% · 그 외 50%</text>
+        <text x="1420" y="371" font-size="13.5" fill="var(--seal)">5년 내 미사용분 익금환입</text>
+
+        <!-- ===== 트랙 2 : 분기 ===== -->
+
+        <rect x="306" y="560" width="196" height="140" rx="12"
+              fill="var(--surface)" stroke="var(--clay)" stroke-width="2"></rect>
+        <text x="404" y="606" text-anchor="middle" font-size="17.5" font-weight="700" fill="var(--ink)">공익사업을</text>
+        <text x="404" y="630" text-anchor="middle" font-size="17.5" font-weight="700" fill="var(--ink)">하는가?</text>
+        <text x="404" y="658" text-anchor="middle" font-size="13" fill="var(--ink-3)">상증령 §12</text>
+
+        <path d="M502,630 H552" fill="none" stroke="var(--clay)" stroke-width="2.2" marker-end="url(#np-clay)"></path>
+
+        <text x="560" y="550" font-size="13.5" font-weight="700" fill="var(--clay)">해당 — 학술 · 장학 · 사회복지 · 의료 등</text>
+
+        <rect x="560" y="560" width="300" height="140" rx="11"
+              fill="var(--surface)" stroke="var(--clay-line)" stroke-width="1.5"></rect>
+        <text x="580" y="606" font-size="17" font-weight="600" fill="var(--ink)">전용계좌 개설 · 신고</text>
+        <text x="580" y="632" font-size="13.5" fill="var(--ink-2)">상증법 §50조의2</text>
+        <text x="580" y="656" font-size="13.5" fill="var(--seal)">미개설 · 미사용 시 가산세</text>
+
+        <path d="M860,630 H880" fill="none" stroke="var(--clay)" stroke-width="2.2" marker-end="url(#np-clay)"></path>
+
+        <rect x="888" y="560" width="440" height="140" rx="11" fill="var(--clay)"></rect>
+        <text x="910" y="602" font-size="19" font-weight="700" fill="var(--on-clay)">4.30 — 네 가지가 한꺼번에</text>
+        <text x="910" y="632" font-size="14.5" fill="var(--on-clay)" opacity="0.95">출연재산 등 보고서 · 결산서류 등 공시</text>
+        <text x="910" y="658" font-size="14.5" fill="var(--on-clay)" opacity="0.95">외부전문가 세무확인 · 의무이행 여부 보고</text>
+        <text x="910" y="681" font-size="12.5" fill="var(--on-clay)" opacity="0.8">세무확인 대상 : 총자산 5억 이상 또는 수입금액＋출연재산 3억 이상</text>
+
+        <path d="M1328,630 H1348" fill="none" stroke="var(--clay)" stroke-width="2.2" marker-end="url(#np-clay)"></path>
+
+        <rect x="1356" y="560" width="344" height="140" rx="11"
+              fill="var(--surface)" stroke="var(--clay-line)" stroke-width="1.5"></rect>
+        <text x="1376" y="606" font-size="16.5" font-weight="600" fill="var(--ink)">6.30 기부금영수증</text>
+        <text x="1376" y="630" font-size="16.5" font-weight="600" fill="var(--ink)">발급명세서 제출</text>
+        <text x="1376" y="656" font-size="13.5" fill="var(--ink-2)">발급명세 5년 보관 · 전자발급분 제외</text>
+        <text x="1376" y="678" font-size="13" fill="var(--ink-3)">법인세법 §112조의2</text>
+
+      </svg>
+    </div>
+
+    <div class="figfoot">
+      <figcaption>
+        출발점은 <strong>수입 항목별 대가성</strong>입니다. 순수 회비 · 기부금 · 보조금은 수익사업이 아니지만,
+        학술대회 참가비 · 게재료 · 광고료처럼 <strong>대가가 오가는 수입</strong>은 수익사업입니다.
+        학술단체는 이 항목들이 거의 항상 있으므로 실무상 <strong>수익사업 있음</strong> 갈래로 갑니다.
+        두 트랙은 서로 독립이라, 공익법인이면 4월 의무가 별도로 남습니다.
+      </figcaption>
+
+      <ul class="legend">
+        <li><span class="swatch sw-jade"></span>법인세 트랙</li>
+        <li><span class="swatch sw-clay"></span>공익법인 트랙</li>
+        <li><span class="swatch sw-key"></span>핵심 기한</li>
+        <li><span class="swatch sw-seal"></span>별도 판정</li>
+      </ul>
+    </div>
+  </figure>
+
+  <section class="block">
+    <h2>수입 항목별 판정</h2>
+    <p class="lede">
+      학술단체 실무의 8할이 이 표입니다. <strong>법인세와 부가세는 판정 기준이 다릅니다</strong> —
+      부가세 면세는 &ldquo;학술 연구와 관련하여 실비 또는 무상으로 공급하는가&rdquo;를 보고,
+      법인세 수익사업은 &ldquo;대가관계가 있는 계속·반복적 사업인가&rdquo;를 봅니다.
+      그래서 <strong>면세이면서 동시에 수익사업</strong>인 항목이 대부분입니다.
+    </p>
+
+    <div class="tablewrap">
+      <table class="sched verdict">
+        <thead>
+          <tr><th>수입 항목</th><th>법인세</th><th>부가세</th><th>메모</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>정회원 · 단체회원 회비 <span style="color:var(--ink-3);font-size:13.5px">(반대급부 없음)</span></td>
+            <td class="v v-out">비수익</td>
+            <td class="v v-na">해당 없음</td>
+            <td>정관 · 회칙에 회비 대가로 주는 것이 적혀 있는지 확인</td>
+          </tr>
+          <tr>
+            <td>회비인데 학술지 제공 · 학술대회 무료참가 등 <strong>급부가 붙는 경우</strong></td>
+            <td class="v v-chk">대가성 검토</td>
+            <td class="v v-chk">검토</td>
+            <td>급부의 가치가 회비에 가까울수록 수익사업에 근접</td>
+          </tr>
+          <tr class="key">
+            <td>학술대회 · 세미나 <strong>참가비 · 등록비</strong></td>
+            <td class="v v-in">수익사업</td>
+            <td class="v v-out">면세</td>
+            <td>주무관청 허가 법인이 실비 수준으로 받을 때 면세. 법인격 없는 임의단체는 과세</td>
+          </tr>
+          <tr>
+            <td>학술지 <strong>게재료 · 심사료</strong></td>
+            <td class="v v-in">수익사업</td>
+            <td class="v v-out">면세</td>
+            <td>실비 요건 충족 전제</td>
+          </tr>
+          <tr>
+            <td>학술지 <strong>광고료</strong></td>
+            <td class="v v-in">수익사업</td>
+            <td class="v v-out">면세</td>
+            <td>비영리 출판물에 게재하는 광고</td>
+          </tr>
+          <tr class="key">
+            <td>학술대회 <strong>부스 임대료 · 전시 참가비</strong></td>
+            <td class="v v-in">수익사업</td>
+            <td class="v v-in">과세</td>
+            <td>연구 관련성 · 실비 요건을 벗어나므로 <strong>부가세까지 붙습니다</strong>. 세금계산서 발급 필요</td>
+          </tr>
+          <tr class="key">
+            <td><strong>수탁 연구용역</strong> (부처 · 공공기관 발주)</td>
+            <td class="v v-in">수익사업</td>
+            <td class="v v-chk">검토</td>
+            <td><strong>계약서 형태로 판정합니다.</strong> 용역계약이면 대가관계 있음 → 수익사업</td>
+          </tr>
+          <tr class="key">
+            <td><strong>국고보조금 · 지자체 보조금</strong></td>
+            <td class="v v-out">비수익</td>
+            <td class="v v-na">해당 없음</td>
+            <td>교부결정 통지 방식. 위 수탁용역과 <strong>반드시 구분</strong></td>
+          </tr>
+          <tr>
+            <td>기부금 · 후원금 <span style="color:var(--ink-3);font-size:13.5px">(반대급부 없음)</span></td>
+            <td class="v v-out">비수익</td>
+            <td class="v v-na">해당 없음</td>
+            <td>지정 공익법인이면 기부금영수증 발급 → 6.30 명세서 제출로 연결</td>
+          </tr>
+          <tr>
+            <td>단행본 · 연구보고서 판매</td>
+            <td class="v v-in">수익사업</td>
+            <td class="v v-chk">검토</td>
+            <td>실비 초과 여부로 갈림</td>
+          </tr>
+          <tr>
+            <td>예치금 · 정기예금 <strong>이자</strong></td>
+            <td class="v v-in">수익사업</td>
+            <td class="v v-na">해당 없음</td>
+            <td>고유목적사업준비금 <strong>100% 설정</strong> 가능 → 실질 세부담 없음</td>
+          </tr>
+          <tr>
+            <td>사무실 임대 · 강의실 대관</td>
+            <td class="v v-in">수익사업</td>
+            <td class="v v-in">과세</td>
+            <td>부수적이어도 계속 · 반복이면 수익사업</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="verdict-key">
+      <li><b class="v-out">비수익</b> 법인세 과세 대상 아님</li>
+      <li><b class="v-in">수익사업 · 과세</b> 신고 · 납부 대상</li>
+      <li><b class="v-chk">검토</b> 계약 형태 · 실비 여부로 갈림</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h2>연간 세무일정</h2>
+    <p class="lede">
+      12월 결산 기준입니다. <span class="tag tag-a">법인세</span>는 수익사업이 있을 때,
+      <span class="tag tag-b">공익법인</span>은 상증법상 공익법인일 때만 해당합니다.
+      부가세 · 원천세는 해당 사업이 있을 때만 걸립니다.
+    </p>
+
+    <div class="tablewrap">
+      <table class="sched">
+        <thead>
+          <tr><th>시기</th><th>항목</th><th>근거 · 비고</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>매월 10일</td>
+            <td>원천세 신고 · 납부</td>
+            <td>발표 사례비 · 원고료 · 심사료는 기타소득(필요경비 60% 의제). 반기납 승인 시 1.10 · 7.10</td>
+          </tr>
+          <tr>
+            <td>1.25</td>
+            <td>부가가치세 2기 확정신고</td>
+            <td>과세 수익사업이 있을 때만</td>
+          </tr>
+          <tr>
+            <td>2.10</td>
+            <td>사업장현황신고</td>
+            <td>면세사업만 있는 경우. 부스 임대 등 과세분이 있으면 부가세 신고로 넘어감</td>
+          </tr>
+          <tr class="key">
+            <td>2월 말</td>
+            <td>이자 · 배당 · <strong>기타소득 지급명세서</strong></td>
+            <td>학술단체 원천징수의 주력. 연말정산은 2월분 급여 지급 시</td>
+          </tr>
+          <tr>
+            <td>3.10</td>
+            <td>근로 · 퇴직 · 사업소득 지급명세서</td>
+            <td></td>
+          </tr>
+          <tr class="key">
+            <td>3.31</td>
+            <td><span class="tag tag-a">법인세</span>법인세 신고 · 납부</td>
+            <td>사업연도 종료일부터 3개월. 이자소득만 있고 분리과세를 택하면 생략</td>
+          </tr>
+          <tr class="muted">
+            <td>2 ~ 3월</td>
+            <td>정기 사원총회 결산 승인 · 주무관청 사업실적 및 결산서 제출</td>
+            <td>세무 업무는 아니지만 부처 규칙상 종료 후 2 ~ 3개월. <strong>법인세 신고보다 먼저인 경우가 많습니다</strong></td>
+          </tr>
+          <tr>
+            <td>4.25</td>
+            <td>부가가치세 1기 예정신고</td>
+            <td>법인사업자</td>
+          </tr>
+          <tr>
+            <td>4.30</td>
+            <td>법인지방소득세 신고 · 납부</td>
+            <td>법인세 신고기한 종료일이 속하는 달의 말일부터 1개월</td>
+          </tr>
+          <tr class="key">
+            <td>4.30</td>
+            <td><span class="tag tag-b">공익법인</span>출연재산 등 보고서 · 결산서류 등 공시 · 외부전문가 세무확인 · 의무이행 여부 보고</td>
+            <td>모두 사업연도 종료일부터 4개월. <strong>공익법인이면 4월이 3월보다 바쁩니다</strong></td>
+          </tr>
+          <tr class="key">
+            <td>6.30</td>
+            <td><span class="tag tag-b">공익법인</span>기부금영수증 발급명세서 제출</td>
+            <td>사업연도 종료일부터 6개월. 전자기부금영수증 발급분은 제외</td>
+          </tr>
+          <tr>
+            <td>7.10</td>
+            <td>원천세 반기납 1기분</td>
+            <td>반기납 승인 법인</td>
+          </tr>
+          <tr>
+            <td>7.25</td>
+            <td>부가가치세 1기 확정신고</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>8.31</td>
+            <td>법인세 중간예납</td>
+            <td>직전 사업연도 산출세액이 있는 경우</td>
+          </tr>
+          <tr>
+            <td>10.25</td>
+            <td>부가가치세 2기 예정신고</td>
+            <td></td>
+          </tr>
+          <tr class="key">
+            <td>수시</td>
+            <td>수익사업 개시 → 사업자등록 <strong>20일 이내</strong> · 수익사업 개시신고 <strong>2개월 이내</strong></td>
+            <td>법인세법 시행규칙 별지 제75호의4. 신규 수임 시 과거 누락분부터 확인</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>사고가 나는 지점</h2>
+    <p class="lede">신규 수임 시 이 여덟 가지부터 확인합니다. 앞의 셋이 과거 신고 누락으로 이어지는 지점입니다.</p>
+
+    <div class="points">
+      <div class="point">
+        <h3>&ldquo;면세단체라 법인세는 없다&rdquo;</h3>
+        <p>학술단체에서 가장 흔한 오해입니다. 부가세 면세는 실비 · 무상 공급 여부를 보고, 법인세 수익사업은 대가관계를 봅니다. 참가비 · 게재료 · 광고료는 <strong>면세이면서 동시에 수익사업</strong>입니다. 과거 신고 누락이 있으면 여기서 나옵니다.</p>
+        <span class="cite">부가가치세법 §26①18호 · 시행령 §45 ↔ 법인세법 §4③</span>
+      </div>
+
+      <div class="point">
+        <h3>보조금과 수탁용역을 갈라야 합니다</h3>
+        <p>부처 · 공공기관에서 들어온 돈을 전부 보조금으로 처리해 둔 경우가 많습니다. <strong>교부결정 통지</strong>면 비수익, <strong>용역계약</strong>이면 대가관계가 있어 수익사업입니다. 통장이 아니라 계약서철을 봐야 판정이 됩니다.</p>
+        <span class="cite">법인세법 시행령 §3 · 계약 형태로 판정</span>
+      </div>
+
+      <div class="point">
+        <h3>원천징수 건수가 많고 관리가 허술합니다</h3>
+        <p>학술대회 발표 · 토론 사례비, 원고료, 논문 심사료는 대부분 기타소득(필요경비 60% 의제)입니다. 지급 대상이 매번 바뀌어 인적사항이 누락되기 쉽고, 그대로 두면 <strong>지급명세서 제출 불성실 가산세</strong>로 돌아옵니다.</p>
+        <span class="cite">기타소득 지급명세서 2월 말 · 사업소득 3.10</span>
+      </div>
+
+      <div class="point">
+        <h3>부스 임대료는 부가세까지 붙습니다</h3>
+        <p>학술대회 부스 · 전시 참가비, 사무실 · 강의실 대관료는 연구 관련성과 실비 요건을 벗어나 <strong>과세</strong>입니다. 과세분이 있으면 면세사업장 현황신고(2.10)가 아니라 부가세 신고 체계로 넘어갑니다.</p>
+        <span class="cite">부가가치세법 시행령 §45 · 실비 요건</span>
+      </div>
+
+      <div class="point">
+        <h3>구분경리 세팅은 첫 달에</h3>
+        <p>수익 · 비수익의 자산 · 부채 · 손익을 나눠 기장하고, 공통손익은 수입금액 비례로 안분합니다. 학술단체는 인건비 · 임차료 · 사무비가 대부분 공통손익이라 부문코드를 처음에 잡아두지 않으면 연말에 손으로 쪼개게 됩니다.</p>
+        <span class="cite">법인세법 §113 · 시행규칙 §76</span>
+      </div>
+
+      <div class="point">
+        <h3>준비금은 설정보다 사용 관리</h3>
+        <p>예치금 이자는 100% 설정이 되므로 실질 세부담이 없지만, 5년 내 미사용분은 익금환입에 이자상당액까지 붙습니다. 선입선출로 소진되므로 설정연도별 잔액표를 따로 굴려야 합니다.</p>
+        <span class="cite">법인세법 §29</span>
+      </div>
+
+      <div class="point">
+        <h3>학술단체는 공익법인 트랙에 걸립니다</h3>
+        <p>학술 연구 · 발전을 목적으로 하면 상증법상 공익법인에 해당합니다. 전용계좌 개설 · 신고, 4.30 네 가지 보고가 그대로 따라붙고, <strong>전용계좌 미개설 가산세</strong>가 대표적인 사고 유형입니다.</p>
+        <span class="cite">상증세법 시행령 §12 · 상증세법 §50조의2</span>
+      </div>
+
+      <div class="point">
+        <h3>기부금단체 지정 기간은 6년입니다</h3>
+        <p>학술연구단체는 공익법인등 지정 대상입니다. 지정을 받아야 기부금영수증을 발급할 수 있고, <strong>지정기간이 끝나기 전에 재지정 신청</strong>을 해야 발급이 끊기지 않습니다. 지정 공고문에서 기간부터 확인합니다.</p>
+        <span class="cite">법인세법 시행령 §39</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>실무서 · 참고자료</h2>
+    <p class="lede">
+      한 권만 고른다면 1번입니다. 2 ~ 5번은 전부 무료 PDF라 함께 내려받아 두면 좋습니다.
+    </p>
+
+    <ol class="refs">
+      <li class="ref">
+        <span class="num">1</span>
+        <p class="name">비영리법인 회계와 세무실무</p>
+        <p class="meta">삼일회계법인 비영리전문팀 (변영선 · 정미향) · 삼일인포마인 · 매년 개정 · 정가 10만원대</p>
+        <p class="why">이 분야 사실상의 표준 실무서. 구분경리 · 고유목적사업준비금 · 공익법인 의무를 한 권에서 연결해 다루는 책이 이것 말고는 마땅치 않습니다. 매년 개정되므로 주문 전에 최신판인지 확인하세요.</p>
+      </li>
+
+      <li class="ref">
+        <span class="num">2</span>
+        <p class="name">공익법인 세무안내<span class="pill-free">무료</span></p>
+        <p class="meta">국세청 · 매년 2 ~ 3월 발간 · 국세청 &gt; 국세신고안내 &gt; 법인신고안내 &gt; 공익법인 &gt; 참고자료실</p>
+        <p class="why">공익법인 의무 전반이 서식 · 기한 · 가산세 표로 정리돼 있어 실무에서 제일 자주 펴게 됩니다. 4월 30일 네 가지를 이 책자 순서대로 따라가면 됩니다.</p>
+      </li>
+
+      <li class="ref">
+        <span class="num">3</span>
+        <p class="name">공익법인회계기준 실무지침서<span class="pill-free">무료</span></p>
+        <p class="meta">기획재정부 · 공익법인회계기준(기재부 고시) 해설</p>
+        <p class="why">계정과목별 회계처리 사례집. 결산서류를 조판할 때 근거로 씁니다.</p>
+      </li>
+
+      <li class="ref">
+        <span class="num">4</span>
+        <p class="name">비영리조직회계기준<span class="pill-free">무료</span></p>
+        <p class="meta">한국회계기준원 · 2017년 제정</p>
+        <p class="why">공익법인회계기준 적용 대상이 아닌 법인의 결산 근거. 주무관청 규칙(사회복지법인 재무 · 회계규칙 등)이 따로 있으면 그쪽이 우선입니다.</p>
+      </li>
+
+      <li class="ref">
+        <span class="num">5</span>
+        <p class="name">비영리법인 업무편람 · 업무 매뉴얼<span class="pill-free">무료</span></p>
+        <p class="meta">주무관청 발간 (경기도 · 문화체육관광부 · 법무부 등)</p>
+        <p class="why">정관 변경 · 총회 · 주무관청 보고 부분. 세무사 업무는 아니지만 결산 일정이 여기에 걸리므로 담당 부처 편람 한 부는 받아둡니다.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block">
+    <h2>신규 수임 시 받을 자료</h2>
+    <p class="lede">이 목록이 채워져야 위의 두 트랙 판정이 끝납니다.</p>
+
+    <ul class="intake">
+      <li><b>정관</b> · 회칙 — 회비 대가로 무엇을 주는지</li>
+      <li><b>법인설립허가증</b> · 등기부등본 — 주무관청 확인</li>
+      <li><b>고유번호증</b> 또는 사업자등록증</li>
+      <li>최근 3년 <b>결산서</b> 및 법인세 신고서</li>
+      <li>주무관청 제출 <b>사업보고서 · 결산보고서</b></li>
+      <li>기부금단체 <b>지정 공고문</b> — 지정기간 확인</li>
+      <li><b>총회 · 이사회 회의록</b></li>
+      <li><b>통장 목록</b> — 전용계좌 개설 여부</li>
+      <li><b>연구용역 계약서철</b> — 보조금과 구분하는 핵심 자료</li>
+      <li>보조금 <b>교부결정 통지서</b> · 정산보고서</li>
+      <li><b>학술대회 결산자료</b> — 참가비 · 부스 · 광고 수입 내역</li>
+      <li><b>학술지 발간 내역</b> — 게재료 · 심사료 · 광고료</li>
+      <li>회비 <b>수납 내역</b> · 기부금영수증 발급 이력</li>
+      <li><b>원천징수이행상황신고서</b> 및 지급명세서 제출 이력</li>
+    </ul>
+  </section>
+
+  <footer>
+    학술단체(학회 · 포럼) 기준 실무 참고용 요약입니다. 부가세 면세 판정은 &ldquo;실비 또는 무상&rdquo; 요건의 사실판단이 들어가므로
+    개별 항목은 국세청 예규로 확인이 필요하고, 주무관청 보고 기한은 소관 부처의 비영리법인 설립 · 감독 규칙마다 다릅니다.
+    적용 전에 해당 연도 국세청 공익법인 세무안내와 소관 부처 규칙으로 확인하십시오.
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var stage = document.getElementById('stage');
+    var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-zoom]'));
+
+    function apply(value, save) {
+      stage.style.setProperty('--zoom', value);
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.zoom === value));
+      });
+      if (save) {
+        try { localStorage.setItem('nonprofit-zoom', value); } catch (e) {}
+      }
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () { apply(b.dataset.zoom, true); });
+    });
+
+    try {
+      var saved = localStorage.getItem('nonprofit-zoom');
+      if (saved && buttons.some(function (b) { return b.dataset.zoom === saved; })) apply(saved, false);
+    } catch (e) {}
+
+    document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
+  })();
+</script>
