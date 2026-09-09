@@ -123,3 +123,67 @@ docs/nonprofit-corp-tax.html — 작업 이력
      수정신고·기한후신고 범위 산정. (별도 조서로 작성, 이 저장소에는 올리지 않음)
 
 ================================================================================
+
+--------------------------------------------------------------------------------
+[작업일자] 2026-09-09 — 워드 재생성 + 생성 스크립트 저장소 편입
+
+[참고한 것 / 어디서부터 이었는지]
+  - 이 파일의 2026-09-08 (2차) 항목. 거기 적힌 제약(열너비 합 = 표 width,
+    ShadingType.CLEAR, 맑은 고딕)을 그대로 승계했다. 새로 설계하지 않았다.
+  - docs/nonprofit-corp-tax.html 본문 전체를 다시 읽어 문구를 옮겼다.
+
+[왜 다시 만들었나]
+  9/8 컨테이너가 회수되면서 PDF·DOCX가 사라졌다. 문제는 산출물이 아니라
+  build-docx.js 를 저장소에 안 올려둔 것이었다. "HTML 에서 언제든 재생성 가능"
+  이라고 적어놨지만 정작 재생성 수단이 남아있지 않았다.
+  → 이번에는 생성 스크립트를 저장소에 커밋한다. (docs/nonprofit-corp-tax_build-docx.js)
+
+[9/8 판과 달라진 점]  ★
+  판정 흐름도를 PNG 이미지가 아니라 **워드 네이티브 표 2개**로 만들었다.
+  이미지로 넣으면 워드에서 글자를 못 고친다. 이제 문서 전체(표제·흐름도·표·
+  본문·체크리스트)가 전부 편집 가능한 텍스트다. 이미지 0개.
+  대신 SVG 흐름도의 곡선 화살표 레이아웃은 표 구조로 치환됐다.
+  화면·인쇄용 원본은 HTML/PDF 쪽이 그대로 더 정확하다.
+
+[작업요약]
+  1. docs/nonprofit-corp-tax_build-docx.js 신규 작성 (저장소에 커밋).
+     - 섹션 2개 : A4 가로(표제+흐름도 표 2개) + A4 세로(본문)
+     - 표 4개 : 트랙1 4x6 / 트랙2 2x5 / 판정표 13x4 / 세무일정 17x3
+  2. PDF 재생성 (HTML → Chromium print-to-pdf)
+
+[함정 — 이번에 걸린 것]
+  docx 의 PageSize 는 **세로 기준 치수를 받아 landscape 일 때 스스로 뒤집는다.**
+  미리 뒤집은 값(16838x11906)을 넘기면 도로 세로가 되어
+  orient=landscape 인데 실제 치수는 11906x16838 인 문서가 나온다.
+  → landscape 섹션에도 A4 세로 치수(11906 x 16838)를 그대로 넘길 것.
+  1차 빌드에서 이 상태로 나왔고 검증에서 잡아 수정했다.
+
+[사용코드]
+  npm install docx                      # docx 9.7.1 로 검증
+  node docs/nonprofit-corp-tax_build-docx.js "출력경로.docx"
+
+  # PDF
+  BIN=/opt/pw-browsers/chromium-1194/chrome-linux/chrome
+  "$BIN" --headless --disable-gpu --no-sandbox --no-pdf-header-footer \
+    --print-to-pdf="비영리 사단법인 세무 실무 노트.pdf" --virtual-time-budget=8000 \
+    "file:///home/user/claude/docs/nonprofit-corp-tax.html"
+
+[검증]
+  - PDF : 6쪽. MediaBox 직접 파싱 → p1 842x595(가로), p2~6 595x842(세로), 전부 A4.
+          (pymupdf·pypdf 둘 다 이 컨테이너에서 import 실패 → 정규식으로 직접 판독)
+  - DOCX: 섹션 2개(16838x11906 가로 / 11906x16838 세로) 확인,
+          표 4개 전부 gridCol 합 = tblW 일치, 이미지 0개, 페이지나눔 4개,
+          문단 223개, 본문 5,243자, 핵심 문구 10/10 존재, SOLID 음영 미사용.
+  - DOCX 육안 확인은 이번에도 못 했다. 이 컨테이너의 LibreOffice(24.2.7.2)에는
+    Writer 모듈이 없어(libwriterperfectlo.so 만 있음) docx 를 아예 로드하지 못한다.
+    → 워드에서 처음 열 때 흐름도 표의 열 폭은 한 번 눈으로 볼 것.
+
+[산출물 위치]
+  PDF·DOCX 는 이번에도 저장소에 커밋하지 않는다. 대신 생성 스크립트가 저장소에
+  있으므로 위 명령 두 줄로 언제든 복원된다. 파일 자체는 Dropbox 에 보관.
+
+[다음단계]
+  - 9/8 항목의 다음단계 1~5는 그대로 유효하다. 특히 1번(저장소 Public → Private)은
+    2026-09-09 현재도 미해결. GitHub API visibility 여전히 public.
+  - 워드에서 흐름도 표를 실제로 편집해 보고, 열 폭·줄바꿈이 불편하면
+    트랙1 표의 FLOW1_COLS 배열만 조정하면 된다 (합 14570 유지).
